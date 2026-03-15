@@ -149,7 +149,7 @@ enum SampleData {
     }
 
     static func seedIfNeeded(modelContext: ModelContext) {
-        var descriptor = FetchDescriptor<Course>()
+        let descriptor = FetchDescriptor<Course>()
         let existing = (try? modelContext.fetch(descriptor)) ?? []
         if existing.isEmpty {
             _ = createSampleCourses(modelContext: modelContext)

@@ -20,8 +20,10 @@ final class CourseService {
         return (try? context.fetch(descriptor)) ?? []
     }
 
-    func course(byId id: String) -> Course? {
-        var descriptor = FetchDescriptor<Course>(predicate: #Predicate { $0.id == id })
+    func course(byId courseId: String) -> Course? {
+        var descriptor = FetchDescriptor<Course>(predicate: #Predicate<Course> { course in
+            course.id == courseId
+        })
         descriptor.fetchLimit = 1
         guard let context = modelContext else { return nil }
         return try? context.fetch(descriptor).first
