@@ -44,9 +44,6 @@ struct MainTabView: View {
         }
         .tint(Theme.Color.accent)
         .preferredColorScheme(.dark)
-        .onAppear {
-            SampleData.seedIfNeeded(modelContext: modelContext)
-        }
     }
 }
 

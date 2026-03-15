@@ -154,11 +154,15 @@ enum SampleData {
         if existing.isEmpty {
             _ = createSampleCourses(modelContext: modelContext)
             _ = createSampleFriendEntries(modelContext: modelContext)
-            _ = createOrUpdateSampleUser(modelContext: modelContext)
             let courses = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
             for c in courses.prefix(2) {
                 _ = createSampleRounds(modelContext: modelContext, courseId: c.id, courseName: c.name)
             }
         }
+    }
+
+    /// Call when you want demo data with a pre-filled profile (e.g. for screenshots).
+    static func ensureDemoProfile(modelContext: ModelContext) {
+        _ = createOrUpdateSampleUser(modelContext: modelContext)
     }
 }

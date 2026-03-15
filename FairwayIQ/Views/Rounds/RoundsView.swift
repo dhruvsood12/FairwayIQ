@@ -9,6 +9,7 @@ import SwiftData
 struct RoundsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
+    @State private var showRoundSetup = false
 
     var body: some View {
         NavigationStack {
@@ -24,12 +25,15 @@ struct RoundsView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        // Start new round
+                        showRoundSetup = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .foregroundStyle(Theme.Color.accent)
                     }
                 }
+            }
+            .sheet(isPresented: $showRoundSetup) {
+                RoundSetupView(onDismiss: { showRoundSetup = false })
             }
         }
     }
@@ -57,7 +61,7 @@ struct RoundsView: View {
             LazyVStack(spacing: 12) {
                 ForEach(rounds, id: \.id) { round in
                     NavigationLink {
-                        Text("Round detail — \(round.courseName)")
+                        RoundSummaryView(round: round)
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
