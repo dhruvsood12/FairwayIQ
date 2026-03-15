@@ -22,7 +22,7 @@ struct LiveRoundView: View {
     private var par: Int { Self.parArray.indices.contains(currentHoleIndex) ? Self.parArray[currentHoleIndex] : 4 }
     private var isPar3: Bool { par == 3 }
     private var currentScore: HoleScore? {
-        round.holeScores.first { $0.holeNumber == currentHoleNumber }
+        round?.holeScores.first { $0.holeNumber == currentHoleNumber }
     }
     private var isLastHole: Bool { currentHoleIndex == holeCount - 1 }
 
