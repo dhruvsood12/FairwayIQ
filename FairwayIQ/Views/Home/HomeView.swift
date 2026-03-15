@@ -10,6 +10,7 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
     @Query private var profiles: [UserProfile]
+    @State private var showRoundSetup = false
 
     private var recentRound: Round? { rounds.first }
     private var profile: UserProfile? { profiles.first }
@@ -51,8 +52,8 @@ struct HomeView: View {
     }
 
     private var quickStartCard: some View {
-        NavigationLink {
-            Text("Round setup — coming next")
+        Button {
+            showRoundSetup = true
         } label: {
             HStack(spacing: 16) {
                 Image(systemName: "plus.circle.fill")
@@ -76,64 +77,83 @@ struct HomeView: View {
             .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
         }
         .buttonStyle(.plain)
+        .sheet(isPresented: $showRoundSetup) {
+            RoundSetupView(onDismiss: { showRoundSetup = false })
+        }
     }
 
     private func recentRoundCard(_ round: Round) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Recent Round")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundStyle(Theme.Color.textSecondary)
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(round.courseName)
-                        .font(.headline)
-                        .foregroundStyle(Theme.Color.textPrimary)
-                    Text(round.date.formatted(date: .abbreviated, time: .omitted))
-                        .font(.caption)
-                        .foregroundStyle(Theme.Color.textSecondary)
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("\(round.totalStrokes)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundStyle(Theme.Color.accent)
-                    Text(round.scoreRelativeToPar >= 0 ? "+\(round.scoreRelativeToPar)" : "\(round.scoreRelativeToPar)")
-                        .font(.caption)
-                        .foregroundStyle(round.scoreRelativeToPar <= 0 ? Theme.Color.positive : Theme.Color.negative)
+        NavigationLink {
+            RoundSummaryView(round: round)
+        } label: {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Recent Round")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Theme.Color.textSecondary)
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(round.courseName)
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.textPrimary)
+                        Text(round.date.formatted(date: .abbreviated, time: .omitted))
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text("\(round.totalStrokes)")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Theme.Color.accent)
+                        Text(round.scoreRelativeToPar >= 0 ? "+\(round.scoreRelativeToPar)" : "\(round.scoreRelativeToPar)")
+                            .font(.caption)
+                            .foregroundStyle(round.scoreRelativeToPar <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                    }
                 }
             }
+            .padding(Theme.Layout.cardPadding)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Theme.Color.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
         }
-        .padding(Theme.Layout.cardPadding)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Theme.Color.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+        .buttonStyle(.plain)
     }
 
     private var handicapPreviewCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Handicap Trend")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundStyle(Theme.Color.textSecondary)
-            HStack(alignment: .bottom) {
-                Text("\(profile?.handicapEstimate ?? 18, specifier: "%.1f")")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundStyle(Theme.Color.textPrimary)
-                Text("index")
+        NavigationLink {
+            AnalyticsView()
+        } label: {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text("Handicap Trend")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                }
+                HStack(alignment: .bottom) {
+                    Text("\(profile?.handicapEstimate ?? 18, specifier: "%.1f")")
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundStyle(Theme.Color.textPrimary)
+                    Text("index")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                        .padding(.bottom, 6)
+                }
+                Text("Tap to view full analytics")
                     .font(.caption)
                     .foregroundStyle(Theme.Color.textSecondary)
-                    .padding(.bottom, 6)
             }
-            Text("Trend chart will appear here")
-                .font(.caption)
-                .foregroundStyle(Theme.Color.textSecondary)
+            .padding(Theme.Layout.cardPadding)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Theme.Color.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
         }
-        .padding(Theme.Layout.cardPadding)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Theme.Color.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+        .buttonStyle(.plain)
     }
 
     private var leaderboardPreviewCard: some View {
