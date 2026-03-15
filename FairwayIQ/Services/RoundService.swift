@@ -15,7 +15,7 @@ final class RoundService {
     }
 
     func fetchAllRounds() -> [Round] {
-        let descriptor = FetchDescriptor<Round>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+        var descriptor = FetchDescriptor<Round>(sortBy: [SortDescriptor(\.date, order: .reverse)])
         descriptor.fetchLimit = 100
         guard let context = modelContext else { return [] }
         return (try? context.fetch(descriptor)) ?? []
