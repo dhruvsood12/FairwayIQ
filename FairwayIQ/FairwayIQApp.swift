@@ -2,8 +2,6 @@
 //  FairwayIQApp.swift
 //  FairwayIQ
 //
-//  Created by Dhruv Sood on 3/15/26.
-//
 
 import SwiftUI
 import SwiftData
@@ -12,12 +10,24 @@ import SwiftData
 struct FairwayIQApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            UserProfile.self,
+            Course.self,
+            Hole.self,
+            Round.self,
+            HoleScore.self,
+            Shot.self,
+            FriendEntry.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false
+        )
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(
+                for: schema,
+                configurations: [modelConfiguration]
+            )
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
@@ -25,7 +35,7 @@ struct FairwayIQApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
         }
         .modelContainer(sharedModelContainer)
     }
