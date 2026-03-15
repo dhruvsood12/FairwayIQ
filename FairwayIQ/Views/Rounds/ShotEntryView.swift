@@ -21,7 +21,7 @@ struct ShotEntryView: View {
     @State private var endLat: Double?
     @State private var endLon: Double?
     @State private var distanceYards: Double?
-    @StateObject private var locationManager = LocationManager()
+    @State private var locationManager = LocationManager()
 
     private let clubs = ["Driver", "3-Wood", "5-Wood", "3-Hybrid", "4-Iron", "5-Iron", "6-Iron", "7-Iron", "8-Iron", "9-Iron", "Pitching Wedge", "Sand Wedge", "Lob Wedge", "Putter"]
     private let lies = ["Tee", "Fairway", "Rough", "Bunker", "Green", "Other"]
