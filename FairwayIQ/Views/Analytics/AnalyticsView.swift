@@ -7,6 +7,18 @@ import SwiftUI
 import SwiftData
 import Charts
 
+private struct ScoreTrendPoint: Identifiable {
+    let id: Date
+    let date: Date
+    let score: Int
+}
+
+private struct HandicapTrendPoint: Identifiable {
+    let id: Date
+    let date: Date
+    let index: Double
+}
+
 struct AnalyticsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .forward) private var rounds: [Round]
@@ -14,14 +26,15 @@ struct AnalyticsView: View {
 
     private var profile: UserProfile? { profiles.first }
     private var sortedRounds: [Round] { rounds.sorted { $0.date < $1.date } }
-    private var handicapTrendData: [(Date, Double)] {
+    private var handicapTrendData: [HandicapTrendPoint] {
         sortedRounds.enumerated().map { index, _ in
             let estimate = (profile?.handicapEstimate ?? 18) - Double(index) * 0.4
-            return (sortedRounds[index].date, max(0, estimate))
+            let date = sortedRounds[index].date
+            return HandicapTrendPoint(id: date, date: date, index: max(0, estimate))
         }
     }
-    private var scoreTrendData: [(Date, Int)] {
-        sortedRounds.map { ($0.date, $0.totalStrokes) }
+    private var scoreTrendData: [ScoreTrendPoint] {
+        sortedRounds.map { ScoreTrendPoint(id: $0.date, date: $0.date, score: $0.totalStrokes) }
     }
     private var averageScore: Double {
         guard !rounds.isEmpty else { return 0 }
@@ -117,18 +130,20 @@ struct AnalyticsView: View {
             Text("Score trend")
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
-            Chart(scoreTrendData, id: \.0) { item in
-                LineMark(
-                    x: .value("Date", item.0),
-                    y: .value("Score", item.1)
-                )
-                .foregroundStyle(Theme.Color.greenPrimary)
-                .interpolationMethod(.catmullRom)
-                PointMark(
-                    x: .value("Date", item.0),
-                    y: .value("Score", item.1)
-                )
-                .foregroundStyle(Theme.Color.accent)
+            Chart {
+                ForEach(scoreTrendData) { item in
+                    LineMark(
+                        x: .value("Date", item.date),
+                        y: .value("Score", item.score)
+                    )
+                    .foregroundStyle(Theme.Color.greenPrimary)
+                    .interpolationMethod(.catmullRom)
+                    PointMark(
+                        x: .value("Date", item.date),
+                        y: .value("Score", item.score)
+                    )
+                    .foregroundStyle(Theme.Color.accent)
+                }
             }
             .chartYScale(domain: 65...95)
             .frame(height: 180)
@@ -144,24 +159,26 @@ struct AnalyticsView: View {
             Text("Handicap trend")
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
-            Chart(handicapTrendData, id: \.0) { item in
-                AreaMark(
-                    x: .value("Date", item.0),
-                    y: .value("Index", item.1)
-                )
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [Theme.Color.greenPrimary.opacity(0.6), Theme.Color.greenPrimary.opacity(0.1)],
-                        startPoint: .top,
-                        endPoint: .bottom
+            Chart {
+                ForEach(handicapTrendData) { item in
+                    AreaMark(
+                        x: .value("Date", item.date),
+                        y: .value("Index", item.index)
                     )
-                )
-                LineMark(
-                    x: .value("Date", item.0),
-                    y: .value("Index", item.1)
-                )
-                .foregroundStyle(Theme.Color.greenPrimary)
-                .interpolationMethod(.catmullRom)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [Theme.Color.greenPrimary.opacity(0.6), Theme.Color.greenPrimary.opacity(0.1)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    LineMark(
+                        x: .value("Date", item.date),
+                        y: .value("Index", item.index)
+                    )
+                    .foregroundStyle(Theme.Color.greenPrimary)
+                    .interpolationMethod(.catmullRom)
+                }
             }
             .chartYScale(domain: 0...30)
             .frame(height: 160)

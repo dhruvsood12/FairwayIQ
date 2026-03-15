@@ -15,7 +15,7 @@ final class LeaderboardService {
     }
 
     func fetchFriends() -> [FriendEntry] {
-        var descriptor = FetchDescriptor<FriendEntry>(sortBy: [SortDescriptor(\.sortOrder)])
+        let descriptor = FetchDescriptor<FriendEntry>(sortBy: [SortDescriptor(\.sortOrder)])
         guard let context = modelContext else { return [] }
         return (try? context.fetch(descriptor)) ?? []
     }
