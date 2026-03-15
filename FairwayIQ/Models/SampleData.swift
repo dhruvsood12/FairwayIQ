@@ -16,7 +16,7 @@ enum SampleData {
     }
 
     static func createSampleCourses(modelContext: ModelContext) -> [Course] {
-        let holes1 = createSampleHoles(18)
+        let holes1 = createSampleHoles(count: 18)
         let pebble = Course(
             id: "pebble-beach",
             name: "Pebble Beach Golf Links",
@@ -32,7 +32,7 @@ enum SampleData {
             pebble.holes.append(h)
         }
 
-        let holes2 = createSampleHoles(18)
+        let holes2 = createSampleHoles(count: 18)
         let augusta = Course(
             id: "augusta-national",
             name: "Augusta National",
@@ -48,7 +48,7 @@ enum SampleData {
             augusta.holes.append(h)
         }
 
-        let holes3 = createSampleHoles(9)
+        let holes3 = createSampleHoles(count: 9)
         let local = Course(
             id: "local-muni",
             name: "Riverside Municipal",
