@@ -25,12 +25,22 @@ struct FairwayIQApp: App {
         )
 
         do {
-            return try ModelContainer(
-                for: schema,
-                configurations: [modelConfiguration]
-            )
+            return try makeModelContainer(schema: schema, configuration: modelConfiguration)
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            DebugLogger.error("Persistent store unavailable, falling back to in-memory store", error: error)
+
+            do {
+                let inMemoryConfiguration = ModelConfiguration(
+                    schema: schema,
+                    isStoredInMemoryOnly: true
+                )
+                return try ModelContainer(
+                    for: schema,
+                    configurations: [inMemoryConfiguration]
+                )
+            } catch {
+                fatalError("Could not create fallback ModelContainer: \(error)")
+            }
         }
     }()
 
@@ -41,4 +51,11 @@ struct FairwayIQApp: App {
         }
         .modelContainer(sharedModelContainer)
     }
+}
+
+private func makeModelContainer(schema: Schema, configuration: ModelConfiguration) throws -> ModelContainer {
+    try ModelContainer(
+        for: schema,
+        configurations: [configuration]
+    )
 }
