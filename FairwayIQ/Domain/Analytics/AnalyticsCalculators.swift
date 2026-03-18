@@ -88,9 +88,9 @@ enum AnalyticsCalculators {
     }
 
     static func yDomain(for scores: [Int]) -> ClosedRange<Double> {
-        guard let min = scores.min(), let max = scores.max() else { return 60...100 }
-        let pad = max(2, Int(Double(max - min) * 0.15))
-        return Double(min - pad)...Double(max + pad)
+        guard let minScore = scores.min(), let maxScore = scores.max() else { return 60...100 }
+        let pad = Swift.max(2, Int(Double(maxScore - minScore) * 0.15))
+        return Double(minScore - pad)...Double(maxScore + pad)
     }
 
     static func frontBackSplit(rounds: [Round]) -> SplitSummary {
