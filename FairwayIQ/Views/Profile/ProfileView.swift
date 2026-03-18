@@ -15,7 +15,7 @@ struct ProfileView: View {
     @State private var showEditProfile = false
     @State private var showClubs = false
 
-    private var profile: UserProfile? { profiles.first }
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
     private var homeCourseName: String { profile?.homeCourse?.name ?? "Not set" }
     private var roundsPlayed: Int {
         guard let profile else { return rounds.count }
@@ -197,4 +197,5 @@ struct ProfileView: View {
 #Preview {
     ProfileView()
         .modelContainer(for: [UserProfile.self, Course.self], inMemory: true)
+        .environment(SessionStore())
 }

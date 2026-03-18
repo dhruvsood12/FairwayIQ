@@ -7,13 +7,14 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(SessionStore.self) private var session
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
     @Query private var profiles: [UserProfile]
     @State private var showRoundSetup = false
 
-    private var recentRound: Round? { rounds.first }
-    private var profile: UserProfile? { profiles.first }
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var recentRound: Round? { scopedRounds.first }
 
     var body: some View {
         NavigationStack {
@@ -187,4 +188,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .modelContainer(for: [UserProfile.self, Round.self, Course.self], inMemory: true)
+        .environment(SessionStore())
 }

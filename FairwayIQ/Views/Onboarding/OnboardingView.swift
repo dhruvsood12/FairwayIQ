@@ -280,7 +280,17 @@ struct OnboardingView: View {
         let descriptor = FetchDescriptor<UserProfile>()
         let existing = (try? modelContext.fetch(descriptor)) ?? []
         let profile: UserProfile
-        if let first = existing.first {
+        if let currentProfileId = session.currentProfileId,
+           let current = existing.first(where: { $0.id == currentProfileId }) {
+            profile = current
+            profile.playerName = playerName.trimmingCharacters(in: .whitespaces)
+            profile.skillLevel = skillLevel
+            profile.handicapEstimate = handicapEstimate
+            profile.preferredUnits = preferredUnits
+            profile.homeCourse = selectedHomeCourse
+            profile.hasCompletedOnboarding = true
+            profile.updatedAt = Date()
+        } else if let first = existing.first {
             profile = first
             profile.playerName = playerName.trimmingCharacters(in: .whitespaces)
             profile.skillLevel = skillLevel
@@ -316,4 +326,5 @@ struct OnboardingView: View {
 #Preview {
     OnboardingView()
         .modelContainer(for: [UserProfile.self, Course.self], inMemory: true)
+        .environment(SessionStore())
 }
