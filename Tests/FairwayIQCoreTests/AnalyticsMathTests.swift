@@ -27,5 +27,14 @@ final class AnalyticsMathTests: XCTestCase {
         XCTAssertLessThan(domain.lowerBound, 72)
         XCTAssertGreaterThan(domain.upperBound, 80)
     }
+
+    func testSummaryHandlesZeroFairwayDenominator() {
+        let rounds = [
+            RoundRollup(totalStrokes: 76, fairwaysHit: 0, fairwaysPossible: 0, girsHit: 10, holesPlayed: 18, totalPutts: 30, totalPenalties: 0)
+        ]
+        let s = AnalyticsMath.summary(rounds: rounds)
+        XCTAssertEqual(s.fairwayPct, 0)
+        XCTAssertEqual(s.girPct, (10.0 / 18.0) * 100, accuracy: 0.0001)
+    }
 }
 

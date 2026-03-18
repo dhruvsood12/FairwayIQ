@@ -1,187 +1,228 @@
 # FairwayIQ
 
-**A native iOS golf analytics app for tracking rounds, logging shots, and improving your game.**
+FairwayIQ is a native iPhone golf performance app built with SwiftUI. The goal is to make round tracking, shot logging, course selection, and performance analysis feel premium, fast, and credible as a real product rather than a one-off UI prototype.
 
-FairwayIQ is a recruiter-ready SwiftUI app that helps golfers start and track rounds, record scores and shot locations, view GPS-based maps, analyze performance trends, estimate handicap progression, and compare with friends on a leaderboard—all with a premium, dark-mode-friendly UI and local persistence.
+It is designed around a clean, dark, sports-dashboard aesthetic with local-first persistence today and a clear path toward larger course data, cloud sync, and social features later.
 
----
+## Product overview
 
-## Overview
+FairwayIQ helps a golfer:
 
-FairwayIQ is built to feel like a real consumer sports product. It uses **SwiftUI**, **SwiftData**, **MapKit**, **CoreLocation**, and **Swift Charts** with a clear **MVVM**-style architecture. The app is fully demoable with sample courses and mock data, so you can run it immediately after cloning and see a complete flow from onboarding through round summary and analytics.
+- create and persist a real player profile
+- browse a starter catalog of U.S. golf courses
+- start and track rounds with low-friction scoring
+- log shots with structured club, lie, shot type, notes, and optional map-based landing points
+- review scorecards, shot maps, and round summaries
+- explore performance trends with premium chart-driven analytics
 
----
+## Current feature set
 
-## Key Features
+### Profile and preferences
 
-- **Onboarding** — Welcome flow: set player name, skill level, preferred units (yards/meters), and optional home course.
-- **Home dashboard** — Quick start round, recent round card, handicap preview, and leaderboard preview.
-- **Round setup** — Select from sample courses, choose tee box, date, weather, and playing partners.
-- **Live round scoring** — Hole-by-hole entry: strokes, putts, fairway hit, GIR, penalties; save and advance.
-- **Shot logging** — Record shots with club, lie, shot type; capture start/end location and distance.
-- **Shot map** — MapKit view of all shots for a round (start/end pins).
-- **Round summary** — Final score, scorecard, fairways/GIR/putts/penalties, shot map, club usage.
-- **Analytics** — Handicap trend, score trend, average score, fairway %, GIR %, putts per round, best/worst rounds (Swift Charts).
-- **Leaderboard** — Mock friends leaderboard with weekly best, latest round, and average score.
-- **Profile** — View and edit player info, units, home course; manage clubs in bag.
+- persisted player profile with name, skill level, handicap estimate, preferred units, and home course
+- editable clubs-in-bag flow with add, delete, and reorder support
+- first-launch onboarding tied to a stable current-profile session
 
----
+### Course catalog
 
-## Tech Stack
+- searchable starter course catalog with real U.S. courses
+- course detail screens with location, type, par, and hole breakdown
+- seed-data architecture that can scale into a broader ingestion pipeline
+
+### Round workflow
+
+- course-based round setup
+- hole-by-hole live entry for strokes, putts, penalties, FIR, and GIR
+- safer save flow with user-facing error handling
+- end-of-round summary with scorecard, to-par scoring, stats, and shot map
+
+### Shot tracking
+
+- structured shot entry using typed club, lie, and shot type selections
+- current-location capture for start and landing
+- manual landing placement from a map tap
+- automatic distance calculation when both points are available
+- optional notes for context
+
+### Analytics
+
+- score trend chart
+- index estimate trend
+- average score, FIR, GIR, putts per round, penalties per round
+- best and worst round callouts
+- front-nine vs back-nine comparison
+- course-by-course average scoring
+
+## Tech stack
 
 | Area | Technology |
 |------|------------|
-| UI | SwiftUI |
-| Data | SwiftData |
-| Maps & location | MapKit, CoreLocation |
+| App UI | SwiftUI |
+| Persistence | SwiftData |
+| Maps and location | MapKit, CoreLocation |
 | Charts | Swift Charts |
-| Architecture | MVVM-style, services layer |
-| Min deployment | iOS 17+ (Xcode may show 26.x; adjust if needed) |
+| Architecture | MVVM-oriented feature structure with repositories and pure calculators |
+| Platform | iOS |
 
----
+## Architecture summary
 
-## Architecture
+The project is being refactored from a demo-first structure into a production-minded layout with clearer boundaries:
 
-- **Models** — SwiftData `@Model` types: `UserProfile`, `Course`, `Hole`, `Round`, `HoleScore`, `Shot`, `FriendEntry`.
-- **Views** — Tab shell (Home, Rounds, Analytics, Leaderboard, Profile); onboarding; round setup, live round, shot entry, round summary; profile edit; clubs in bag.
-- **Services** — `LocationManager`, `RoundService`, `AnalyticsService`, `CourseService`, `LeaderboardService`.
-- **Components** — `Theme` (colors, layout), reusable cards and list rows.
-- **Sample data** — `SampleData` seeds courses, friends, and rounds on first launch (no profile so onboarding runs; complete onboarding to create profile and use the app).
+- `App/`
+  - app boot, root routing, session state
+- `Core/`
+  - design system and shared utilities such as debug logging
+- `Domain/`
+  - models, value types, and pure analytics calculations
+- `Data/`
+  - repositories and starter seed loaders
+- `Features/`
+  - feature-specific view models and UI flows
+- `Views/`
+  - existing screens being migrated feature-by-feature into a cleaner structure
 
----
+Key production-minded decisions:
 
-## Folder Structure
+- `SessionStore` tracks the current profile instead of relying on `profiles.first`.
+- `Round` now relates directly to `Course` and `UserProfile`.
+- course seeding is separated from demo-only sample data
+- analytics math is moving out of views into testable calculators
+- critical save flows now surface errors instead of silently failing
 
-```
+## Folder highlights
+
+```text
 FairwayIQ/
-├── App/
-│   ├── RootView.swift          # Gates onboarding vs main app
-│   └── MainTabView.swift       # Tab bar
-├── Models/
-│   ├── UserProfile.swift
-│   ├── Course.swift
-│   ├── Hole.swift
-│   ├── Round.swift
-│   ├── HoleScore.swift
-│   ├── Shot.swift
-│   ├── FriendEntry.swift
-│   └── SampleData.swift
-├── Views/
-│   ├── Onboarding/
-│   │   └── OnboardingView.swift
-│   ├── Home/
-│   │   └── HomeView.swift
-│   ├── Rounds/
-│   │   ├── RoundsView.swift
-│   │   ├── RoundSetupView.swift
-│   │   ├── LiveRoundView.swift
-│   │   ├── ShotEntryView.swift
-│   │   ├── RoundSummaryView.swift
-│   │   └── ShotMapView.swift
-│   ├── Analytics/
-│   │   └── AnalyticsView.swift
-│   ├── Leaderboard/
-│   │   └── LeaderboardView.swift
-│   └── Profile/
-│       ├── ProfileView.swift
-│       ├── ProfileEditView.swift
-│       └── ClubsInBagView.swift
-├── Services/
-│   ├── LocationManager.swift
-│   ├── RoundService.swift
-│   ├── AnalyticsService.swift
-│   ├── CourseService.swift
-│   └── LeaderboardService.swift
-├── Components/
-│   └── Theme.swift
-├── FairwayIQApp.swift
-└── Info.plist / Assets
+├── FairwayIQ/
+│   ├── App/
+│   ├── Core/
+│   ├── Data/
+│   ├── Domain/
+│   ├── Features/
+│   ├── Models/
+│   ├── Views/
+│   └── Services/
+├── scripts/
+│   └── course-data/
+├── Sources/
+│   └── FairwayIQCore/
+└── Tests/
+    └── FairwayIQCoreTests/
 ```
 
----
+## Course data strategy
+
+FairwayIQ is being built with a real course-data pipeline in mind.
+
+### Current approach
+
+- ship a lightweight bundled starter dataset for MVP usability
+- persist seeded courses into SwiftData on first launch
+- use that catalog for onboarding, browsing, and round setup
+
+### Planned scalable pipeline
+
+The repo includes `scripts/course-data/` for a structured ingestion approach based on OpenStreetMap and Overpass.
+
+Pipeline stages:
+
+1. source discovery from OSM objects tagged `leisure=golf_course`
+2. Overpass API ingestion by region or state
+3. normalization and deduplication into a stable app-facing schema
+4. export to versioned seed files for app import
+
+See:
+
+- `scripts/course-data/README.md`
+- `scripts/course-data/seed_schema_v1.md`
+- `scripts/course-data/overpass_fetch.py`
+- `scripts/course-data/normalize.py`
+
+This avoids brittle HTML scraping and keeps the data story credible for production and interviews.
 
 ## Screenshots
 
-_Screenshots can be added here after building and running the app (e.g. onboarding, home, live round, round summary, analytics, leaderboard, profile)._
+Add screenshots here as the UI continues to harden:
 
-| Onboarding | Home | Live Round | Round Summary |
-|------------|------|------------|---------------|
-| _Placeholder_ | _Placeholder_ | _Placeholder_ | _Placeholder_ |
-
-| Analytics | Leaderboard | Profile |
-|-----------|-------------|---------|
-| _Placeholder_ | _Placeholder_ | _Placeholder_ |
-
----
-
-## Demo Flow
-
-1. **First launch** — Seed data creates sample courses and rounds; no profile yet, so onboarding is shown.
-2. **Onboarding** — Complete welcome, name, skill level, units, and optional home course; profile is created and main app appears.
-3. **Home** — Tap “Start New Round” → round setup sheet.
-4. **Round setup** — Pick course, tee, date, weather/partners → “Start Round” → live round.
-5. **Live round** — Enter strokes, putts, fairway/GIR, penalties per hole; optionally “Add shot” to log a shot; “Save & Next Hole” through 18; “Finish Round” → round summary.
-6. **Round summary** — Review score, scorecard, stats, shot map, club usage; “Done” dismisses back to app.
-7. **Rounds** — List of rounds; tap one for summary; “+” opens round setup.
-8. **Analytics** — Score trend, handicap trend, key stats, best/worst rounds.
-9. **Leaderboard** — Mock friends and scores.
-10. **Profile** — Tap card to edit; “Clubs in bag” to manage clubs.
-
----
+- onboarding
+- home dashboard
+- course catalog
+- live round
+- round summary
+- analytics dashboard
+- profile
 
 ## Setup
 
-1. Clone the repo:  
+1. Clone the repo:
    `git clone https://github.com/dhruvsood12/FairwayIQ.git`
 2. Open `FairwayIQ.xcodeproj` in Xcode.
-3. Select an iOS Simulator (e.g. iPhone 16) or a device.
-4. Build and run (⌘R).  
-   On first launch, sample courses and rounds are seeded; complete onboarding to create your profile and use the full app.  
-   **Location:** Shot logging uses GPS. Allow location when prompted, or use the simulator’s location simulation.
+3. Choose an iPhone simulator or a physical device.
+4. Build and run.
 
----
+Notes:
 
-## Why This Project Is Interesting
+- The app uses SwiftData for local persistence.
+- A starter course catalog seeds on first launch.
+- In debug/dev flows, additional demo sample data may be available.
+- Shot logging works best with location permission enabled.
 
-- **Native SwiftUI** — Modern declarative UI, dark theme, and consistent layout.
-- **SwiftData** — Schema design, relationships, and cascade deletes for rounds/scores/shots.
-- **MapKit & CoreLocation** — Shot positions and map presentation.
-- **Swift Charts** — Handicap and score trends, and key stats.
-- **End-to-end flow** — Onboarding → round setup → live scoring → shot entry → summary → analytics and profile, with clear navigation and state.
-- **Demo-ready** — Sample data and mock leaderboard make it easy to show without a backend.
+## Testability
 
----
+The app now separates more logic from UI so core calculations can be tested independently.
 
-## Future Improvements
+Current test scaffolding includes:
 
-- Real course database (e.g. API or local bundle).
-- Handicap index calculation per USGA/WHS.
-- Export scorecards or rounds (PDF/share).
-- iCloud sync for rounds and profile.
-- Social features: real friends, challenges, activity feed.
-- Apple Watch companion for quick score entry.
-- Accessibility: VoiceOver, Dynamic Type, reduced motion.
+- a lightweight Swift Package test harness for pure analytics math
+- first tests around scoring summaries, denominator correctness, and chart domains
 
----
+Recommended next unit-test targets:
+
+- course-driven par and to-par calculations
+- front/back split logic
+- round creation and persistence boundaries
+- shot-distance calculations
 
 ## Roadmap
 
-- [x] Onboarding and home dashboard  
-- [x] Round setup and live scoring  
-- [x] Shot entry and map  
-- [x] Round summary and analytics (Swift Charts)  
-- [x] Leaderboard and profile (edit, clubs)  
-- [x] Polish and README  
-- [ ] Optional: Handicap calculation, export, iCloud, Watch
+### Near-term
 
----
+- improve course filtering by state, city, and type
+- expand shot replay and dispersion views
+- tighten round resume and in-progress round handling
+- replace remaining legacy service usage with repositories/view models
+
+### Product roadmap
+
+- larger U.S. course dataset import
+- optional remote catalog updates
+- WHS-style handicap calculation
+- cloud backup and sync
+- friend system and social comparison
+- export/share flows
+- Apple Watch companion
+
+## Known limitations
+
+- the bundled course catalog is intentionally small today
+- tee-box metadata, course rating, and slope are not complete yet
+- handicap is still an estimate, not a full WHS implementation
+- social features are scaffolded but not yet connected to a real backend
+- Swift Package tests were added for pure logic, but app-target XCTest coverage is still limited
+
+## Recommended commit checkpoints
+
+Suggested incremental commit messages for your local workflow:
+
+- `refactor: introduce app state + repositories boundary`
+- `feat(profile): persisted profile, preferences, clubs bag`
+- `feat(courses): searchable catalog + seed loader + pipeline docs`
+- `feat(rounds): robust round setup + live scoring tied to course holes`
+- `feat(shots): structured shot entry + distance + map improvements`
+- `feat(analytics): premium dashboard + testable calculators`
+- `chore: harden persistence, states, and debug tooling`
+- `docs: product narrative, architecture, course data pipeline`
 
 ## Author
 
-**[dhruvsood12](https://github.com/dhruvsood12)** — [GitHub](https://github.com/dhruvsood12)
-
----
-
-## License
-
-This project is available for portfolio and educational use. See repository for any license details.
+Built and maintained by [dhruvsood12](https://github.com/dhruvsood12).

@@ -20,6 +20,8 @@ struct RoundSetupView: View {
     @State private var playingPartners = ""
     @State private var isStarting = false
     @State private var startedRoundItem: RoundNavItem?
+    @State private var saveErrorMessage: String?
+    @State private var showingSaveError = false
 
     private var profile: UserProfile? { profiles.first }
 
@@ -79,6 +81,14 @@ struct RoundSetupView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .alert("Couldn’t start round", isPresented: $showingSaveError) {
+            Button("OK") {
+                saveErrorMessage = nil
+                showingSaveError = false
+            }
+        } message: {
+            Text(saveErrorMessage ?? "")
+        }
     }
 
     private var canStart: Bool { selectedCourse != nil }
@@ -113,8 +123,15 @@ struct RoundSetupView: View {
         )
         for s in holeScores { s.round = round }
         modelContext.insert(round)
-        try? modelContext.save()
-        startedRoundItem = RoundNavItem(id: round.id)
+        do {
+            try modelContext.save()
+            DebugLogger.log("Started round \(round.id) at \(course.name)")
+            startedRoundItem = RoundNavItem(id: round.id)
+        } catch {
+            DebugLogger.error("Failed to start round", error: error)
+            saveErrorMessage = "Your round couldn’t be created. Please try again."
+            showingSaveError = true
+        }
         isStarting = false
     }
 }

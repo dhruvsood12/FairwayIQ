@@ -25,6 +25,8 @@ struct AnalyticsView: View {
                         scoreTrendCard
                         handicapTrendCard
                         statsGridCard
+                        splitCard
+                        coursePerformanceCard
                         bestWorstCard
                     } else {
                         emptyAnalyticsCard
@@ -158,6 +160,57 @@ struct AnalyticsView: View {
                 miniStat(title: "Fairways", value: String(format: "%.0f%%", viewModel.summary.fairwayPct))
                 miniStat(title: "GIR", value: String(format: "%.0f%%", viewModel.summary.girPct))
                 miniStat(title: "Putts/rnd", value: String(format: "%.1f", viewModel.summary.puttsPerRound))
+            }
+            HStack(spacing: 12) {
+                miniStat(title: "Penalties/rnd", value: String(format: "%.1f", viewModel.summary.penaltiesPerRound))
+                miniStat(title: "Best", value: viewModel.summary.bestRoundScore.map(String.init) ?? "—")
+                miniStat(title: "Worst", value: viewModel.summary.worstRoundScore.map(String.init) ?? "—")
+            }
+        }
+        .padding(Theme.Layout.cardPadding)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Theme.Color.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+    }
+
+    private var splitCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Front vs back")
+                .font(.headline)
+                .foregroundStyle(Theme.Color.textPrimary)
+            HStack(spacing: 12) {
+                miniStat(title: "Front 9", value: String(format: "%.1f", viewModel.splitSummary.frontNineAverage))
+                miniStat(title: "Back 9", value: String(format: "%.1f", viewModel.splitSummary.backNineAverage))
+            }
+        }
+        .padding(Theme.Layout.cardPadding)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Theme.Color.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+    }
+
+    private var coursePerformanceCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Course-by-course")
+                .font(.headline)
+                .foregroundStyle(Theme.Color.textPrimary)
+            ForEach(viewModel.coursePerformance.prefix(4)) { item in
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(item.courseName)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Theme.Color.textPrimary)
+                            .lineLimit(1)
+                        Text("\(item.roundsPlayed) rounds")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                    Spacer()
+                    Text(String(format: "%.1f", item.averageScore))
+                        .font(.headline)
+                        .foregroundStyle(Theme.Color.accent)
+                }
+                .padding(.vertical, 6)
             }
         }
         .padding(Theme.Layout.cardPadding)

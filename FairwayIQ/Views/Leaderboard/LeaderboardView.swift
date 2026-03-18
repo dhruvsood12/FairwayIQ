@@ -33,7 +33,7 @@ struct LeaderboardView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundStyle(Theme.Color.textPrimary)
-            Text("Mock leaderboard will show here with sample data.")
+            Text("Social comparison is planned for a future cloud release. This screen will grow into live friend activity and rankings.")
                 .font(.subheadline)
                 .foregroundStyle(Theme.Color.textSecondary)
                 .multilineTextAlignment(.center)

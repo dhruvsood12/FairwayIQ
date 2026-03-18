@@ -38,23 +38,43 @@ struct ShotMapView: View {
     }
 
     var body: some View {
-        Map(initialPosition: .region(region)) {
-            ForEach(Array(shots.enumerated()), id: \.offset) { _, shot in
-                if let start = shot.startCoordinate {
-                    Annotation("Start", coordinate: start) {
-                        Image(systemName: "mappin.circle.fill")
-                            .foregroundStyle(Theme.Color.greenPrimary)
+        Group {
+            if shots.isEmpty {
+                VStack(spacing: 10) {
+                    Image(systemName: "map")
+                        .font(.system(size: 28))
+                        .foregroundStyle(Theme.Color.textSecondary)
+                    Text("No shot locations yet")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Theme.Color.textPrimary)
+                    Text("Add shots during a round to build a map and distance history.")
+                        .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                        .padding(.horizontal, 20)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Theme.Color.cardBackground)
+            } else {
+                Map(initialPosition: .region(region)) {
+                    ForEach(Array(shots.enumerated()), id: \.offset) { _, shot in
+                        if let start = shot.startCoordinate {
+                            Annotation("Start", coordinate: start) {
+                                Image(systemName: "mappin.circle.fill")
+                                    .foregroundStyle(Theme.Color.greenPrimary)
+                            }
+                        }
+                        if let end = shot.endCoordinate {
+                            Annotation("End", coordinate: end) {
+                                Image(systemName: "flag.checkered")
+                                    .foregroundStyle(Theme.Color.accent)
+                            }
+                        }
                     }
                 }
-                if let end = shot.endCoordinate {
-                    Annotation("End", coordinate: end) {
-                        Image(systemName: "flag.checkered")
-                            .foregroundStyle(Theme.Color.accent)
-                    }
-                }
+                .mapStyle(.standard(elevation: .realistic))
             }
         }
-        .mapStyle(.standard(elevation: .realistic))
     }
 }
 
