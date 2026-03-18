@@ -1,0 +1,37 @@
+{
+  "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/FairwayIQApp.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/FairwayIQApp.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/FairwayIQApp.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/FairwayIQApp.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/FairwayIQApp.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/FairwayIQApp.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Views/Rounds/RoundsView.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RoundsView.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RoundsView.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RoundsView.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RoundsView.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RoundsView.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Views/Rounds/ShotEntryView.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotEntryView.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotEntryView.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotEntryView.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotEntryView.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotEntryView.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Views/Rounds/ShotMapView.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotMapView.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotMapView.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotMapView.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotMapView.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ShotMapView.swiftdeps"
+  }
+}

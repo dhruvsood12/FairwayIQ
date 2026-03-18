@@ -1,0 +1,44 @@
+{
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/App/AppState/SessionStore.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/SessionStore.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/SessionStore.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/SessionStore.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/SessionStore.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/SessionStore.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/App/MainTabView.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/MainTabView.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/MainTabView.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/MainTabView.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/MainTabView.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/MainTabView.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/App/RootView.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RootView.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RootView.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RootView.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RootView.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/RootView.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Components/Theme.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/Theme.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/Theme.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/Theme.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/Theme.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/Theme.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Core/Utilities/DebugLogger.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/DebugLogger.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/DebugLogger.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/DebugLogger.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/DebugLogger.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/DebugLogger.swiftdeps"
+  },
+  "/Users/dhruvsood/Desktop/FairwayIQ/FairwayIQ/Data/Repositories/ProfileRepository.swift" : {
+    "const-values" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ProfileRepository.swiftconstvalues",
+    "dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ProfileRepository.d",
+    "diagnostics" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ProfileRepository.dia",
+    "object" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ProfileRepository.o",
+    "swift-dependencies" : "/Users/dhruvsood/Desktop/FairwayIQ/.build/DerivedData/Build/Intermediates.noindex/FairwayIQ.build/Debug-iphoneos/FairwayIQ.build/Objects-normal/arm64/ProfileRepository.swiftdeps"
+  }
+}
