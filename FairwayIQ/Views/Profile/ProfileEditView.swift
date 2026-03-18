@@ -16,7 +16,9 @@ struct ProfileEditView: View {
     @State private var skillLevel: String = "Intermediate"
     @State private var handicapEstimate: Double = 18
     @State private var preferredUnits: String = "yards"
-    @State private var selectedHomeCourseId: String?
+    @State private var selectedHomeCourse: Course?
+    @State private var saveErrorMessage: String?
+    @State private var showingSaveError = false
 
     private let skillLevels = ["Beginner", "Intermediate", "Advanced", "Scratch"]
     private var eligibleCourses: [Course] { courses.filter { $0.holes.count >= 18 } }
@@ -44,10 +46,10 @@ struct ProfileEditView: View {
                         Text("Yards").tag("yards")
                         Text("Meters").tag("meters")
                     }
-                    Picker("Home course", selection: $selectedHomeCourseId) {
-                        Text("None").tag(nil as String?)
+                    Picker("Home course", selection: $selectedHomeCourse) {
+                        Text("None").tag(nil as Course?)
                         ForEach(eligibleCourses, id: \.id) { course in
-                            Text(course.name).tag(course.id as String?)
+                            Text(course.name).tag(course as Course?)
                         }
                     }
                 }
@@ -63,8 +65,9 @@ struct ProfileEditView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        save()
-                        dismiss()
+                        if save() {
+                            dismiss()
+                        }
                     }
                     .fontWeight(.semibold)
                     .foregroundStyle(Theme.Color.greenPrimary)
@@ -75,19 +78,40 @@ struct ProfileEditView: View {
                 skillLevel = profile.skillLevel
                 handicapEstimate = profile.handicapEstimate
                 preferredUnits = profile.preferredUnits
-                selectedHomeCourseId = profile.homeCourseId
+                selectedHomeCourse = profile.homeCourse
             }
         }
         .preferredColorScheme(.dark)
+        .alert("Couldn’t save profile", isPresented: $showingSaveError) {
+            Button("OK") {
+                saveErrorMessage = nil
+                showingSaveError = false
+            }
+        } message: {
+            Text(saveErrorMessage ?? "")
+        }
     }
 
-    private func save() {
-        profile.playerName = playerName.trimmingCharacters(in: .whitespaces)
+    private func save() -> Bool {
+        let trimmedName = playerName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty else {
+            saveErrorMessage = "Name can’t be empty."
+            showingSaveError = true
+            return false
+        }
+        profile.playerName = trimmedName
         profile.skillLevel = skillLevel
         profile.handicapEstimate = handicapEstimate
         profile.preferredUnits = preferredUnits
-        profile.homeCourseId = selectedHomeCourseId
+        profile.homeCourse = selectedHomeCourse
         profile.updatedAt = Date()
-        try? modelContext.save()
+        do {
+            try modelContext.save()
+            return true
+        } catch {
+            saveErrorMessage = String(describing: error)
+            showingSaveError = true
+            return false
+        }
     }
 }

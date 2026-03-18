@@ -13,6 +13,7 @@ final class Shot {
     var club: String
     var lie: String
     var shotType: String
+    var notes: String?
     var startLatitude: Double?
     var startLongitude: Double?
     var endLatitude: Double?
@@ -36,6 +37,7 @@ final class Shot {
         club: String,
         lie: String,
         shotType: String,
+        notes: String? = nil,
         startLatitude: Double? = nil,
         startLongitude: Double? = nil,
         endLatitude: Double? = nil,
@@ -47,6 +49,7 @@ final class Shot {
         self.club = club
         self.lie = lie
         self.shotType = shotType
+        self.notes = notes
         self.startLatitude = startLatitude
         self.startLongitude = startLongitude
         self.endLatitude = endLatitude

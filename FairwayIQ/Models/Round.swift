@@ -9,17 +9,22 @@ import SwiftData
 @Model
 final class Round {
     var id: UUID
-    var courseId: String
-    var courseName: String
+    var course: Course?
+    var courseNameSnapshot: String
     var teeBox: String
     var date: Date
     var weather: String?
     var playingPartners: String?
+    var player: UserProfile?
     @Relationship(deleteRule: .cascade, inverse: \HoleScore.round)
     var holeScores: [HoleScore] = []
     @Relationship(deleteRule: .cascade, inverse: \Shot.round)
     var shots: [Shot] = []
     var createdAt: Date
+
+    var courseName: String {
+        course?.name ?? courseNameSnapshot
+    }
 
     var totalStrokes: Int {
         holeScores.reduce(0) { $0 + $1.strokes }
@@ -42,6 +47,10 @@ final class Round {
     }
 
     var totalPar: Int {
+        if let course {
+            return course.totalPar
+        }
+        // Fallback for legacy/demo rounds until migration is complete.
         let holes = holeScores.count
         return holes == 18 ? 72 : (holes == 9 ? 36 : holes * 4)
     }
@@ -52,23 +61,25 @@ final class Round {
 
     init(
         id: UUID = UUID(),
-        courseId: String,
-        courseName: String,
+        course: Course? = nil,
+        courseNameSnapshot: String,
         teeBox: String = "Blue",
         date: Date = Date(),
         weather: String? = nil,
         playingPartners: String? = nil,
+        player: UserProfile? = nil,
         holeScores: [HoleScore] = [],
         shots: [Shot] = [],
         createdAt: Date = Date()
     ) {
         self.id = id
-        self.courseId = courseId
-        self.courseName = courseName
+        self.course = course
+        self.courseNameSnapshot = courseNameSnapshot
         self.teeBox = teeBox
         self.date = date
         self.weather = weather
         self.playingPartners = playingPartners
+        self.player = player
         self.holeScores = holeScores
         self.shots = shots
         self.createdAt = createdAt

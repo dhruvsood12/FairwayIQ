@@ -8,18 +8,22 @@ import SwiftData
 
 struct LiveRoundView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     let roundId: UUID
     var onRoundComplete: (() -> Void)?
     @Query private var rounds: [Round]
     @State private var currentHoleIndex = 0
     @State private var showShotEntry = false
     @State private var showSummary = false
+    @State private var loadFailed = false
 
     private var round: Round? { rounds.first { $0.id == roundId } }
-    private static let parArray = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4]
-    private var holeCount: Int { round?.holeScores.count ?? 18 }
+    private var holeCount: Int { round?.holeScores.count ?? round?.course?.holes.count ?? 18 }
     private var currentHoleNumber: Int { currentHoleIndex + 1 }
-    private var par: Int { Self.parArray.indices.contains(currentHoleIndex) ? Self.parArray[currentHoleIndex] : 4 }
+    private var par: Int {
+        guard let course = round?.course else { return 4 }
+        return course.holes.first(where: { $0.number == currentHoleNumber })?.par ?? 4
+    }
     private var isPar3: Bool { par == 3 }
     private var currentScore: HoleScore? {
         round?.holeScores.first { $0.holeNumber == currentHoleNumber }
@@ -35,17 +39,44 @@ struct LiveRoundView: View {
                     liveContent(round: round)
                 }
             } else {
-                ProgressView("Loading round…")
+                if loadFailed {
+                    VStack(spacing: 12) {
+                        Text("Couldn’t load this round.")
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.textPrimary)
+                        Button("Close") { dismiss() }
+                            .fontWeight(.semibold)
+                            .foregroundStyle(Theme.Color.background)
+                            .padding(.horizontal, 18)
+                            .padding(.vertical, 12)
+                            .background(Theme.Color.greenPrimary)
+                            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+                    }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Theme.Color.background)
+                } else {
+                    ProgressView("Loading round…")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Theme.Color.background)
+                        .onAppear {
+                            // If the round isn't in the store, don't soft-lock the user here.
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                if round == nil { loadFailed = true }
+                            }
+                        }
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Text("Hole \(currentHoleNumber)/\(holeCount)")
-                    .font(.headline)
-                    .foregroundStyle(Theme.Color.textPrimary)
+                HStack(spacing: 12) {
+                    Button("Exit") { dismiss() }
+                        .foregroundStyle(Theme.Color.textSecondary)
+                    Text("Hole \(currentHoleNumber)/\(holeCount)")
+                        .font(.headline)
+                        .foregroundStyle(Theme.Color.textPrimary)
+                }
             }
         }
         .sheet(isPresented: $showShotEntry) {
@@ -249,7 +280,7 @@ struct LiveRoundView: View {
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Round.self, HoleScore.self, configurations: config)
-    let round = Round(courseId: "x", courseName: "Preview Course", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4) })
+    let round = Round(courseNameSnapshot: "Preview Course", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4) })
     container.mainContext.insert(round)
     return NavigationStack {
         LiveRoundView(roundId: round.id)

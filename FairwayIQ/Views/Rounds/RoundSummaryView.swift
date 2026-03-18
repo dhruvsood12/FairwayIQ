@@ -11,8 +11,6 @@ struct RoundSummaryView: View {
     @Environment(\.dismiss) private var dismiss
     var round: Round
     var onComplete: (() -> Void)?
-
-    private static let parArray = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4]
     private var sortedScores: [HoleScore] {
         round.holeScores.sorted { $0.holeNumber < $1.holeNumber }
     }
@@ -98,7 +96,7 @@ struct RoundSummaryView: View {
                 Text("Putts").font(.caption).fontWeight(.semibold).foregroundStyle(Theme.Color.textSecondary)
                 Text("+/-").font(.caption).fontWeight(.semibold).foregroundStyle(Theme.Color.textSecondary)
                 ForEach(Array(sortedScores.enumerated()), id: \.element.holeNumber) { _, s in
-                    let par = Self.parArray.indices.contains(s.holeNumber - 1) ? Self.parArray[s.holeNumber - 1] : 4
+                    let par = parForHole(s.holeNumber)
                     let diff = s.strokes - par
                     Text("\(s.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
                     Text("\(par)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
@@ -123,7 +121,7 @@ struct RoundSummaryView: View {
                 .foregroundStyle(Theme.Color.textPrimary)
             HStack(spacing: 16) {
                 statBlock(title: "Fairways", value: "\(round.fairwaysHit)/\(round.fairwaysPossible)")
-                statBlock(title: "GIR", value: "\(round.girsHit)/18")
+                statBlock(title: "GIR", value: "\(round.girsHit)/\(max(1, round.holeScores.count))")
                 statBlock(title: "Putts", value: "\(round.totalPutts)")
                 statBlock(title: "Penalties", value: "\(round.holeScores.reduce(0) { $0 + $1.penalties })")
             }
@@ -180,11 +178,16 @@ struct RoundSummaryView: View {
             .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
         }
     }
+
+    private func parForHole(_ holeNumber: Int) -> Int {
+        guard let course = round.course else { return 4 }
+        return course.holes.first(where: { $0.number == holeNumber })?.par ?? 4
+    }
 }
 
 #Preview {
     NavigationStack {
-        RoundSummaryView(round: Round(courseId: "x", courseName: "Preview", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2) }))
+        RoundSummaryView(round: Round(courseNameSnapshot: "Preview", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2) }))
     }
     .modelContainer(for: [Round.self], inMemory: true)
 }

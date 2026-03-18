@@ -12,6 +12,8 @@ struct ClubsInBagView: View {
     @Bindable var profile: UserProfile
     @State private var newClubName = ""
     @State private var showAddField = false
+    @State private var saveErrorMessage: String?
+    @State private var showingSaveError = false
 
     private var clubs: [String] { profile.clubsList }
 
@@ -23,6 +25,7 @@ struct ClubsInBagView: View {
                         .foregroundStyle(Theme.Color.textPrimary)
                 }
                 .onDelete(perform: deleteClubs)
+                .onMove(perform: moveClubs)
                 if showAddField {
                     HStack {
                         TextField("Club name", text: $newClubName)
@@ -55,9 +58,21 @@ struct ClubsInBagView: View {
                     }
                     .foregroundStyle(Theme.Color.greenPrimary)
                 }
+                ToolbarItem(placement: .secondaryAction) {
+                    EditButton()
+                        .foregroundStyle(Theme.Color.textSecondary)
+                }
             }
         }
         .preferredColorScheme(.dark)
+        .alert("Couldn’t save clubs", isPresented: $showingSaveError) {
+            Button("OK") {
+                saveErrorMessage = nil
+                showingSaveError = false
+            }
+        } message: {
+            Text(saveErrorMessage ?? "")
+        }
     }
 
     private func addClub() {
@@ -67,7 +82,7 @@ struct ClubsInBagView: View {
         if !list.contains(name) {
             list.append(name)
             profile.clubsList = list
-            try? modelContext.save()
+            save()
         }
         newClubName = ""
     }
@@ -76,6 +91,22 @@ struct ClubsInBagView: View {
         var list = profile.clubsList
         list.remove(atOffsets: offsets)
         profile.clubsList = list
-        try? modelContext.save()
+        save()
+    }
+
+    private func moveClubs(from source: IndexSet, to destination: Int) {
+        var list = profile.clubsList
+        list.move(fromOffsets: source, toOffset: destination)
+        profile.clubsList = list
+        save()
+    }
+
+    private func save() {
+        do {
+            try modelContext.save()
+        } catch {
+            saveErrorMessage = String(describing: error)
+            showingSaveError = true
+        }
     }
 }

@@ -9,12 +9,13 @@ import SwiftData
 struct OnboardingView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var courses: [Course]
+    @Environment(SessionStore.self) private var session
     @State private var step = 0
     @State private var playerName = ""
     @State private var skillLevel = "Intermediate"
     @State private var handicapEstimate = 18.0
     @State private var preferredUnits = "yards"
-    @State private var selectedHomeCourseId: String?
+    @State private var selectedHomeCourse: Course?
     @State private var isCompleting = false
 
     private let skillLevels = ["Beginner", "Intermediate", "Advanced", "Scratch"]
@@ -177,25 +178,25 @@ struct OnboardingView: View {
             ScrollView {
                 VStack(spacing: 10) {
                     Button {
-                        selectedHomeCourseId = nil
+                        selectedHomeCourse = nil
                     } label: {
                         HStack {
                             Text("None")
                                 .foregroundStyle(Theme.Color.textPrimary)
                             Spacer()
-                            if selectedHomeCourseId == nil {
+                            if selectedHomeCourse == nil {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(Theme.Color.greenPrimary)
                             }
                         }
                         .padding(Theme.Layout.cardPadding)
-                        .background(selectedHomeCourseId == nil ? Theme.Color.greenMuted.opacity(0.4) : Theme.Color.cardBackground)
+                        .background(selectedHomeCourse == nil ? Theme.Color.greenMuted.opacity(0.4) : Theme.Color.cardBackground)
                         .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
                     }
                     .buttonStyle(.plain)
                     ForEach(courses.filter { $0.holes.count >= 18 }, id: \.id) { course in
                         Button {
-                            selectedHomeCourseId = course.id
+                            selectedHomeCourse = course
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
@@ -208,13 +209,13 @@ struct OnboardingView: View {
                                     }
                                 }
                                 Spacer()
-                                if selectedHomeCourseId == course.id {
+                                if selectedHomeCourse?.id == course.id {
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundStyle(Theme.Color.greenPrimary)
                                 }
                             }
                             .padding(Theme.Layout.cardPadding)
-                            .background(selectedHomeCourseId == course.id ? Theme.Color.greenMuted.opacity(0.4) : Theme.Color.cardBackground)
+                            .background(selectedHomeCourse?.id == course.id ? Theme.Color.greenMuted.opacity(0.4) : Theme.Color.cardBackground)
                             .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
                         }
                         .buttonStyle(.plain)
@@ -275,7 +276,7 @@ struct OnboardingView: View {
             profile.skillLevel = skillLevel
             profile.handicapEstimate = handicapEstimate
             profile.preferredUnits = preferredUnits
-            profile.homeCourseId = selectedHomeCourseId
+            profile.homeCourse = selectedHomeCourse
             profile.hasCompletedOnboarding = true
             profile.updatedAt = Date()
         } else {
@@ -284,12 +285,17 @@ struct OnboardingView: View {
                 skillLevel: skillLevel,
                 handicapEstimate: handicapEstimate,
                 preferredUnits: preferredUnits,
-                homeCourseId: selectedHomeCourseId,
+                homeCourse: selectedHomeCourse,
                 hasCompletedOnboarding: true
             )
             modelContext.insert(profile)
         }
-        try? modelContext.save()
+        do {
+            try modelContext.save()
+            session.currentProfileId = profile.id
+        } catch {
+            // Onboarding is still usable without persisting; keep user on this screen until next run.
+        }
     }
 }
 

@@ -8,6 +8,7 @@ import SwiftData
 
 @main
 struct FairwayIQApp: App {
+    @State private var session = SessionStore()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             UserProfile.self,
@@ -36,6 +37,7 @@ struct FairwayIQApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(session)
         }
         .modelContainer(sharedModelContainer)
     }

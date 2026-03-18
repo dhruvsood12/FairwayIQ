@@ -9,9 +9,13 @@ import CoreLocation
 
 @Model
 final class Course {
+    @Attribute(.unique)
     var id: String
     var name: String
-    var locationName: String?
+    var city: String?
+    var state: String?
+    var kind: String?
+    var websiteURL: String?
     var latitude: Double?
     var longitude: Double?
     @Relationship(deleteRule: .cascade, inverse: \Hole.course)
@@ -22,6 +26,15 @@ final class Course {
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
 
+    var locationName: String? {
+        switch (city?.isEmpty == false ? city : nil, state?.isEmpty == false ? state : nil) {
+        case let (c?, s?): return "\(c), \(s)"
+        case let (c?, nil): return c
+        case let (nil, s?): return s
+        default: return nil
+        }
+    }
+
     var totalPar: Int {
         holes.reduce(0) { $0 + $1.par }
     }
@@ -29,14 +42,20 @@ final class Course {
     init(
         id: String,
         name: String,
-        locationName: String? = nil,
+        city: String? = nil,
+        state: String? = nil,
+        kind: String? = nil,
+        websiteURL: String? = nil,
         latitude: Double? = nil,
         longitude: Double? = nil,
         holes: [Hole] = []
     ) {
         self.id = id
         self.name = name
-        self.locationName = locationName
+        self.city = city
+        self.state = state
+        self.kind = kind
+        self.websiteURL = websiteURL
         self.latitude = latitude
         self.longitude = longitude
         self.holes = holes

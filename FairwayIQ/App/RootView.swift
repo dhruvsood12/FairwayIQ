@@ -8,25 +8,76 @@ import SwiftData
 
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var profiles: [UserProfile]
+    @Environment(SessionStore.self) private var session
 
-    private var profile: UserProfile? { profiles.first }
-    private var showOnboarding: Bool {
-        guard let p = profile else { return true }
-        return !p.hasCompletedOnboarding
+    @State private var route: Route = .loading
+    @State private var loadErrorMessage: String?
+    @State private var showingLoadError = false
+
+    private enum Route: Equatable {
+        case loading
+        case onboarding
+        case main
     }
 
     var body: some View {
-        Group {
-            if showOnboarding {
-                OnboardingView()
-            } else {
-                MainTabView()
+        ZStack {
+            Theme.Color.background.ignoresSafeArea()
+            Group {
+                switch route {
+                case .loading:
+                    ProgressView("Loading…")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                case .onboarding:
+                    OnboardingView()
+                case .main:
+                    MainTabView()
+                }
             }
         }
-        .onAppear {
-            SampleData.seedIfNeeded(modelContext: modelContext)
+        .alert("Couldn’t load your data", isPresented: $showingLoadError) {
+            Button("Retry") { loadRoute() }
+            Button("Continue") { }
+        } message: {
+            Text(loadErrorMessage ?? "")
         }
+        .onAppear { loadRoute() }
+        .onChange(of: session.currentProfileId) { _, _ in loadRoute() }
+    }
+
+    private func loadRoute() {
+        loadErrorMessage = nil
+        showingLoadError = false
+        route = .loading
+
+        let repo = ProfileRepository(modelContext: modelContext)
+        do {
+            let profile: UserProfile?
+            if let id = session.currentProfileId {
+                profile = try repo.fetchProfile(id: id)
+            } else {
+                profile = try repo.fetchAnyProfile()
+                session.currentProfileId = profile?.id
+            }
+
+            guard let profile else {
+                route = .onboarding
+                return
+            }
+
+            route = profile.hasCompletedOnboarding ? .main : .onboarding
+        } catch {
+            loadErrorMessage = String(describing: error)
+            showingLoadError = true
+            route = .onboarding
+        }
+
+        CourseSeedLoader.seedIfNeeded(modelContext: modelContext)
+
+        #if DEBUG
+        // Keep demo data available for previews/dev runs, but avoid silently turning production into a demo.
+        SampleData.seedIfNeeded(modelContext: modelContext)
+        #endif
     }
 }
 
