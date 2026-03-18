@@ -22,6 +22,18 @@ struct AnalyticsSummary: Hashable {
     let worstRoundScore: Int?
 }
 
+struct SplitSummary: Hashable {
+    let frontNineAverage: Double
+    let backNineAverage: Double
+}
+
+struct CoursePerformance: Identifiable, Hashable {
+    var id: String { courseName }
+    let courseName: String
+    let roundsPlayed: Int
+    let averageScore: Double
+}
+
 enum AnalyticsCalculators {
     static func scoreTrend(rounds: [Round]) -> [ScoreTrendPoint] {
         rounds
@@ -79,6 +91,37 @@ enum AnalyticsCalculators {
         guard let min = scores.min(), let max = scores.max() else { return 60...100 }
         let pad = max(2, Int(Double(max - min) * 0.15))
         return Double(min - pad)...Double(max + pad)
+    }
+
+    static func frontBackSplit(rounds: [Round]) -> SplitSummary {
+        var frontTotals: [Int] = []
+        var backTotals: [Int] = []
+
+        for round in rounds {
+            let sorted = round.holeScores.sorted { $0.holeNumber < $1.holeNumber }
+            let front = sorted.filter { $0.holeNumber <= 9 }.reduce(0) { $0 + $1.strokes }
+            let back = sorted.filter { $0.holeNumber > 9 }.reduce(0) { $0 + $1.strokes }
+            if front > 0 { frontTotals.append(front) }
+            if back > 0 { backTotals.append(back) }
+        }
+
+        let frontAvg = frontTotals.isEmpty ? 0 : Double(frontTotals.reduce(0, +)) / Double(frontTotals.count)
+        let backAvg = backTotals.isEmpty ? 0 : Double(backTotals.reduce(0, +)) / Double(backTotals.count)
+        return SplitSummary(frontNineAverage: frontAvg, backNineAverage: backAvg)
+    }
+
+    static func coursePerformance(rounds: [Round]) -> [CoursePerformance] {
+        let grouped = Dictionary(grouping: rounds, by: \.courseName)
+        return grouped.map { key, rounds in
+            let avg = Double(rounds.map(\.totalStrokes).reduce(0, +)) / Double(rounds.count)
+            return CoursePerformance(courseName: key, roundsPlayed: rounds.count, averageScore: avg)
+        }
+        .sorted { lhs, rhs in
+            if lhs.roundsPlayed == rhs.roundsPlayed {
+                return lhs.averageScore < rhs.averageScore
+            }
+            return lhs.roundsPlayed > rhs.roundsPlayed
+        }
     }
 }
 

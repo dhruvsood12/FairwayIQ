@@ -16,6 +16,8 @@ struct LiveRoundView: View {
     @State private var showShotEntry = false
     @State private var showSummary = false
     @State private var loadFailed = false
+    @State private var saveErrorMessage: String?
+    @State private var showingSaveError = false
 
     private var round: Round? { rounds.first { $0.id == roundId } }
     private var holeCount: Int { round?.holeScores.count ?? round?.course?.holes.count ?? 18 }
@@ -85,6 +87,14 @@ struct LiveRoundView: View {
                     showShotEntry = false
                 }
             }
+        }
+        .alert("Couldn’t save round", isPresented: $showingSaveError) {
+            Button("OK") {
+                saveErrorMessage = nil
+                showingSaveError = false
+            }
+        } message: {
+            Text(saveErrorMessage ?? "")
         }
     }
 
@@ -266,7 +276,15 @@ struct LiveRoundView: View {
     }
 
     private func saveHoleAndAdvance(round: Round) {
-        try? modelContext.save()
+        do {
+            try modelContext.save()
+            DebugLogger.log("Saved hole \(currentHoleNumber) for round \(round.id)")
+        } catch {
+            DebugLogger.error("Failed to save hole \(currentHoleNumber)", error: error)
+            saveErrorMessage = "We couldn’t save this hole. Please try again."
+            showingSaveError = true
+            return
+        }
         if isLastHole {
             showSummary = true
         } else {

@@ -17,6 +17,8 @@ struct OnboardingView: View {
     @State private var preferredUnits = "yards"
     @State private var selectedHomeCourse: Course?
     @State private var isCompleting = false
+    @State private var completeErrorMessage: String?
+    @State private var showingCompleteError = false
 
     private let skillLevels = ["Beginner", "Intermediate", "Advanced", "Scratch"]
     private let unitsOptions = ["yards", "meters"]
@@ -39,6 +41,14 @@ struct OnboardingView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .alert("Couldn’t finish setup", isPresented: $showingCompleteError) {
+            Button("OK") {
+                completeErrorMessage = nil
+                showingCompleteError = false
+            }
+        } message: {
+            Text(completeErrorMessage ?? "")
+        }
     }
 
     private var progressIndicator: some View {
@@ -293,9 +303,13 @@ struct OnboardingView: View {
         do {
             try modelContext.save()
             session.currentProfileId = profile.id
+            DebugLogger.log("Completed onboarding for profile \(profile.id)")
         } catch {
-            // Onboarding is still usable without persisting; keep user on this screen until next run.
+            DebugLogger.error("Failed to complete onboarding", error: error)
+            completeErrorMessage = "Your profile couldn’t be saved. Please try again."
+            showingCompleteError = true
         }
+        isCompleting = false
     }
 }
 
