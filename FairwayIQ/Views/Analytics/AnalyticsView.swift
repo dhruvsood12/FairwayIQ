@@ -8,20 +8,22 @@ import SwiftData
 import Charts
 
 struct AnalyticsView: View {
+    @Environment(SessionStore.self) private var session
     @Query(sort: \Round.date, order: .forward) private var rounds: [Round]
     @Query private var profiles: [UserProfile]
     @State private var viewModel = AnalyticsDashboardViewModel()
 
-    private var profile: UserProfile? { profiles.first }
-    private var bestRound: Round? { rounds.min(by: { $0.totalStrokes < $1.totalStrokes }) }
-    private var worstRound: Round? { rounds.max(by: { $0.totalStrokes < $1.totalStrokes }) }
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var bestRound: Round? { scopedRounds.min(by: { $0.totalStrokes < $1.totalStrokes }) }
+    private var worstRound: Round? { scopedRounds.max(by: { $0.totalStrokes < $1.totalStrokes }) }
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.Layout.sectionSpacing) {
                     overviewCard
-                    if !rounds.isEmpty {
+                    if !scopedRounds.isEmpty {
                         scoreTrendCard
                         handicapTrendCard
                         statsGridCard
@@ -39,8 +41,7 @@ struct AnalyticsView: View {
             .navigationTitle("Analytics")
             .preferredColorScheme(.dark)
         }
-        .onAppear { viewModel.refresh(rounds: rounds, profileIndexEstimate: profile?.handicapEstimate) }
-        .onChange(of: rounds.count) { _, _ in viewModel.refresh(rounds: rounds, profileIndexEstimate: profile?.handicapEstimate) }
+        .task(id: refreshKey) { refreshDashboard() }
     }
 
     private var overviewCard: some View {
@@ -60,7 +61,7 @@ struct AnalyticsView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("\(rounds.count)")
+                    Text("\(scopedRounds.count)")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundStyle(Theme.Color.textPrimary)
@@ -288,7 +289,23 @@ struct AnalyticsView: View {
     }
 }
 
+private extension AnalyticsView {
+    var refreshKey: String {
+        let roundsKey = rounds.map {
+            "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar)"
+        }.joined(separator: "|")
+        let profileKey = session.currentProfileId?.uuidString ?? "no-profile"
+        let handicapKey = profile.map { String(format: "%.1f", $0.handicapEstimate) } ?? "no-index"
+        return [profileKey, handicapKey, roundsKey].joined(separator: "#")
+    }
+
+    func refreshDashboard() {
+        viewModel.refresh(rounds: scopedRounds, profileIndexEstimate: profile?.handicapEstimate)
+    }
+}
+
 #Preview {
     AnalyticsView()
         .modelContainer(for: [Round.self, UserProfile.self], inMemory: true)
+        .environment(SessionStore())
 }

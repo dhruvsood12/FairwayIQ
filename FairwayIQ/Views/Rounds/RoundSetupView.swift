@@ -9,6 +9,7 @@ import SwiftData
 struct RoundSetupView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(SessionStore.self) private var session
     var onDismiss: (() -> Void)?
     @Query private var courses: [Course]
     @Query private var profiles: [UserProfile]
@@ -23,7 +24,7 @@ struct RoundSetupView: View {
     @State private var saveErrorMessage: String?
     @State private var showingSaveError = false
 
-    private var profile: UserProfile? { profiles.first }
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
 
     private struct RoundNavItem: Identifiable, Hashable {
         let id: UUID
@@ -139,4 +140,5 @@ struct RoundSetupView: View {
 #Preview {
     RoundSetupView()
         .modelContainer(for: [Course.self, Round.self, UserProfile.self], inMemory: true)
+        .environment(SessionStore())
 }

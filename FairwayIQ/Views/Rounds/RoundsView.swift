@@ -7,14 +7,17 @@ import SwiftUI
 import SwiftData
 
 struct RoundsView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(SessionStore.self) private var session
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
+    @Query private var profiles: [UserProfile]
     @State private var showRoundSetup = false
+
+    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
 
     var body: some View {
         NavigationStack {
             Group {
-                if rounds.isEmpty {
+                if scopedRounds.isEmpty {
                     emptyState
                 } else {
                     roundsList
@@ -59,7 +62,7 @@ struct RoundsView: View {
     private var roundsList: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                ForEach(rounds, id: \.id) { round in
+                ForEach(scopedRounds, id: \.id) { round in
                     NavigationLink {
                         RoundSummaryView(round: round)
                     } label: {
@@ -93,5 +96,6 @@ struct RoundsView: View {
 
 #Preview {
     RoundsView()
-        .modelContainer(for: [Round.self], inMemory: true)
+        .modelContainer(for: [Round.self, UserProfile.self], inMemory: true)
+        .environment(SessionStore())
 }

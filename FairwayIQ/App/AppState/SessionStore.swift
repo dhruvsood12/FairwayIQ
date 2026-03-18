@@ -32,3 +32,25 @@ final class SessionStore {
     }
 }
 
+extension SessionStore {
+    func resolvedProfile(in profiles: [UserProfile]) -> UserProfile? {
+        if let currentProfileId,
+           let profile = profiles.first(where: { $0.id == currentProfileId }) {
+            return profile
+        }
+        return profiles.sorted(by: { $0.createdAt < $1.createdAt }).first
+    }
+
+    func roundsForCurrentProfile(_ rounds: [Round], profiles: [UserProfile]) -> [Round] {
+        guard let profile = resolvedProfile(in: profiles) else { return rounds }
+
+        let hasMultipleProfiles = profiles.count > 1
+        return rounds.filter { round in
+            if let playerId = round.player?.id {
+                return playerId == profile.id
+            }
+            return !hasMultipleProfiles
+        }
+    }
+}
+
