@@ -86,8 +86,8 @@ struct RoundSetupView: View {
     private func startRound() {
         guard let course = selectedCourse else { return }
         isStarting = true
-        let pars = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4]
-        let holeScores: [HoleScore] = (1...18).map { num in
+        let holeCount = max(1, course.holes.count)
+        let holeScores: [HoleScore] = (1...holeCount).map { num in
             let score = HoleScore(
                 holeNumber: num,
                 strokes: 0,
@@ -100,12 +100,13 @@ struct RoundSetupView: View {
             return score
         }
         let round = Round(
-            courseId: course.id,
-            courseName: course.name,
+            course: course,
+            courseNameSnapshot: course.name,
             teeBox: teeBox,
             date: roundDate,
             weather: weather,
             playingPartners: playingPartners.isEmpty ? nil : playingPartners,
+            player: profile,
             holeScores: holeScores,
             shots: [],
             createdAt: Date()

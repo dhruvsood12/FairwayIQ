@@ -20,7 +20,10 @@ enum SampleData {
         let pebble = Course(
             id: "pebble-beach",
             name: "Pebble Beach Golf Links",
-            locationName: "Pebble Beach, CA",
+            city: "Pebble Beach",
+            state: "CA",
+            kind: "Resort",
+            websiteURL: "https://www.pebblebeach.com/golf/pebble-beach-golf-links/",
             latitude: 36.5674,
             longitude: -121.9500,
             holes: []
@@ -36,7 +39,9 @@ enum SampleData {
         let augusta = Course(
             id: "augusta-national",
             name: "Augusta National",
-            locationName: "Augusta, GA",
+            city: "Augusta",
+            state: "GA",
+            kind: "Private",
             latitude: 33.5023,
             longitude: -82.0197,
             holes: []
@@ -52,7 +57,9 @@ enum SampleData {
         let local = Course(
             id: "local-muni",
             name: "Riverside Municipal",
-            locationName: "Local",
+            city: "Riverside",
+            state: "CA",
+            kind: "Municipal",
             latitude: nil,
             longitude: nil,
             holes: []
@@ -68,8 +75,9 @@ enum SampleData {
         return [pebble, augusta, local]
     }
 
-    static func createSampleRounds(modelContext: ModelContext, courseId: String, courseName: String) -> Round {
-        let holeScores: [HoleScore] = (1...18).map { num in
+    static func createSampleRounds(modelContext: ModelContext, course: Course) -> Round {
+        let holeCount = max(1, course.holes.count)
+        let holeScores: [HoleScore] = (1...holeCount).map { num in
             let par = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4][num - 1]
             let strokes = par + Int.random(in: -1...2)
             let putts = min(strokes, Int.random(in: 1...3))
@@ -87,8 +95,8 @@ enum SampleData {
             return score
         }
         let round = Round(
-            courseId: courseId,
-            courseName: courseName,
+            course: course,
+            courseNameSnapshot: course.name,
             teeBox: "Blue",
             date: Date().addingTimeInterval(-Double.random(in: 1...14) * 86400),
             weather: "Sunny",
@@ -135,12 +143,15 @@ enum SampleData {
         if let existing = try? modelContext.fetch(descriptor).first {
             return existing
         }
+        let homeCourse = (try? modelContext.fetch(FetchDescriptor<Course>(
+            predicate: #Predicate { $0.id == "pebble-beach" }
+        )))?.first
         let profile = UserProfile(
             playerName: "Demo Player",
             skillLevel: "Intermediate",
             handicapEstimate: 12.0,
             preferredUnits: "yards",
-            homeCourseId: "pebble-beach",
+            homeCourse: homeCourse,
             hasCompletedOnboarding: true
         )
         modelContext.insert(profile)
@@ -156,7 +167,7 @@ enum SampleData {
             _ = createSampleFriendEntries(modelContext: modelContext)
             let courses = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
             for c in courses.prefix(2) {
-                _ = createSampleRounds(modelContext: modelContext, courseId: c.id, courseName: c.name)
+                _ = createSampleRounds(modelContext: modelContext, course: c)
             }
         }
     }

@@ -7,54 +7,12 @@ import SwiftUI
 import SwiftData
 import Charts
 
-private struct ScoreTrendPoint: Identifiable {
-    let id: Date
-    let date: Date
-    let score: Int
-}
-
-private struct HandicapTrendPoint: Identifiable {
-    let id: Date
-    let date: Date
-    let index: Double
-}
-
 struct AnalyticsView: View {
-    @Environment(\.modelContext) private var modelContext
     @Query(sort: \Round.date, order: .forward) private var rounds: [Round]
     @Query private var profiles: [UserProfile]
+    @State private var viewModel = AnalyticsDashboardViewModel()
 
     private var profile: UserProfile? { profiles.first }
-    private var sortedRounds: [Round] { rounds.sorted { $0.date < $1.date } }
-    private var handicapTrendData: [HandicapTrendPoint] {
-        sortedRounds.enumerated().map { index, _ in
-            let estimate = (profile?.handicapEstimate ?? 18) - Double(index) * 0.4
-            let date = sortedRounds[index].date
-            return HandicapTrendPoint(id: date, date: date, index: max(0, estimate))
-        }
-    }
-    private var scoreTrendData: [ScoreTrendPoint] {
-        sortedRounds.map { ScoreTrendPoint(id: $0.date, date: $0.date, score: $0.totalStrokes) }
-    }
-    private var averageScore: Double {
-        guard !rounds.isEmpty else { return 0 }
-        return Double(rounds.map(\.totalStrokes).reduce(0, +)) / Double(rounds.count)
-    }
-    private var fairwayPct: Double {
-        let total = rounds.reduce(0) { $0 + $1.fairwaysPossible }
-        guard total > 0 else { return 0 }
-        return Double(rounds.reduce(0) { $0 + $1.fairwaysHit }) / Double(total) * 100
-    }
-    private var girPct: Double {
-        guard !rounds.isEmpty else { return 0 }
-        let total = rounds.count * 18
-        let hit = rounds.reduce(0) { $0 + $1.girsHit }
-        return Double(hit) / Double(total) * 100
-    }
-    private var puttsPerRound: Double {
-        guard !rounds.isEmpty else { return 0 }
-        return Double(rounds.reduce(0) { $0 + $1.totalPutts }) / Double(rounds.count)
-    }
     private var bestRound: Round? { rounds.min(by: { $0.totalStrokes < $1.totalStrokes }) }
     private var worstRound: Round? { rounds.max(by: { $0.totalStrokes < $1.totalStrokes }) }
 
@@ -79,6 +37,8 @@ struct AnalyticsView: View {
             .navigationTitle("Analytics")
             .preferredColorScheme(.dark)
         }
+        .onAppear { viewModel.refresh(rounds: rounds, profileIndexEstimate: profile?.handicapEstimate) }
+        .onChange(of: rounds.count) { _, _ in viewModel.refresh(rounds: rounds, profileIndexEstimate: profile?.handicapEstimate) }
     }
 
     private var overviewCard: some View {
@@ -88,7 +48,7 @@ struct AnalyticsView: View {
                 .foregroundStyle(Theme.Color.textPrimary)
             HStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(format: "%.1f", averageScore))
+                    Text(String(format: "%.1f", viewModel.summary.averageScore))
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundStyle(Theme.Color.accent)
@@ -112,7 +72,7 @@ struct AnalyticsView: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundStyle(Theme.Color.greenPrimary)
-                    Text("Index")
+                    Text("Index (estimate)")
                         .font(.caption)
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
@@ -131,7 +91,7 @@ struct AnalyticsView: View {
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
             Chart {
-                ForEach(scoreTrendData) { item in
+                ForEach(viewModel.scoreTrend) { item in
                     LineMark(
                         x: .value("Date", item.date),
                         y: .value("Score", item.score)
@@ -145,7 +105,7 @@ struct AnalyticsView: View {
                     .foregroundStyle(Theme.Color.accent)
                 }
             }
-            .chartYScale(domain: 65...95)
+            .chartYScale(domain: AnalyticsCalculators.yDomain(for: viewModel.scoreTrend.map(\.score)))
             .frame(height: 180)
         }
         .padding(Theme.Layout.cardPadding)
@@ -156,11 +116,11 @@ struct AnalyticsView: View {
 
     private var handicapTrendCard: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Handicap trend")
+            Text("Index estimate")
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
             Chart {
-                ForEach(handicapTrendData) { item in
+                ForEach(viewModel.indexTrend) { item in
                     AreaMark(
                         x: .value("Date", item.date),
                         y: .value("Index", item.index)
@@ -180,7 +140,7 @@ struct AnalyticsView: View {
                     .interpolationMethod(.catmullRom)
                 }
             }
-            .chartYScale(domain: 0...30)
+            .chartYScale(domain: 0...54)
             .frame(height: 160)
         }
         .padding(Theme.Layout.cardPadding)
@@ -195,9 +155,9 @@ struct AnalyticsView: View {
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
             HStack(spacing: 12) {
-                miniStat(title: "Fairways", value: String(format: "%.0f%%", fairwayPct))
-                miniStat(title: "GIR", value: String(format: "%.0f%%", girPct))
-                miniStat(title: "Putts/rnd", value: String(format: "%.1f", puttsPerRound))
+                miniStat(title: "Fairways", value: String(format: "%.0f%%", viewModel.summary.fairwayPct))
+                miniStat(title: "GIR", value: String(format: "%.0f%%", viewModel.summary.girPct))
+                miniStat(title: "Putts/rnd", value: String(format: "%.1f", viewModel.summary.puttsPerRound))
             }
         }
         .padding(Theme.Layout.cardPadding)

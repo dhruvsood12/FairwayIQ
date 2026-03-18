@@ -11,11 +11,13 @@ final class Hole {
     var number: Int
     var par: Int
     var handicapIndex: Int
+    var yardage: Int?
     var course: Course?
 
-    init(number: Int, par: Int, handicapIndex: Int = 0) {
+    init(number: Int, par: Int, handicapIndex: Int = 0, yardage: Int? = nil) {
         self.number = number
         self.par = par
         self.handicapIndex = handicapIndex
+        self.yardage = yardage
     }
 }

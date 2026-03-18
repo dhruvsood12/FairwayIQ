@@ -18,21 +18,21 @@ struct MainTabView: View {
                 }
                 .tag(0)
 
+            CoursesView()
+                .tabItem {
+                    Label("Courses", systemImage: "map.fill")
+                }
+                .tag(1)
+
             RoundsView()
                 .tabItem {
                     Label("Rounds", systemImage: "flag.fill")
                 }
-                .tag(1)
+                .tag(2)
 
             AnalyticsView()
                 .tabItem {
                     Label("Analytics", systemImage: "chart.line.uptrend.xyaxis")
-                }
-                .tag(2)
-
-            LeaderboardView()
-                .tabItem {
-                    Label("Leaderboard", systemImage: "trophy.fill")
                 }
                 .tag(3)
 
