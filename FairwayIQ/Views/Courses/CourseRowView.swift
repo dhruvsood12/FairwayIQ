@@ -1,0 +1,40 @@
+import SwiftUI
+
+struct CourseRowView: View {
+    let course: Course
+
+    var body: some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(course.name)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Theme.Color.textPrimary)
+                HStack(spacing: 8) {
+                    if let location = course.locationName {
+                        Text(location)
+                    }
+                    if let kind = course.kind, !kind.isEmpty {
+                        Text("• \(kind)")
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(Theme.Color.textSecondary)
+            }
+            Spacer()
+            VStack(alignment: .trailing, spacing: 4) {
+                Text("\(course.holes.count) holes")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(Theme.Color.textSecondary)
+                if course.totalPar > 0 {
+                    Text("Par \(course.totalPar)")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Theme.Color.accent)
+                }
+            }
+        }
+        .padding(Theme.Layout.cardPadding)
+        .background(Theme.Color.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+    }
+}
+
