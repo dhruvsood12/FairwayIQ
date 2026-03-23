@@ -6,7 +6,7 @@ import argparse
 import json
 import time
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import requests
 
@@ -26,7 +26,7 @@ def build_query(bbox: BBox) -> str:
     # Fetch nodes/ways/relations tagged leisure=golf_course within bbox.
     # We request tags + center for ways/relations.
     return f"""
-[out:json][timeout:180];
+[out:json][timeout:300];
 (
   node["leisure"="golf_course"]({bbox.south},{bbox.west},{bbox.north},{bbox.east});
   way["leisure"="golf_course"]({bbox.south},{bbox.west},{bbox.north},{bbox.east});
@@ -36,10 +36,19 @@ out tags center;
 """
 
 
-def fetch_overpass(query: str) -> Dict[str, Any]:
-    resp = requests.post(OVERPASS_URL, data={"data": query}, timeout=240)
-    resp.raise_for_status()
-    return resp.json()
+def fetch_overpass(query: str, retries: int = 3) -> Dict[str, Any]:
+    last_err: Optional[Exception] = None
+    for attempt in range(retries):
+        try:
+            resp = requests.post(OVERPASS_URL, data={"data": query}, timeout=360)
+            resp.raise_for_status()
+            return resp.json()
+        except (requests.RequestException, ValueError) as e:
+            last_err = e
+            if attempt < retries - 1:
+                time.sleep(5 * (attempt + 1))
+    assert last_err is not None
+    raise last_err
 
 
 def main() -> None:
