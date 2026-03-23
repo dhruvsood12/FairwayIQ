@@ -72,6 +72,7 @@ struct RootView: View {
             route = .onboarding
         }
 
+        CourseSeedLoader.applyBundledCatalogIfNeeded(modelContext: modelContext)
         CourseSeedLoader.seedIfNeeded(modelContext: modelContext)
 
         #if DEBUG

@@ -1,0 +1,8534 @@
+[
+  {
+    "id": "osm:node:4630683403",
+    "name": "Steele Canyon Driving Range",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.744,
+    "longitude": -116.893404,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "node",
+      "osmId": 4630683403,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:node:5769176985",
+    "name": "Brengle Terrace Park Disc Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2091848,
+    "longitude": -117.221408,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "node",
+      "osmId": 5769176985,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:node:9632409806",
+    "name": "Mission Bay Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.798925,
+    "longitude": -117.2169082,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "node",
+      "osmId": 9632409806,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:25841862",
+    "name": "Balboa Championship Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.sandiego.gov/park-and-recreation/golf/bpgolf",
+    "latitude": 32.7299975,
+    "longitude": -117.1380433,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 25841862,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:30407983",
+    "name": "La Jolla Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.8384668,
+    "longitude": -117.266791,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 30407983,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:31484455",
+    "name": "Bonita Golf Course",
+    "city": "Bonita",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://bonitagolf.net/",
+    "latitude": 32.6810343,
+    "longitude": -117.0131659,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 31484455,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:31484532",
+    "name": "Chula Vista Golf Course",
+    "city": "Bonita",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://chulavistagc.com/",
+    "latitude": 32.6635817,
+    "longitude": -117.0331251,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 31484532,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:31522542",
+    "name": "Balboa Executive 9-hole Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.sandiego.gov/park-and-recreation/golf/bpgolf",
+    "latitude": 32.7220319,
+    "longitude": -117.1360102,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 31522542,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:35679009",
+    "name": "Torrey Pines North Course",
+    "city": "La Jolla",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.torreypines.com/torrey-pines-north-course/",
+    "latitude": 32.9087097,
+    "longitude": -117.2489801,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 35679009,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:35679036",
+    "name": "Torrey Pines South Course",
+    "city": "La Jolla",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.torreypines.com/torrey-pines-south-course/",
+    "latitude": 32.8971363,
+    "longitude": -117.247647,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 35679036,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:40056999",
+    "name": "Spindrift Pitch & Putt (La Jolla Beach & Tennis Club)",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.ljbtc.com/",
+    "latitude": 32.8531276,
+    "longitude": -117.2579334,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 40056999,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500618",
+    "name": "Emerald Isle Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2133635,
+    "longitude": -117.3278339,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500618,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500619",
+    "name": "Meadow Lake Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2164477,
+    "longitude": -117.1052423,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500619,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500700",
+    "name": "Twin Oaks Golf Course",
+    "city": "San Marcos",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.jcgolf.com/san-diego-tee-times/san-marcos-ca-golf-courses",
+    "latitude": 33.163453,
+    "longitude": -117.1572914,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500700,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500732",
+    "name": "Rancho Carlsbad Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.148232,
+    "longitude": -117.2867567,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500732,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500735",
+    "name": "Oaks North Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.jcgolf.com/course/oaks-north/",
+    "latitude": 33.0348609,
+    "longitude": -117.0541551,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500735,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500748",
+    "name": "San Vicente Golf Club",
+    "city": "Ramona",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.sanvicenteresort.com/",
+    "latitude": 33.0011275,
+    "longitude": -116.8114959,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500748,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44500957",
+    "name": "Rancho Bernardo Inn Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.jcgolf.com/course/rancho-bernardo/",
+    "latitude": 33.0317957,
+    "longitude": -117.0689475,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44500957,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501106",
+    "name": "Presidio Hills Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.7565254,
+    "longitude": -117.1963602,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501106,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501149",
+    "name": "Willowbrook Golf Course",
+    "city": "Lakeside",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "http://www.willowbrookgolfcourse.com/",
+    "latitude": 32.8620876,
+    "longitude": -116.9353579,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501149,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501177",
+    "name": "Lake San Marcos Executive Golf Course",
+    "city": "San Marcos",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.thelakehouseresort.com/san-marcos-golf",
+    "latitude": 33.1209595,
+    "longitude": -117.2170824,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501177,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501266",
+    "name": "Omni La Costa Golf Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.1083793,
+    "longitude": -117.2630985,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501266,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501324",
+    "name": "The Heights Country Club",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.001318,
+    "longitude": -117.0725428,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501324,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501399",
+    "name": "Shadowridge Country Club",
+    "city": "Vista",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.invitedclubs.com/clubs/shadowridge-golf-club/golf",
+    "latitude": 33.1665111,
+    "longitude": -117.2353877,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501399,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501432",
+    "name": "Rancho Bernardo Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.0248433,
+    "longitude": -117.0623399,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501432,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501514",
+    "name": "National City Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.666776,
+    "longitude": -117.0844082,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501514,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501559",
+    "name": "The Vineyard at Escondido Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.0704922,
+    "longitude": -117.0492745,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501559,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501568",
+    "name": "Oceanside Municipal Golf Course",
+    "city": "Oceanside",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.playoceansidegolf.com/",
+    "latitude": 33.2556702,
+    "longitude": -117.3198879,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501568,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501596",
+    "name": "San Diego Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.619668,
+    "longitude": -117.0653152,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501596,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501629",
+    "name": "Rancho Santa Fe Golf Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.0255749,
+    "longitude": -117.2108467,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501629,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501636",
+    "name": "Carlton Oaks Golf",
+    "city": "Santee",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.carltonoaksgolf.com/",
+    "latitude": 32.8404353,
+    "longitude": -117.0133553,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501636,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:44501768",
+    "name": "Mission Trails Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.missiontrailsgc.com/",
+    "latitude": 32.7964907,
+    "longitude": -117.0357822,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 44501768,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:52117243",
+    "name": "Club Campestre de Tijuana",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.5093386,
+    "longitude": -117.005104,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 52117243,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:62102530",
+    "name": "Maderas Golf Club",
+    "city": "Poway",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.maderasgolf.com/",
+    "latitude": 33.0383198,
+    "longitude": -117.0258291,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 62102530,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:83332241",
+    "name": "The Crossings at Carlsbad",
+    "city": "Carlsbad",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://thecrossingsatcarlsbad.com/",
+    "latitude": 33.1297857,
+    "longitude": -117.2981814,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 83332241,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:94482998",
+    "name": "Cottonwood Golf Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.7464625,
+    "longitude": -116.9154489,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 94482998,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:128312850",
+    "name": "Miramar Memorial Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.mccsmiramar.com/golfcourse/",
+    "latitude": 32.8837377,
+    "longitude": -117.1482095,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 128312850,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:129896593",
+    "name": "Villa Parke Golf Course - 9 holes",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.8491256,
+    "longitude": -117.1909819,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 129896593,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:130359926",
+    "name": "Sorrento Canyon Golf Center",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.8919938,
+    "longitude": -117.1894761,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 130359926,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:130538534",
+    "name": "Fairbanks Ranch Country Club",
+    "city": "Rancho Santa Fe",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "http://www.fairbanksranch.com/",
+    "latitude": 32.9795623,
+    "longitude": -117.2174863,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 130538534,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:155530689",
+    "name": "The Farms Golf Club at Rancho Santa Fe",
+    "city": "Rancho Santa Fe",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.thefarmsgolfclub.com/",
+    "latitude": 32.9890957,
+    "longitude": -117.1763505,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 155530689,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:218739730",
+    "name": "Barona Resort Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.9468061,
+    "longitude": -116.8723157,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 218739730,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:222839605",
+    "name": "High Country Villas",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.0412207,
+    "longitude": -117.2480215,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 222839605,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:305930625",
+    "name": "The Oaks",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2302245,
+    "longitude": -117.1432393,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 305930625,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:305932873",
+    "name": "Sycuan Golf Resort",
+    "city": "El Cajon",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.sycuanresort.com/",
+    "latitude": 32.7782833,
+    "longitude": -116.8806277,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 305932873,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:323172257",
+    "name": "Mt. Woodson Golf Club",
+    "city": "Ramona",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.mtwoodsongolfclub.com/",
+    "latitude": 33.0150241,
+    "longitude": -116.9610679,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 323172257,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:468522362",
+    "name": "Eastlake Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "http://www.eastlakecountryclub.com",
+    "latitude": 32.6468227,
+    "longitude": -116.962343,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 468522362,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:468534491",
+    "name": "Steele Canyon Golf",
+    "city": "Jamul",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.steelecanyon.com/",
+    "latitude": 32.7440765,
+    "longitude": -116.8947103,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 468534491,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:499750016",
+    "name": "La Costa Omni Resort Golf Course",
+    "city": "Carlsbad",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.omnihotels.com/hotels/san-diego-la-costa",
+    "latitude": 33.0934602,
+    "longitude": -117.2550064,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 499750016,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:546487726",
+    "name": "Hodges Golf Learning Center",
+    "city": "Escondido",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.0663502,
+    "longitude": -117.0644731,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 546487726,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:726990937",
+    "name": "Tecolote Canyon Golf Course",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.tecolotecanyon.com/",
+    "latitude": 32.7889986,
+    "longitude": -117.1871225,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 726990937,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:726990939",
+    "name": "Tecolote Canyon Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.790725,
+    "longitude": -117.1864699,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 726990939,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:753438873",
+    "name": "Lomas Santa Fe Executive Golf Course",
+    "city": "Solana Beach",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.lomassantafegc.com/",
+    "latitude": 33.0018059,
+    "longitude": -117.243379,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 753438873,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:777640309",
+    "name": "Taylormade \"The Kingdom\" Test Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.1384392,
+    "longitude": -117.2821784,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 777640309,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:789695496",
+    "name": "Callaway Golf Test Course",
+    "city": "Carlsbad",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.123959,
+    "longitude": -117.2935409,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 789695496,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:863987351",
+    "name": "The Grand Golf Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.9388124,
+    "longitude": -117.1975957,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 863987351,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:935513443",
+    "name": "Coronado Golf Course",
+    "city": "Coronado",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.golfcoronado.com/",
+    "latitude": 32.6852107,
+    "longitude": -117.1685616,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 935513443,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:961157213",
+    "name": "Steele Canyon Golf Club",
+    "city": "Jamul",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.steelecanyon.com/",
+    "latitude": 32.7438438,
+    "longitude": -116.8941841,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 961157213,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:969679887",
+    "name": "Del Mar Country Club",
+    "city": "Rancho Santa Fe",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.9770174,
+    "longitude": -117.1931913,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 969679887,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:975709666",
+    "name": "The Bridges at Rancho Santa Fe",
+    "city": "Rancho Santa Fe",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.058098,
+    "longitude": -117.199234,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 975709666,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:1211528955",
+    "name": "Riverwalk Golf Club",
+    "city": "San Diego",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://riverwalkgc.com/",
+    "latitude": 32.7629337,
+    "longitude": -117.1776148,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 1211528955,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:1213083701",
+    "name": "Sea 'N Air Golf Club",
+    "city": "Coronado",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://sandiego.navylifesw.com/programs/434d53dc-2cfd-4df4-9a2f-9610df25efef",
+    "latitude": 32.6925718,
+    "longitude": -117.1961396,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 1213083701,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:1230883066",
+    "name": "Ocean Hills Country Club",
+    "city": "Oceanside",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.1601269,
+    "longitude": -117.2635397,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 1230883066,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:way:1312909584",
+    "name": "The Havens Country Club",
+    "city": "Vista",
+    "state": "Ca",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2446511,
+    "longitude": -117.193927,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "way",
+      "osmId": 1312909584,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:2279644",
+    "name": "Reidy Creek Golf Course",
+    "city": "Escondido",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.playreidycreek.com",
+    "latitude": 33.1660417,
+    "longitude": -117.0919529,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 2279644,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:3566984",
+    "name": "Bernardo Heights Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.bhcc.net/",
+    "latitude": 33.0025862,
+    "longitude": -117.0733032,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 3566984,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:3568455",
+    "name": "St Marks Golf - Lake San Marcos Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.stmarkgolf.com/",
+    "latitude": 33.1242267,
+    "longitude": -117.2000601,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 3568455,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:3572324",
+    "name": "Dos Osos Golf Club",
+    "city": "Escondido",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.jcgolf.com/san-diego-tee-times/dos-osos-golf",
+    "latitude": 33.1192388,
+    "longitude": -117.0090962,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 3572324,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:3573430",
+    "name": "Balboa Park Golf Course",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.balboagc.com/",
+    "latitude": 32.7284353,
+    "longitude": -117.1380433,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 3573430,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:4080606",
+    "name": "Fountains Course",
+    "city": "Escondido",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://welkresorts.com/san-diego-golf/",
+    "latitude": 33.2341186,
+    "longitude": -117.1416583,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 4080606,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:4080613",
+    "name": "Mission Bay Golf Course and Practice Center",
+    "city": "San Diego",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.sandiego.gov/park-and-recreation/golf/mbgolf.shtml",
+    "latitude": 32.8004423,
+    "longitude": -117.2163287,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 4080613,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:4080620",
+    "name": "Colina Park Golf Course",
+    "city": "San Diego",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://www.colinaparkgolf.com/",
+    "latitude": 32.7514268,
+    "longitude": -117.0825603,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 4080620,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:11215970",
+    "name": "Arrowood Golf Course",
+    "city": "Oceanside",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://arrowoodgolf.com/",
+    "latitude": 33.2709658,
+    "longitude": -117.2879839,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 11215970,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:12652834",
+    "name": "The Loma Club",
+    "city": "San Diego",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": "https://thelomaclub.com/",
+    "latitude": 32.7424789,
+    "longitude": -117.2123282,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 12652834,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:13192104",
+    "name": "Pauma Valley Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.3029803,
+    "longitude": -116.9883251,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 13192104,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:13316150",
+    "name": "Sea 'N Air Golf Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 32.6925718,
+    "longitude": -117.1961327,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 13316150,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:13836791",
+    "name": "Castle Creek Country Club",
+    "city": "Unknown",
+    "state": "Unknown",
+    "kind": "Unknown",
+    "websiteURL": null,
+    "latitude": 33.2527073,
+    "longitude": -117.1438325,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 13836791,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:15549559",
+    "name": "Native Oaks Golf Course",
+    "city": "Valley Center",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://www.nativeoaksgolfclub.com/",
+    "latitude": 33.2095956,
+    "longitude": -117.0206248,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 15549559,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  },
+  {
+    "id": "osm:relation:19922772",
+    "name": "Aviara Golf Club",
+    "city": "Carlsbad",
+    "state": "CA",
+    "kind": "Unknown",
+    "websiteURL": "https://parkhyattaviara.com/golf/",
+    "latitude": 33.0995081,
+    "longitude": -117.2868084,
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 16,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "yardage": null
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "yardage": null
+      }
+    ],
+    "source": {
+      "provider": "osm",
+      "osmType": "relation",
+      "osmId": 19922772,
+      "fetchedAt": "2026-03-23T14:55:13Z"
+    }
+  }
+]

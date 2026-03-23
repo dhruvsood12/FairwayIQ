@@ -32,6 +32,17 @@ def canonical_website(tags: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def is_likely_public(tags: Dict[str, Any]) -> bool:
+    """Exclude clearly private clubs; keep unknown / public / municipal / resort when not marked private."""
+    access = (tags.get("access") or "").lower()
+    if access in ("private", "no"):
+        return False
+    kind = infer_kind(tags)
+    if kind == "Private":
+        return False
+    return True
+
+
 def infer_kind(tags: Dict[str, Any]) -> Optional[str]:
     # OSM can have access=private/public, or operator:type, or description text.
     access = (tags.get("access") or "").lower()
@@ -87,13 +98,15 @@ class NormalizedCourse:
     source: Dict[str, Any]
 
 
-def normalize(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+def normalize(raw: Dict[str, Any], public_only: bool = False) -> List[Dict[str, Any]]:
     meta = raw.get("_fairwayiq") or {}
     fetched_at = meta.get("fetchedAt")
 
     out: List[NormalizedCourse] = []
     for el in raw.get("elements", []):
         tags = el.get("tags") or {}
+        if public_only and not is_likely_public(tags):
+            continue
         name = tags.get("name")
         if not isinstance(name, str) or not name.strip():
             continue
@@ -154,12 +167,17 @@ def main() -> None:
     p = argparse.ArgumentParser(description="Normalize Overpass golf courses to FairwayIQ seed schema v1.")
     p.add_argument("--in", dest="inp", type=str, required=True)
     p.add_argument("--out", dest="outp", type=str, required=True)
+    p.add_argument(
+        "--public-only",
+        action="store_true",
+        help="Drop courses tagged private or with access=private (OSM is incomplete; verify locally).",
+    )
     args = p.parse_args()
 
     with open(args.inp, "r", encoding="utf-8") as f:
         raw = json.load(f)
 
-    normalized = normalize(raw)
+    normalized = normalize(raw, public_only=args.public_only)
     with open(args.outp, "w", encoding="utf-8") as f:
         json.dump(normalized, f, ensure_ascii=False, indent=2)
 

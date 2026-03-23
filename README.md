@@ -25,9 +25,10 @@ FairwayIQ helps a golfer:
 
 ### Course catalog
 
-- searchable starter course catalog with real U.S. courses
-- course detail screens with location, type, par, and hole breakdown
-- seed-data architecture that can scale into a broader ingestion pipeline
+- bundled **OpenStreetMap–derived** catalog (`FairwayIQ/Resources/courses_catalog.json`), currently seeded from a **San Diego metro** Overpass query plus a small legacy starter list fallback
+- searchable list with state filter; course detail with par totals (hole-level data is MVP placeholders until tee-specific yardage is ingested)
+- Python pipeline under `scripts/course-data/` to fetch more regions or **all U.S. states** (structured Overpass API queries — not HTML scraping)
+- bump `bundledCatalogVersion` in `CourseSeedLoader.swift` when you replace the bundled JSON so existing installs import the new file
 
 ### Round workflow
 

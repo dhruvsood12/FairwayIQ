@@ -1,0 +1,5 @@
+.build/
+DerivedData/
+scripts/course-data/out/
+.venv/
+*.xcuserstate

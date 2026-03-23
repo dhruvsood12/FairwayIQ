@@ -74,6 +74,35 @@ Recommended approach (incremental, reliable):
   - proximity (coordinates within a small threshold)
 - Then export a single `courses_seed_v*.json`.
 
+### Full U.S. public catalog (batch job)
+
+`us_state_bboxes.json` lists approximate bounding boxes for each state. Run:
+
+```bash
+python scripts/course-data/ingest_us_public.py \
+  --out scripts/course-data/out/courses_us_public.json \
+  --delay 45
+```
+
+This calls Overpass once per state, normalizes with `--public-only`, then merges with `merge_catalogs.py`. Expect **tens of minutes** and respect Overpass fair-use limits (the default delay helps).
+
+Copy the merged file to `FairwayIQ/Resources/courses_catalog.json` and **increment `bundledCatalogVersion`** in `CourseSeedLoader.swift` so the app re-imports on the next launch.
+
+### Merge multiple normalized files
+
+```bash
+python scripts/course-data/merge_catalogs.py \
+  scripts/course-data/out/part_a.json \
+  scripts/course-data/out/part_b.json \
+  --out scripts/course-data/out/merged.json
+```
+
+### Honest limitations (OSM)
+
+- **“Public”** is inferred from OSM tags (`access`, text hints); many courses are untagged — use `--public-only` as a best-effort filter, not a legal guarantee.
+- Hole pars / yardages in the seed are **placeholders** unless you enrich from another source.
+- This pipeline **does not scrape** private club websites; it uses structured OSM data.
+
 Later (beyond MVP), you can:
 - host the normalized dataset remotely (S3/GitHub Releases/CDN),
 - ship a small starter dataset in-app,
