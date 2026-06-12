@@ -1,229 +1,208 @@
 # FairwayIQ
 
-FairwayIQ is a native iPhone golf performance app built with SwiftUI. The goal is to make round tracking, shot logging, course selection, and performance analysis feel premium, fast, and credible as a real product rather than a one-off UI prototype.
+FairwayIQ is a native iOS golf performance and strategy app built with SwiftUI, SwiftData, MapKit/CoreLocation, and Swift Charts. It is local-first, privacy-conscious, and designed to feel like a polished sports-tech dashboard rather than a basic CRUD score tracker.
 
-It is designed around a clean, dark, sports-dashboard aesthetic with local-first persistence today and a clear path toward larger course data, cloud sync, and social features later.
+The product vision is simple: help golfers record rounds, learn real club distances, understand miss tendencies, set measurable goals, and make smarter on-course decisions.
 
-## Product overview
+## Why It Exists
 
-FairwayIQ helps a golfer:
+Most casual golf apps stop at score entry. FairwayIQ goes further by turning local round and practice data into explainable coaching and strategy:
 
-- create and persist a real player profile
-- browse a starter catalog of U.S. golf courses
-- start and track rounds with low-friction scoring
-- log shots with structured club, lie, shot type, notes, and optional map-based landing points
-- review scorecards, shot maps, and round summaries
-- explore performance trends with premium chart-driven analytics
+- Which clubs are trustworthy?
+- Where do misses usually go?
+- What actually cost strokes in the last round?
+- Which hole type fits the player best?
+- What is the safer tee option when driver dispersion is risky?
 
-## Current feature set
+The app intentionally avoids fake AI. Smart Caddie, Club Gapping, and Coaching insights are deterministic, rules-based, and derived from stored shot and scoring history.
 
-### Profile and preferences
+## Core Features
 
-- persisted player profile with name, skill level, handicap estimate, preferred units, and home course
-- editable clubs-in-bag flow with add, delete, and reorder support
-- first-launch onboarding tied to a stable current-profile session
+- Player profile, onboarding, home course, handicap estimate, clubs-in-bag, and privacy preferences.
+- Course catalog seeded from bundled local course data with searchable course browsing.
+- Round setup, live hole-by-hole scoring, FIR/GIR/putts/penalties, and optional shot mapping.
+- Round summaries with score vs par, scorecard, front/back splits, map previews, export, and post-round coaching.
+- Analytics dashboard with scoring, putting, driving, approach, club gapping, and goals views.
+- Practice/range sessions to build club distance data outside of rounds.
+- Goals and progress tracking for break-score, putting, GIR, fairways, penalties, and best-score goals.
+- Shareable local text exports for stats snapshots, round summaries, and club gapping reports.
 
-### Course catalog
+## Standout Features
 
-- bundled **OpenStreetMap–derived** catalog (`FairwayIQ/Resources/courses_catalog.json`), currently seeded from a **San Diego metro** Overpass query plus a small legacy starter list fallback
-- searchable list with state filter; course detail with par totals (hole-level data is MVP placeholders until tee-specific yardage is ingested)
-- Python pipeline under `scripts/course-data/` to fetch more regions or **all U.S. states** (structured Overpass API queries — not HTML scraping)
-- bump `bundledCatalogVersion` in `CourseSeedLoader.swift` when you replace the bundled JSON so existing installs import the new file
+### Smart Caddie
 
-### Round workflow
+Smart Caddie recommends conservative, standard, or aggressive strategies per hole using:
 
-- course-based round setup
-- hole-by-hole live entry for strokes, putts, penalties, FIR, and GIR
-- safer save flow with user-facing error handling
-- end-of-round summary with scorecard, to-par scoring, stats, and shot map
+- hole par and yardage
+- learned club distances
+- club confidence and sample size
+- miss tendencies from tee and approach shots
+- warnings when data is sparse
 
-### Shot tracking
+Every recommendation includes a rationale and confidence summary.
 
-- structured shot entry using typed club, lie, and shot type selections
-- current-location capture for start and landing
-- manual landing placement from a map tap
-- automatic distance calculation when both points are available
-- optional notes for context
+### Club Gapping Lab
 
-### Analytics
+The Club Gapping Lab computes:
 
-- score trend chart
-- index estimate trend
-- average score, FIR, GIR, putts per round, penalties per round
-- best and worst round callouts
-- front-nine vs back-nine comparison
-- course-by-course average scoring
+- average, median, min, max, and range
+- carry-style and total-style estimates where shot data allows
+- consistency rating using variance-style dispersion
+- sample-size confidence
+- left/right and short/long miss trends
+- filters for round/practice data, recent timeframe, lie, and shot type
 
-## Tech stack
+### Coaching Engine
 
-| Area | Technology |
-|------|------------|
-| App UI | SwiftUI |
-| Persistence | SwiftData |
-| Maps and location | MapKit, CoreLocation |
-| Charts | Swift Charts |
-| Architecture | MVVM-oriented feature structure with repositories and pure calculators |
-| Platform | iOS |
+Post-round coaching identifies:
 
-## Architecture summary
+- what went well
+- what cost strokes
+- three-putts, penalties, GIR changes, and baseline comparisons
+- best and worst stretches
+- 3-5 actionable practice takeaways
 
-The project is being refactored from a demo-first structure into a production-minded layout with clearer boundaries:
+### Goals + Progress
 
-- `App/`
-  - app boot, root routing, session state
-- `Core/`
-  - design system and shared utilities such as debug logging
-- `Domain/`
-  - models, value types, and pure analytics calculations
-- `Data/`
-  - repositories and starter seed loaders
-- `Features/`
-  - feature-specific view models and UI flows
-- `Views/`
-  - existing screens being migrated feature-by-feature into a cleaner structure
+Goals are evaluated against recent rounds with:
 
-Key production-minded decisions:
+- current value
+- target value
+- progress percentage
+- trend direction
+- achieved / remaining status
 
-- `SessionStore` tracks the current profile instead of relying on `profiles.first`.
-- `Round` now relates directly to `Course` and `UserProfile`.
-- course seeding is separated from demo-only sample data
-- analytics math is moving out of views into testable calculators
-- critical save flows now surface errors instead of silently failing
+## Architecture
 
-## Folder highlights
+FairwayIQ uses a production-style, MVVM-oriented layout:
 
 ```text
 FairwayIQ/
-├── FairwayIQ/
-│   ├── App/
-│   ├── Core/
-│   ├── Data/
-│   ├── Domain/
-│   ├── Features/
-│   ├── Models/
-│   ├── Views/
-│   └── Services/
-├── scripts/
-│   └── course-data/
-├── Sources/
-│   └── FairwayIQCore/
-└── Tests/
-    └── FairwayIQCoreTests/
+├── App/                  App entry, root routing, session state
+├── Core/                 Design system, validation, shared utilities
+├── Data/                 Repositories, seed loaders, export helpers
+├── Domain/               Pure analytics, strategy, coaching, goal engines
+├── Features/             Practice, Club Gapping, Smart Caddie, Goals, Analytics
+├── Models/               SwiftData persistence models
+├── Services/             Platform services such as location
+└── Views/                Existing app flows for home/courses/rounds/profile
 ```
 
-## Course data strategy
+Key design decisions:
 
-FairwayIQ is being built with a real course-data pipeline in mind.
+- SwiftData models are kept local-first and relationship-oriented.
+- Domain engines are pure and testable where possible.
+- Views consume summaries and recommendations instead of duplicating math.
+- Session scoping keeps profile-specific rounds, practice sessions, and goals separated.
+- Demo/sample data is isolated from local user data.
 
-### Current approach
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a deeper breakdown.
 
-- ship a lightweight bundled starter dataset for MVP usability
-- persist seeded courses into SwiftData on first launch
-- use that catalog for onboarding, browsing, and round setup
+## Data Model Overview
 
-### Planned scalable pipeline
+- `UserProfile`: player identity, skill level, handicap estimate, home course, clubs, onboarding, and privacy settings.
+- `Course` / `Hole`: local course and hole metadata.
+- `Round` / `HoleScore` / `Shot`: scored rounds, per-hole stats, and optional mapped shots.
+- `PracticeSession` / `PracticeShot`: range or practice data used by Club Gapping and Smart Caddie.
+- `PlayerGoal`: measurable player goals evaluated by the Goal Engine.
 
-The repo includes `scripts/course-data/` for a structured ingestion approach based on OpenStreetMap and Overpass.
+## Security And Privacy
 
-Pipeline stages:
+FairwayIQ is local-first:
 
-1. source discovery from OSM objects tagged `leisure=golf_course`
-2. Overpass API ingestion by region or state
-3. normalization and deduplication into a stable app-facing schema
-4. export to versioned seed files for app import
+- no backend dependency
+- no analytics SDK
+- no advertising tracker
+- location is requested only for optional shot logging
+- exports can hide exact location detail
+- delete-all-data is available from Profile
+- numeric inputs are validated and bounded
 
-See:
+See [SECURITY.md](SECURITY.md) for threat model, risks, mitigations, and limitations.
 
+## Screens And Flows
+
+- Onboarding: profile setup and home course selection.
+- Home Dashboard: score trend, goals, recent rounds, smart insights, quick actions.
+- Live Round: current hole progress, score entry, shot logging, Smart Caddie preview.
+- Round Summary: stats, scorecard, coaching, map preview, export.
+- Analytics: overview, scoring, putting, driving/approach, clubs, goals.
+- Practice: session logging and shot capture.
+- Club Gapping Lab: distance chart, confidence, filters, dispersion.
+- Profile: settings, privacy controls, data export, delete local data.
+
+## Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| UI | SwiftUI |
+| Persistence | SwiftData |
+| Maps/location | MapKit, CoreLocation |
+| Charts | Swift Charts |
+| Architecture | MVVM-ish views + pure domain engines |
+| Testing | Swift Testing / XCTest-style app test files + SwiftPM core tests |
+| Platform | iOS |
+
+## How To Run
+
+1. Open `FairwayIQ.xcodeproj` in Xcode.
+2. Select the `FairwayIQ` scheme.
+3. Run on an iPhone simulator or device.
+4. Complete onboarding, seed/sample data if needed, and start logging rounds or practice sessions.
+
+For command-line builds, use a local derived data path:
+
+```sh
+xcodebuild -project FairwayIQ.xcodeproj -scheme FairwayIQ -derivedDataPath .build/DerivedData build
+```
+
+## Testing
+
+The repo includes tests for:
+
+- club gapping calculations
+- strategy recommendations
+- miss tendency detection
+- coaching summary rules
+- goal progress evaluation
+- input validation
+- export privacy formatting
+- performance insight helpers
+- SwiftPM core analytics math
+
+Run the SwiftPM core tests:
+
+```sh
+swift test
+```
+
+Run app tests from Xcode using the FairwayIQ test target when simulator runtimes are available.
+
+See [TESTING.md](TESTING.md) for coverage details and known environment limitations.
+
+## Documentation
+
+- [ARCHITECTURE.md](ARCHITECTURE.md)
+- [SECURITY.md](SECURITY.md)
+- [TESTING.md](TESTING.md)
+- [CHANGELOG.md](CHANGELOG.md)
 - `scripts/course-data/README.md`
-- `scripts/course-data/seed_schema_v1.md`
-- `scripts/course-data/overpass_fetch.py`
-- `scripts/course-data/normalize.py`
 
-This avoids brittle HTML scraping and keeps the data story credible for production and interviews.
+## Known Limitations
 
-## Screenshots
+- The course catalog is local and intentionally lightweight.
+- Hole yardage depends on available seed data.
+- Handicap is a user estimate, not a full WHS implementation.
+- Smart Caddie is rules-based and intentionally does not overclaim when data is sparse.
+- PDF export can be added later; current exports are privacy-safe formatted text.
+- Simulator-based UI tests require a local Xcode simulator runtime.
 
-Add screenshots here as the UI continues to harden:
+## Future Improvements
 
-- onboarding
-- home dashboard
-- course catalog
-- live round
-- round summary
-- analytics dashboard
-- profile
+- Full WHS-style handicap calculations.
+- Better tee-specific course metadata.
+- Optional iCloud backup/sync while preserving local-first defaults.
+- Apple Watch shot capture.
+- PDF report rendering.
+- Richer map overlays and dispersion visualizations.
 
-## Setup
-
-1. Clone the repo:
-   `git clone https://github.com/dhruvsood12/FairwayIQ.git`
-2. Open `FairwayIQ.xcodeproj` in Xcode.
-3. Choose an iPhone simulator or a physical device.
-4. Build and run.
-
-Notes:
-
-- The app uses SwiftData for local persistence.
-- A starter course catalog seeds on first launch.
-- In debug/dev flows, additional demo sample data may be available.
-- Shot logging works best with location permission enabled.
-
-## Testability
-
-The app now separates more logic from UI so core calculations can be tested independently.
-
-Current test scaffolding includes:
-
-- a lightweight Swift Package test harness for pure analytics math
-- first tests around scoring summaries, denominator correctness, and chart domains
-
-Recommended next unit-test targets:
-
-- course-driven par and to-par calculations
-- front/back split logic
-- round creation and persistence boundaries
-- shot-distance calculations
-
-## Roadmap
-
-### Near-term
-
-- improve course filtering by state, city, and type
-- expand shot replay and dispersion views
-- tighten round resume and in-progress round handling
-- replace remaining legacy service usage with repositories/view models
-
-### Product roadmap
-
-- larger U.S. course dataset import
-- optional remote catalog updates
-- WHS-style handicap calculation
-- cloud backup and sync
-- friend system and social comparison
-- export/share flows
-- Apple Watch companion
-
-## Known limitations
-
-- the bundled course catalog is intentionally small today
-- tee-box metadata, course rating, and slope are not complete yet
-- handicap is still an estimate, not a full WHS implementation
-- social features are scaffolded but not yet connected to a real backend
-- Swift Package tests were added for pure logic, but app-target XCTest coverage is still limited
-
-## Recommended commit checkpoints
-
-Suggested incremental commit messages for your local workflow:
-
-- `refactor: introduce app state + repositories boundary`
-- `feat(profile): persisted profile, preferences, clubs bag`
-- `feat(courses): searchable catalog + seed loader + pipeline docs`
-- `feat(rounds): robust round setup + live scoring tied to course holes`
-- `feat(shots): structured shot entry + distance + map improvements`
-- `feat(analytics): premium dashboard + testable calculators`
-- `chore: harden persistence, states, and debug tooling`
-- `docs: product narrative, architecture, course data pipeline`
-
-## Author
-
-Built and maintained by [dhruvsood12](https://github.com/dhruvsood12).
