@@ -97,9 +97,9 @@ enum CourseSeedLoader {
     }
 
     private static func mapUnknown(_ raw: String) -> String? {
-        let t = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        if t.isEmpty { return nil }
-        if t.caseInsensitiveCompare("Unknown") == .orderedSame { return nil }
-        return t
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty { return nil }
+        if trimmed.caseInsensitiveCompare("Unknown") == .orderedSame { return nil }
+        return trimmed
     }
 }

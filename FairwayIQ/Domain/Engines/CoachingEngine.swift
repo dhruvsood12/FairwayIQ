@@ -268,8 +268,9 @@ enum CoachingEngine {
                 let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
                 return total + (score.strokes - par)
             }
-            if best == nil || relToPar < best!.totalRelativeToPar {
-                best = StretchResult(startHole: window.first!.holeNumber, endHole: window.last!.holeNumber, totalRelativeToPar: relToPar)
+            guard let firstHole = window.first, let lastHole = window.last else { continue }
+            if best.map({ relToPar < $0.totalRelativeToPar }) ?? true {
+                best = StretchResult(startHole: firstHole.holeNumber, endHole: lastHole.holeNumber, totalRelativeToPar: relToPar)
             }
         }
         return best
@@ -284,8 +285,9 @@ enum CoachingEngine {
                 let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
                 return total + (score.strokes - par)
             }
-            if worst == nil || relToPar > worst!.totalRelativeToPar {
-                worst = StretchResult(startHole: window.first!.holeNumber, endHole: window.last!.holeNumber, totalRelativeToPar: relToPar)
+            guard let firstHole = window.first, let lastHole = window.last else { continue }
+            if worst.map({ relToPar > $0.totalRelativeToPar }) ?? true {
+                worst = StretchResult(startHole: firstHole.holeNumber, endHole: lastHole.holeNumber, totalRelativeToPar: relToPar)
             }
         }
         return (worst?.totalRelativeToPar ?? 0) > 0 ? worst : nil

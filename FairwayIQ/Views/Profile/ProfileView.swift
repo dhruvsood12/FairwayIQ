@@ -159,9 +159,9 @@ struct ProfileView: View {
             if let profile {
                 FIQCard {
                     VStack(alignment: .leading, spacing: Spacing.md) {
-                        Toggle("Hide exact location in exports", isOn: binding(for: \.hideExactLocationInExports))
+                        Toggle("Hide exact location in exports", isOn: binding(for: \.hideExactLocationInExports, on: profile))
                             .tint(Theme.Color.greenPrimary)
-                        Toggle("Prefer manual location logging", isOn: binding(for: \.preferManualLocationLogging))
+                        Toggle("Prefer manual location logging", isOn: binding(for: \.preferManualLocationLogging, on: profile))
                             .tint(Theme.Color.greenPrimary)
                         Text("FairwayIQ stays local-first. These controls let you reduce location detail in reports and avoid automatic GPS use during shot logging.")
                             .font(.caption)
@@ -286,12 +286,12 @@ struct ProfileView: View {
         }
     }
 
-    private func binding<Value>(for keyPath: ReferenceWritableKeyPath<UserProfile, Value>) -> Binding<Value> {
+    private func binding<Value>(for keyPath: ReferenceWritableKeyPath<UserProfile, Value>, on profile: UserProfile) -> Binding<Value> {
         Binding(
-            get: { profile![keyPath: keyPath] },
+            get: { profile[keyPath: keyPath] },
             set: {
-                profile?[keyPath: keyPath] = $0
-                profile?.updatedAt = Date()
+                profile[keyPath: keyPath] = $0
+                profile.updatedAt = Date()
                 try? modelContext.save()
             }
         )
@@ -320,9 +320,12 @@ struct PrivacyInfoView: View {
                             Label("Location", systemImage: "location")
                                 .font(.headline)
                                 .foregroundStyle(Theme.Color.textPrimary)
-                            Text("Location is only used when you choose to log shot positions during a round. It is never shared or uploaded. You can use the app fully without granting location permission.")
-                                .font(.subheadline)
-                                .foregroundStyle(Theme.Color.textSecondary)
+                            Text(
+                                "Location is only used when you choose to log shot positions during a round. "
+                                    + "It is never shared or uploaded. You can use the app fully without granting location permission."
+                            )
+                            .font(.subheadline)
+                            .foregroundStyle(Theme.Color.textSecondary)
                         }
                     }
                     FIQCard {

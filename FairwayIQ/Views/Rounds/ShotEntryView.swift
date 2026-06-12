@@ -59,9 +59,13 @@ struct ShotEntryView: View {
                     }
                 }
                 Section("Location") {
-                    Text(profile?.preferManualLocationLogging == true ? "Manual mode is enabled. GPS is optional for this shot." : "Location is only used for this shot log and stays on device.")
-                        .font(.caption)
-                        .foregroundStyle(Theme.Color.textSecondary)
+                    Text(
+                        profile?.preferManualLocationLogging == true
+                            ? "Manual mode is enabled. GPS is optional for this shot."
+                            : "Location is only used for this shot log and stays on device."
+                    )
+                    .font(.caption)
+                    .foregroundStyle(Theme.Color.textSecondary)
                     if let loc = locationManager.lastLocation {
                         Text("Start: \(loc.coordinate.latitude, specifier: "%.5f"), \(loc.coordinate.longitude, specifier: "%.5f")")
                             .font(.caption)
@@ -189,9 +193,9 @@ struct ShotEntryView: View {
             distanceYards = nil
             return
         }
-        let s = CLLocation(latitude: start.latitude, longitude: start.longitude)
-        let e = CLLocation(latitude: end.latitude, longitude: end.longitude)
-        distanceYards = s.distance(from: e) / 0.9144
+        let startLocation = CLLocation(latitude: start.latitude, longitude: start.longitude)
+        let endLocation = CLLocation(latitude: end.latitude, longitude: end.longitude)
+        distanceYards = startLocation.distance(from: endLocation) / 0.9144
     }
 
     private func saveShot() -> Bool {

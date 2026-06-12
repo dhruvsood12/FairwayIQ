@@ -129,8 +129,8 @@ struct RoundSetupView: View {
             shots: [],
             createdAt: Date()
         )
-        for s in holeScores {
-            s.round = round
+        for holeScore in holeScores {
+            holeScore.round = round
         }
         modelContext.insert(round)
         do {

@@ -15,8 +15,8 @@ struct ExportManagerTests {
             gir: "7/18",
             penalties: 2,
             holeScores: [
-                (1, 4, 5, 2),
-                (2, 3, 3, 1)
+                ExportableHoleLine(hole: 1, par: 4, score: 5, putts: 2),
+                ExportableHoleLine(hole: 2, par: 3, score: 3, putts: 1)
             ],
             coachingHighlights: ["Reduce three-putts", "Strength: Clean card"],
             locationPrivacyNote: nil
@@ -120,7 +120,9 @@ struct ExportManagerTests {
 
     @Test("Round summary text scorecard is formatted")
     func scorecardFormatting() {
-        let holes = (1 ... 18).map { (hole: $0, par: $0 % 3 == 0 ? 3 : 4, score: 4 + ($0 % 3 == 0 ? -1 : 0), putts: 2) }
+        let holes = (1 ... 18).map {
+            ExportableHoleLine(hole: $0, par: $0 % 3 == 0 ? 3 : 4, score: 4 + ($0 % 3 == 0 ? -1 : 0), putts: 2)
+        }
         let summary = ExportableRoundSummary(
             courseName: "Test Course",
             date: "Jan 1, 2025",

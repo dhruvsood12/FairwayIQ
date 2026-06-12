@@ -28,9 +28,9 @@ final class Course {
 
     var locationName: String? {
         switch (city?.isEmpty == false ? city : nil, state?.isEmpty == false ? state : nil) {
-        case let (c?, s?): return "\(c), \(s)"
-        case let (c?, nil): return c
-        case let (nil, s?): return s
+        case let (cityName?, stateName?): return "\(cityName), \(stateName)"
+        case let (cityName?, nil): return cityName
+        case let (nil, stateName?): return stateName
         default: return nil
         }
     }

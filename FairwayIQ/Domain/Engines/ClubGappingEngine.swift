@@ -197,10 +197,8 @@ enum ClubGappingEngine {
         for shot in shots {
             guard let result = shot.result?.lowercased() else { continue }
             categorized += 1
-            if result.contains("left") { leftCount += 1 }
-            else if result.contains("right") { rightCount += 1 }
-            if result.contains("short") { shortCount += 1 }
-            else if result.contains("long") { longCount += 1 }
+            if result.contains("left") { leftCount += 1 } else if result.contains("right") { rightCount += 1 }
+            if result.contains("short") { shortCount += 1 } else if result.contains("long") { longCount += 1 }
         }
 
         return ClubSummary(

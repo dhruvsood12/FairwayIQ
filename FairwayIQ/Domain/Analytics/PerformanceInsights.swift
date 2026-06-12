@@ -87,10 +87,10 @@ enum PerformanceInsights {
             }
             let candidate = (start: window.first?.holeNumber ?? 0, end: window.last?.holeNumber ?? 0, total: relative)
 
-            if bestWindow == nil || relative < bestWindow!.total {
+            if bestWindow.map({ relative < $0.total }) ?? true {
                 bestWindow = candidate
             }
-            if worstWindow == nil || relative > worstWindow!.total {
+            if worstWindow.map({ relative > $0.total }) ?? true {
                 worstWindow = candidate
             }
         }

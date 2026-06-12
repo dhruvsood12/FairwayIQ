@@ -28,10 +28,10 @@ enum SampleData {
             holes: []
         )
         modelContext.insert(pebble)
-        for h in holes1 {
-            modelContext.insert(h)
-            h.course = pebble
-            pebble.holes.append(h)
+        for hole in holes1 {
+            modelContext.insert(hole)
+            hole.course = pebble
+            pebble.holes.append(hole)
         }
 
         let holes2 = createSampleHoles(count: 18)
@@ -46,10 +46,10 @@ enum SampleData {
             holes: []
         )
         modelContext.insert(augusta)
-        for h in holes2 {
-            modelContext.insert(h)
-            h.course = augusta
-            augusta.holes.append(h)
+        for hole in holes2 {
+            modelContext.insert(hole)
+            hole.course = augusta
+            augusta.holes.append(hole)
         }
 
         let holes3 = createSampleHoles(count: 9)
@@ -64,10 +64,10 @@ enum SampleData {
             holes: []
         )
         modelContext.insert(local)
-        for h in holes3 {
-            modelContext.insert(h)
-            h.course = local
-            local.holes.append(h)
+        for hole in holes3 {
+            modelContext.insert(hole)
+            hole.course = local
+            local.holes.append(hole)
         }
 
         try? modelContext.save()
@@ -104,8 +104,8 @@ enum SampleData {
             shots: [],
             createdAt: Date()
         )
-        for s in holeScores {
-            s.round = round
+        for holeScore in holeScores {
+            holeScore.round = round
         }
         modelContext.insert(round)
         try? modelContext.save()
@@ -121,18 +121,18 @@ enum SampleData {
             ("Riley Brown", 73, 76, 75.5, 10.0)
         ]
         var entries: [FriendEntry] = []
-        for (index, n) in names.enumerated() {
-            let e = FriendEntry(
+        for (index, friend) in names.enumerated() {
+            let entry = FriendEntry(
                 id: "friend-\(index)",
-                displayName: n.0,
-                weeklyBestScore: n.1,
-                latestRoundScore: n.2,
-                averageScore: n.3,
-                handicapEstimate: n.4,
+                displayName: friend.0,
+                weeklyBestScore: friend.1,
+                latestRoundScore: friend.2,
+                averageScore: friend.3,
+                handicapEstimate: friend.4,
                 sortOrder: index
             )
-            modelContext.insert(e)
-            entries.append(e)
+            modelContext.insert(entry)
+            entries.append(entry)
         }
         try? modelContext.save()
         return entries
@@ -167,8 +167,8 @@ enum SampleData {
             _ = createSampleCourses(modelContext: modelContext)
             _ = createSampleFriendEntries(modelContext: modelContext)
             let courses = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
-            for c in courses.prefix(2) {
-                _ = createSampleRounds(modelContext: modelContext, course: c)
+            for course in courses.prefix(2) {
+                _ = createSampleRounds(modelContext: modelContext, course: course)
             }
         }
     }

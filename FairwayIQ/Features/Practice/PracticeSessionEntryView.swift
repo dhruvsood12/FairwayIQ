@@ -221,8 +221,8 @@ struct PracticeShotEntrySheet: View {
                 Section("Result") {
                     Picker("Shot Result", selection: $result) {
                         Text("Not recorded").tag(PracticeShotResult?.none)
-                        ForEach(PracticeShotResult.allCases) { r in
-                            Text(r.rawValue).tag(PracticeShotResult?.some(r))
+                        ForEach(PracticeShotResult.allCases) { shotResult in
+                            Text(shotResult.rawValue).tag(PracticeShotResult?.some(shotResult))
                         }
                     }
                     .pickerStyle(.menu)

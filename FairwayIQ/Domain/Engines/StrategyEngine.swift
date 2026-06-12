@@ -255,12 +255,12 @@ enum StrategyEngine {
         switch mode {
         case .conservative:
             let targetDistance = Double(yardage) * 0.6
-            if driverMiss != nil {
+            if let driverMiss {
                 let safeClubs = clubs.filter { $0.clubName != "Driver" && $0.averageDistance >= targetDistance * 0.8 }
                 if let best = safeClubs.first {
                     return ClubRecommendation(
                         club: best.clubName,
-                        rationale: "Avoids your \(driverMiss!.description.lowercased()). Leaves a comfortable approach.",
+                        rationale: "Avoids your \(driverMiss.description.lowercased()). Leaves a comfortable approach.",
                         confidence: best.confidence,
                         expectedDistance: best.averageDistance
                     )
@@ -269,7 +269,7 @@ enum StrategyEngine {
             return recommendClubForDistance(targetDistance, clubs: clubs, mode: mode, context: "conservative tee shot")
 
         case .standard:
-            if driverMiss != nil, driverMiss!.severity == .significant {
+            if driverMiss?.severity == .significant {
                 let alt = clubs.filter { $0.clubName != "Driver" }
                     .max(by: { $0.averageDistance < $1.averageDistance })
                 if let alt {

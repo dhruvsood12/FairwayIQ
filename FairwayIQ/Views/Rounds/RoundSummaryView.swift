@@ -208,15 +208,15 @@ struct RoundSummaryView: View {
                     Text("Score").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("Putts").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("+/-").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
-                    ForEach(sortedScores, id: \.holeNumber) { s in
-                        let par = parForHole(s.holeNumber)
-                        let diff = s.strokes - par
-                        Text("\(s.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
+                    ForEach(sortedScores, id: \.holeNumber) { holeScore in
+                        let par = parForHole(holeScore.holeNumber)
+                        let diff = holeScore.strokes - par
+                        Text("\(holeScore.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
                         Text("\(par)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
-                        Text("\(s.strokes)")
+                        Text("\(holeScore.strokes)")
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(scoreColor(diff))
-                        Text("\(s.putts)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        Text("\(holeScore.putts)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
                         Text(diff > 0 ? "+\(diff)" : "\(diff)")
                             .font(.caption)
                             .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)

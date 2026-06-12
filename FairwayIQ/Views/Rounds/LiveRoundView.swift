@@ -395,6 +395,7 @@ struct LiveRoundView: View {
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    // swiftlint:disable:next force_try
     let container = try! ModelContainer(for: Round.self, HoleScore.self, configurations: config)
     let round = Round(courseNameSnapshot: "Preview Course", holeScores: (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4) })
     container.mainContext.insert(round)

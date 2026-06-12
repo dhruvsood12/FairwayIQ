@@ -118,10 +118,15 @@ struct OnboardingView: View {
                 ForEach(skillLevels, id: \.self) { level in
                     Button {
                         skillLevel = level
-                        if level == "Beginner" { handicapEstimate = 25 }
-                        else if level == "Intermediate" { handicapEstimate = 18 }
-                        else if level == "Advanced" { handicapEstimate = 10 }
-                        else { handicapEstimate = 0 }
+                        if level == "Beginner" {
+                            handicapEstimate = 25
+                        } else if level == "Intermediate" {
+                            handicapEstimate = 18
+                        } else if level == "Advanced" {
+                            handicapEstimate = 10
+                        } else {
+                            handicapEstimate = 0
+                        }
                     } label: {
                         HStack {
                             Text(level)

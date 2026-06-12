@@ -16,10 +16,10 @@ struct CoursesView: View {
             let matchesState = selectedState == "All" || course.state == selectedState
             guard matchesState else { return false }
             guard !searchText.isEmpty else { return true }
-            let q = searchText.lowercased()
-            return course.name.lowercased().contains(q)
-                || (course.city?.lowercased().contains(q) ?? false)
-                || (course.state?.lowercased().contains(q) ?? false)
+            let query = searchText.lowercased()
+            return course.name.lowercased().contains(query)
+                || (course.city?.lowercased().contains(query) ?? false)
+                || (course.state?.lowercased().contains(query) ?? false)
         }
     }
 
@@ -58,8 +58,8 @@ struct CoursesView: View {
     private var filterBar: some View {
         HStack {
             Menu {
-                ForEach(states, id: \.self) { st in
-                    Button(st) { selectedState = st }
+                ForEach(states, id: \.self) { stateName in
+                    Button(stateName) { selectedState = stateName }
                 }
             } label: {
                 HStack(spacing: 8) {

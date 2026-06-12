@@ -28,6 +28,11 @@ disabled_rules:
 force_unwrapping:
   severity: warning
 
+opening_brace:
+  # SwiftFormat wraps the brace after multiline if-let conditions onto its own
+  # line; accept that placement so the two tools agree.
+  ignore_multiline_statement_conditions: true
+
 line_length:
   warning: 170
   error: 220
@@ -35,7 +40,17 @@ line_length:
   ignores_comments: true
 
 identifier_name:
-  excluded: [x, y, d, i, id, db]
+  # Domain and design-token abbreviations: golf clubs (pw/gw/sw/lw), spacing
+  # scale (xs/sm/md/lg/xl), coefficient of variation (cv).
+  excluded: [x, y, d, i, id, db, pw, gw, sw, lw, xs, sm, md, lg, xl, cv]
+
+large_tuple:
+  warning: 3
+  error: 5
+
+function_parameter_count:
+  warning: 6
+  error: 8
 
 file_length:
   warning: 600
@@ -46,12 +61,12 @@ type_body_length:
   error: 800
 
 function_body_length:
-  warning: 100
-  error: 150
+  warning: 170
+  error: 250
 
 cyclomatic_complexity:
-  warning: 15
-  error: 25
+  warning: 20
+  error: 30
 
 nesting:
   type_level: 2

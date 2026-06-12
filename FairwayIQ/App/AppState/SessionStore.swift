@@ -39,7 +39,7 @@ extension SessionStore {
         {
             return profile
         }
-        return profiles.sorted(by: { $0.createdAt < $1.createdAt }).first
+        return profiles.min(by: { $0.createdAt < $1.createdAt })
     }
 
     func roundsForCurrentProfile(_ rounds: [Round], profiles: [UserProfile]) -> [Round] {

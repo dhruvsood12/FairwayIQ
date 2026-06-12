@@ -6,6 +6,13 @@ struct ExportPrivacyOptions: Hashable {
     var includeCoachingNotes: Bool = true
 }
 
+struct ExportableHoleLine {
+    let hole: Int
+    let par: Int
+    let score: Int
+    let putts: Int
+}
+
 struct ExportableRoundSummary {
     let courseName: String
     let date: String
@@ -15,7 +22,7 @@ struct ExportableRoundSummary {
     let fairwaysHit: String
     let gir: String
     let penalties: Int
-    let holeScores: [(hole: Int, par: Int, score: Int, putts: Int)]
+    let holeScores: [ExportableHoleLine]
     let coachingHighlights: [String]
     let locationPrivacyNote: String?
 }
@@ -59,8 +66,8 @@ enum ExportManager {
         lines.append("")
         lines.append("Scorecard")
         lines.append("  Hole  Par  Score  Putts")
-        for h in summary.holeScores {
-            lines.append(String(format: "  %2d    %d    %2d     %d", h.hole, h.par, h.score, h.putts))
+        for holeScore in summary.holeScores {
+            lines.append(String(format: "  %2d    %d    %2d     %d", holeScore.hole, holeScore.par, holeScore.score, holeScore.putts))
         }
         if !summary.coachingHighlights.isEmpty {
             lines.append("")
@@ -126,16 +133,16 @@ enum ExportManager {
         privacy: ExportPrivacyOptions = ExportPrivacyOptions()
     ) -> ExportableRoundSummary {
         let scores = round.holeScores.sorted { $0.holeNumber < $1.holeNumber }
-        let holeData: [(Int, Int, Int, Int)] = scores.map { score in
+        let holeData: [ExportableHoleLine] = scores.map { score in
             let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
-            return (score.holeNumber, par, score.strokes, score.putts)
+            return ExportableHoleLine(hole: score.holeNumber, par: par, score: score.strokes, putts: score.putts)
         }
 
         var highlights: [String] = []
         if privacy.includeCoachingNotes, let coaching {
             highlights.append(contentsOf: coaching.actionItems)
-            for s in coaching.strengths.prefix(2) {
-                highlights.append("Strength: \(s.title)")
+            for strength in coaching.strengths.prefix(2) {
+                highlights.append("Strength: \(strength.title)")
             }
         }
 
