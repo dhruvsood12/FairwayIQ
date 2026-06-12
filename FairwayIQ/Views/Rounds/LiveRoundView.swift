@@ -9,9 +9,12 @@ import SwiftData
 struct LiveRoundView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(SessionStore.self) private var session
     let roundId: UUID
     var onRoundComplete: (() -> Void)?
     @Query private var rounds: [Round]
+    @Query(sort: \PracticeSession.date, order: .reverse) private var practiceSessions: [PracticeSession]
+    @Query private var profiles: [UserProfile]
     @State private var currentHoleIndex = 0
     @State private var showShotEntry = false
     @State private var showSummary = false
@@ -20,6 +23,9 @@ struct LiveRoundView: View {
     @State private var showingSaveError = false
 
     private var round: Round? { rounds.first { $0.id == roundId } }
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var scopedPracticeSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles) }
     private var holeCount: Int { round?.holeScores.count ?? round?.course?.holes.count ?? 18 }
     private var currentHoleNumber: Int { currentHoleIndex + 1 }
     private var par: Int {
@@ -31,6 +37,47 @@ struct LiveRoundView: View {
         round?.holeScores.first { $0.holeNumber == currentHoleNumber }
     }
     private var isLastHole: Bool { currentHoleIndex == holeCount - 1 }
+    private var smartRecommendation: StrategyRecommendation? {
+        guard let round, let course = round.course,
+              let hole = course.holes.first(where: { $0.number == currentHoleNumber }) else { return nil }
+
+        let shotRecords = scopedRounds.flatMap { round in
+            round.shots.map {
+                ShotRecord(
+                    club: $0.club,
+                    lie: $0.lie,
+                    shotType: $0.shotType,
+                    distanceYards: $0.distanceYards,
+                    result: $0.notes,
+                    date: $0.timestamp,
+                    isPractice: false
+                )
+            }
+        } + scopedPracticeSessions.flatMap { session in
+            session.shots.map {
+                ShotRecord(
+                    club: $0.club,
+                    lie: $0.lie,
+                    shotType: $0.shotType,
+                    distanceYards: $0.distanceYards,
+                    result: $0.result,
+                    date: $0.timestamp,
+                    isPractice: true
+                )
+            }
+        }
+
+        return StrategyEngine.recommend(
+            hole: HoleInfo(number: hole.number, par: hole.par, yardage: hole.yardage),
+            clubSummaries: ClubGappingEngine.computeClubSummaries(shots: shotRecords),
+            missTendencies: StrategyEngine.detectMissTendencies(
+                shots: shotRecords,
+                holeScores: scopedRounds.flatMap(\.holeScores),
+                rounds: scopedRounds
+            ),
+            mode: profile?.preferredStrategyMode ?? .standard
+        )
+    }
 
     var body: some View {
         Group {
@@ -107,6 +154,9 @@ struct LiveRoundView: View {
             VStack(alignment: .leading, spacing: Theme.Layout.sectionSpacing) {
                 courseHeader(round: round)
                 parCard
+                if let smartRecommendation {
+                    smartCaddieCard(smartRecommendation)
+                }
                 if let score = currentScore {
                     scoreEntryCard(score)
                     statsTogglesCard(score)
@@ -147,6 +197,28 @@ struct LiveRoundView: View {
         .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
     }
 
+    private func smartCaddieCard(_ recommendation: StrategyRecommendation) -> some View {
+        FIQCard {
+            VStack(alignment: .leading, spacing: Spacing.md) {
+                SectionHeader(title: "Smart Caddie", eyebrow: "Hole preview")
+                Text(recommendation.overallAdvice)
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.Color.textSecondary)
+                FIQChip(text: recommendation.confidenceSummary, color: Theme.Color.accent, isOutline: true)
+                if let tee = recommendation.teeSuggestion {
+                    Text("Tee: \(tee.club)")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Theme.Color.textPrimary)
+                }
+                if let approach = recommendation.approachSuggestion {
+                    Text("Approach: \(approach.club)")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                }
+            }
+        }
+    }
+
     private func scoreEntryCard(_ score: HoleScore) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Score")
@@ -160,8 +232,8 @@ struct LiveRoundView: View {
                         .foregroundStyle(Theme.Color.textSecondary)
                     Stepper("\(score.strokes)", value: Binding(
                         get: { score.strokes },
-                        set: { score.strokes = max(0, $0) }
-                    ), in: 0...20)
+                        set: { score.strokes = InputValidation.clamp($0, min: 1, max: 20) }
+                    ), in: 1...20)
                     .labelsHidden()
                     Text("\(score.strokes)")
                         .font(.title)
@@ -176,7 +248,7 @@ struct LiveRoundView: View {
                         .foregroundStyle(Theme.Color.textSecondary)
                     Stepper("\(score.putts)", value: Binding(
                         get: { score.putts },
-                        set: { score.putts = max(0, min(score.strokes, $0)) }
+                        set: { score.putts = InputValidation.clamp($0, min: 0, max: min(score.strokes, 10)) }
                     ), in: 0...10)
                     .labelsHidden()
                     Text("\(score.putts)")
@@ -192,7 +264,7 @@ struct LiveRoundView: View {
                         .foregroundStyle(Theme.Color.textSecondary)
                     Stepper("\(score.penalties)", value: Binding(
                         get: { score.penalties },
-                        set: { score.penalties = max(0, $0) }
+                        set: { score.penalties = InputValidation.clamp($0, min: 0, max: 10) }
                     ), in: 0...5)
                     .labelsHidden()
                     Text("\(score.penalties)")

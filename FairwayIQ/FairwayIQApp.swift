@@ -1,8 +1,3 @@
-//
-//  FairwayIQApp.swift
-//  FairwayIQ
-//
-
 import SwiftUI
 import SwiftData
 
@@ -18,6 +13,9 @@ struct FairwayIQApp: App {
             HoleScore.self,
             Shot.self,
             FriendEntry.self,
+            PracticeSession.self,
+            PracticeShot.self,
+            PlayerGoal.self,
         ])
         let modelConfiguration = ModelConfiguration(
             schema: schema,

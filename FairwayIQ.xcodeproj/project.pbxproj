@@ -8,6 +8,13 @@
 
 /* Begin PBXFileReference section */
 		281B96082F675C0C00AEA9CC /* FairwayIQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairwayIQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		286735282F7C422800FA6642 /* InputValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationTests.swift; sourceTree = "<group>"; };
+		286735292F7C424000FA6642 /* ExportManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManagerTests.swift; sourceTree = "<group>"; };
+		2867352A2F7C425400FA6642 /* PerformanceInsightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceInsightsTests.swift; sourceTree = "<group>"; };
+		2883B0DE2F7BA213006B73B8 /* ClubGappingEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubGappingEngineTests.swift; sourceTree = "<group>"; };
+		2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingEngineTests.swift; sourceTree = "<group>"; };
+		2883B0E02F7BA216006B73B8 /* GoalEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEngineTests.swift; sourceTree = "<group>"; };
+		2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyEngineTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -34,6 +41,7 @@
 			children = (
 				281B960A2F675C0C00AEA9CC /* FairwayIQ */,
 				281B96092F675C0C00AEA9CC /* Products */,
+				2883B0DD2F7BA1B9006B73B8 /* FairwayIQTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +51,20 @@
 				281B96082F675C0C00AEA9CC /* FairwayIQ.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2883B0DD2F7BA1B9006B73B8 /* FairwayIQTests */ = {
+			isa = PBXGroup;
+			children = (
+				2883B0DE2F7BA213006B73B8 /* ClubGappingEngineTests.swift */,
+				2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */,
+				2883B0E02F7BA216006B73B8 /* GoalEngineTests.swift */,
+				2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */,
+				286735282F7C422800FA6642 /* InputValidationTests.swift */,
+				286735292F7C424000FA6642 /* ExportManagerTests.swift */,
+				2867352A2F7C425400FA6642 /* PerformanceInsightsTests.swift */,
+			);
+			path = FairwayIQTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

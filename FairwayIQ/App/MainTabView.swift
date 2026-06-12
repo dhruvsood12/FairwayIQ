@@ -1,8 +1,3 @@
-//
-//  MainTabView.swift
-//  FairwayIQ
-//
-
 import SwiftUI
 import SwiftData
 
@@ -49,5 +44,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
-        .modelContainer(for: [UserProfile.self, Round.self, Course.self, FriendEntry.self], inMemory: true)
+        .modelContainer(for: [UserProfile.self, Round.self, Course.self, FriendEntry.self, PracticeSession.self, PlayerGoal.self], inMemory: true)
 }

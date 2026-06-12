@@ -1,8 +1,3 @@
-//
-//  ProfileView.swift
-//  FairwayIQ
-//
-
 import SwiftUI
 import SwiftData
 
@@ -11,191 +6,360 @@ struct ProfileView: View {
     @Environment(SessionStore.self) private var session
     @Query private var profiles: [UserProfile]
     @Query(sort: \Round.date, order: .reverse) private var rounds: [Round]
-
     @State private var showEditProfile = false
-    @State private var showClubs = false
+    @State private var showClubsInBag = false
+    @State private var showDeleteConfirmation = false
+    @State private var showPrivacyInfo = false
+    @State private var exportText = ""
+    @State private var showShareSheet = false
 
     private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var homeCourseName: String { profile?.homeCourse?.name ?? "Not set" }
-    private var roundsPlayed: Int {
-        guard let profile else { return rounds.count }
-        return rounds.filter { $0.player?.id == profile.id }.count
-    }
+    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                Theme.Color.background.ignoresSafeArea()
-                if let profile {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: Theme.Layout.sectionSpacing) {
-                            playerCard(profile: profile)
-                            profileStatsCard
-                            settingsSection(profile: profile)
-                        }
-                        .padding(Theme.Layout.horizontalPadding)
-                        .padding(.bottom, 32)
+            ScrollView {
+                VStack(alignment: .leading, spacing: Spacing.xxl) {
+                    if let profile {
+                        profileHeader(profile)
+                        statsCard
+                        settingsSection
+                        privacySection
+                        dangerZone
+                    } else {
+                        EmptyStateView(
+                            icon: "person.crop.circle",
+                            title: "No Profile",
+                            message: "Complete onboarding to create your player profile."
+                        )
                     }
-                } else {
-                    emptyState
                 }
+                .padding(Theme.Layout.horizontalPadding)
+                .padding(.bottom, Spacing.xxxl)
             }
+            .background(Theme.Color.background)
             .navigationTitle("Profile")
-            .sheet(isPresented: $showEditProfile) {
-                if let profile = profile { ProfileEditView(profile: profile) }
-            }
-            .sheet(isPresented: $showClubs) {
-                if let profile = profile { ClubsInBagView(profile: profile) }
-            }
             .preferredColorScheme(.dark)
+        }
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(text: exportText)
         }
     }
 
-    private func playerCard(profile: UserProfile) -> some View {
-        Button { showEditProfile = true } label: {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(spacing: 16) {
-                    initialsBadge(name: profile.playerName)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(profile.playerName)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Theme.Color.textPrimary)
-                        Text(profile.skillLevel)
-                            .font(.subheadline)
-                            .foregroundStyle(Theme.Color.textSecondary)
-                        Text("Index: \(String(format: "%.1f", profile.handicapEstimate))")
-                            .font(.caption)
+    private func profileHeader(_ profile: UserProfile) -> some View {
+        FIQCard {
+            VStack(spacing: Spacing.lg) {
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 60))
+                    .foregroundStyle(Theme.Color.greenPrimary)
+                Text(profile.playerName)
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(Theme.Color.textPrimary)
+                HStack(spacing: Spacing.xl) {
+                    VStack(spacing: Spacing.xxs) {
+                        Text(String(format: "%.1f", profile.handicapEstimate))
+                            .font(.headline)
                             .foregroundStyle(Theme.Color.accent)
+                        Text("Handicap")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
                     }
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                    VStack(spacing: Spacing.xxs) {
+                        Text(profile.skillLevel)
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.textPrimary)
+                        Text("Skill Level")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                    VStack(spacing: Spacing.xxs) {
+                        Text("\(scopedRounds.count)")
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.textPrimary)
+                        Text("Rounds")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                }
+                if let homeCourse = profile.homeCourse {
+                    Text("Home: \(homeCourse.name)")
                         .font(.caption)
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
             }
-            .padding(Theme.Layout.cardPadding)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Theme.Color.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var profileStatsCard: some View {
-        HStack(spacing: 12) {
-            statPill(title: "Rounds", value: "\(roundsPlayed)")
-            statPill(title: "Home", value: homeCourseName)
+            .frame(maxWidth: .infinity)
         }
     }
 
-    private func statPill(title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    private var statsCard: some View {
+        FIQCard {
+            VStack(alignment: .leading, spacing: Spacing.md) {
+                SectionHeader(title: "Quick Stats")
+                if scopedRounds.isEmpty {
+                    Text("Play a round to see your stats here.")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
+                } else {
+                    let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+                    HStack(spacing: Spacing.md) {
+                        StatTile(title: "Avg Score", value: String(format: "%.0f", summary.averageScore))
+                        StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
+                        StatTile(title: "Putts/Rnd", value: String(format: "%.1f", summary.puttsPerRound))
+                    }
+                }
+            }
+        }
+    }
+
+    private var settingsSection: some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            SectionHeader(title: "Settings")
+
+            Button { showEditProfile = true } label: {
+                settingsRow(icon: "pencil", title: "Edit Profile")
+            }
+            .sheet(isPresented: $showEditProfile) {
+                if let profile {
+                    ProfileEditView(profile: profile)
+                }
+            }
+
+            Button { showClubsInBag = true } label: {
+                settingsRow(icon: "bag.fill", title: "Clubs in Bag")
+            }
+            .sheet(isPresented: $showClubsInBag) {
+                if let profile {
+                    ClubsInBagView(profile: profile)
+                }
+            }
+
+            NavigationLink {
+                PracticeView()
+            } label: {
+                settingsRow(icon: "figure.golf", title: "Practice Sessions")
+            }
+
+            NavigationLink {
+                GoalsView()
+            } label: {
+                settingsRow(icon: "target", title: "Goals")
+            }
+        }
+    }
+
+    private var privacySection: some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            SectionHeader(title: "Privacy & Data")
+
+            if let profile {
+                FIQCard {
+                    VStack(alignment: .leading, spacing: Spacing.md) {
+                        Toggle("Hide exact location in exports", isOn: binding(for: \.hideExactLocationInExports))
+                            .tint(Theme.Color.greenPrimary)
+                        Toggle("Prefer manual location logging", isOn: binding(for: \.preferManualLocationLogging))
+                            .tint(Theme.Color.greenPrimary)
+                        Text("FairwayIQ stays local-first. These controls let you reduce location detail in reports and avoid automatic GPS use during shot logging.")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                }
+            }
+
+            Button { showPrivacyInfo = true } label: {
+                settingsRow(icon: "lock.shield", title: "Privacy Info")
+            }
+            .sheet(isPresented: $showPrivacyInfo) {
+                PrivacyInfoView()
+            }
+
+            Button {
+                exportAllData()
+            } label: {
+                settingsRow(icon: "square.and.arrow.up", title: "Export My Data")
+            }
+        }
+    }
+
+    private var dangerZone: some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            SectionHeader(title: "Danger Zone")
+
+            Button { showDeleteConfirmation = true } label: {
+                HStack(spacing: Spacing.md) {
+                    Image(systemName: "trash")
+                        .font(.body)
+                        .foregroundStyle(Theme.Color.negative)
+                        .frame(width: 28)
+                    Text("Delete All Local Data")
+                        .font(.subheadline)
+                        .foregroundStyle(Theme.Color.negative)
+                    Spacer()
+                }
+                .padding(Theme.Layout.cardPadding)
+                .background(Theme.Color.cardBackground)
+                .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+            }
+            .buttonStyle(.plain)
+            .alert("Delete All Data?", isPresented: $showDeleteConfirmation) {
+                Button("Cancel", role: .cancel) {}
+                Button("Delete Everything", role: .destructive) {
+                    deleteAllData()
+                }
+            } message: {
+                Text("This will permanently delete all rounds, practice sessions, goals, and profile data. This cannot be undone.")
+            }
+
+            #if DEBUG
+            Button {
+                SampleData.seedIfNeeded(modelContext: modelContext)
+                SampleData.ensureDemoProfile(modelContext: modelContext)
+            } label: {
+                settingsRow(icon: "ladybug", title: "Reset Sample Data (Debug)")
+            }
+            #endif
+        }
+    }
+
+    private func settingsRow(icon: String, title: String) -> some View {
+        HStack(spacing: Spacing.md) {
+            Image(systemName: icon)
+                .font(.body)
+                .foregroundStyle(Theme.Color.greenPrimary)
+                .frame(width: 28)
             Text(title)
+                .font(.subheadline)
+                .foregroundStyle(Theme.Color.textPrimary)
+            Spacer()
+            Image(systemName: "chevron.right")
                 .font(.caption)
                 .foregroundStyle(Theme.Color.textSecondary)
-            Text(value)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Theme.Color.textPrimary)
-                .lineLimit(1)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(Theme.Layout.cardPadding)
         .background(Theme.Color.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
     }
 
-    private func settingsSection(profile: UserProfile) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Settings")
-                .font(.headline)
-                .foregroundStyle(Theme.Color.textPrimary)
-            VStack(spacing: 0) {
-                row("Units", value: profile.preferredUnits) { showEditProfile = true }
-                Divider().background(Theme.Color.textSecondary.opacity(0.3))
-                row("Home course", value: homeCourseName) { showEditProfile = true }
-                Divider().background(Theme.Color.textSecondary.opacity(0.3))
-                row("Clubs in bag", value: "\(profile.clubsList.count) clubs") { showClubs = true }
-
-                #if DEBUG
-                Divider().background(Theme.Color.textSecondary.opacity(0.3))
-                row("Debug: Reset onboarding", value: "") {
-                    profile.hasCompletedOnboarding = false
-                    session.clearCurrentProfile()
-                    try? modelContext.save()
-                }
-                #endif
-            }
-            .background(Theme.Color.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
-        }
-    }
-
-    private func row(_ title: String, value: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack {
-                Text(title)
-                    .foregroundStyle(Theme.Color.textPrimary)
-                Spacer()
-                Text(value)
-                    .foregroundStyle(Theme.Color.textSecondary)
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundStyle(Theme.Color.textSecondary)
-            }
-            .padding(Theme.Layout.cardPadding)
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "person.crop.circle.badge.plus")
-                .font(.system(size: 54))
-                .foregroundStyle(Theme.Color.greenMuted)
-            Text("Create your profile")
-                .font(.title3.weight(.semibold))
-                .foregroundStyle(Theme.Color.textPrimary)
-            Text("Set your name, handicap estimate, home course, units, and clubs to personalize FairwayIQ.")
-                .font(.subheadline)
-                .foregroundStyle(Theme.Color.textSecondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
-            Button {
-                session.clearCurrentProfile()
-            } label: {
-                Text("Start onboarding")
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Theme.Color.background)
-                    .frame(maxWidth: 260)
-                    .padding(.vertical, 14)
-                    .background(Theme.Color.greenPrimary)
-                    .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
-            }
-            .buttonStyle(.plain)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(Theme.Layout.horizontalPadding)
-    }
-
-    private func initialsBadge(name: String) -> some View {
-        let parts = name.split(separator: " ").prefix(2)
-        let initials = parts.compactMap { $0.first }.map { String($0) }.joined()
-        return Text(initials.isEmpty ? "F" : initials.uppercased())
-            .font(.system(size: 22, weight: .bold, design: .rounded))
-            .foregroundStyle(Theme.Color.textPrimary)
-            .frame(width: 56, height: 56)
-            .background(Theme.Color.cardBackground)
-            .overlay(
-                RoundedRectangle(cornerRadius: 18)
-                    .stroke(Theme.Color.greenMuted.opacity(0.35), lineWidth: 1)
+    private func exportAllData() {
+        guard let profile else { return }
+        let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+        let snapshot = ExportManager.buildStatsExport(
+            profile: profile,
+            summary: summary,
+            roundCount: scopedRounds.count
+        )
+        let snapshotText = ExportManager.statsSnapshotText(snapshot: snapshot)
+        let latestRoundText: String
+        if let round = scopedRounds.first {
+            let coaching = CoachingEngine.analyze(round: round, baseline: CoachingEngine.computeBaseline(from: Array(scopedRounds.dropFirst().prefix(5))))
+            let export = ExportManager.buildRoundExport(
+                round: round,
+                coaching: coaching,
+                privacy: ExportPrivacyOptions(hideExactLocation: profile.hideExactLocationInExports, includeCoachingNotes: true)
             )
-            .clipShape(RoundedRectangle(cornerRadius: 18))
+            latestRoundText = ExportManager.roundSummaryText(summary: export)
+        } else {
+            latestRoundText = "No rounds available yet."
+        }
+        exportText = [snapshotText, "", latestRoundText].joined(separator: "\n")
+        showShareSheet = true
+    }
+
+    private func deleteAllData() {
+        do {
+            try modelContext.delete(model: PracticeShot.self)
+            try modelContext.delete(model: PracticeSession.self)
+            try modelContext.delete(model: PlayerGoal.self)
+            try modelContext.delete(model: Shot.self)
+            try modelContext.delete(model: HoleScore.self)
+            try modelContext.delete(model: Round.self)
+            try modelContext.delete(model: UserProfile.self)
+            try modelContext.delete(model: FriendEntry.self)
+            try modelContext.save()
+            session.clearCurrentProfile()
+        } catch {
+            DebugLogger.error("Failed to delete all data", error: error)
+        }
+    }
+
+    private func binding<Value>(for keyPath: ReferenceWritableKeyPath<UserProfile, Value>) -> Binding<Value> {
+        Binding(
+            get: { profile![keyPath: keyPath] },
+            set: {
+                profile?[keyPath: keyPath] = $0
+                profile?.updatedAt = Date()
+                try? modelContext.save()
+            }
+        )
+    }
+}
+
+struct PrivacyInfoView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: Spacing.xxl) {
+                    FIQCard {
+                        VStack(alignment: .leading, spacing: Spacing.md) {
+                            Label("Local-First", systemImage: "iphone")
+                                .font(.headline)
+                                .foregroundStyle(Theme.Color.textPrimary)
+                            Text("All your data is stored locally on your device. FairwayIQ does not send your data to any server.")
+                                .font(.subheadline)
+                                .foregroundStyle(Theme.Color.textSecondary)
+                        }
+                    }
+                    FIQCard {
+                        VStack(alignment: .leading, spacing: Spacing.md) {
+                            Label("Location", systemImage: "location")
+                                .font(.headline)
+                                .foregroundStyle(Theme.Color.textPrimary)
+                            Text("Location is only used when you choose to log shot positions during a round. It is never shared or uploaded. You can use the app fully without granting location permission.")
+                                .font(.subheadline)
+                                .foregroundStyle(Theme.Color.textSecondary)
+                        }
+                    }
+                    FIQCard {
+                        VStack(alignment: .leading, spacing: Spacing.md) {
+                            Label("Your Data", systemImage: "person.badge.shield.checkmark")
+                                .font(.headline)
+                                .foregroundStyle(Theme.Color.textPrimary)
+                            Text("You can export all your data at any time from Profile > Export My Data. You can delete all data from Profile > Delete All Local Data.")
+                                .font(.subheadline)
+                                .foregroundStyle(Theme.Color.textSecondary)
+                        }
+                    }
+                    FIQCard {
+                        VStack(alignment: .leading, spacing: Spacing.md) {
+                            Label("No Tracking", systemImage: "eye.slash")
+                                .font(.headline)
+                                .foregroundStyle(Theme.Color.textPrimary)
+                            Text("FairwayIQ does not include any analytics SDKs, advertising trackers, or third-party data collection.")
+                                .font(.subheadline)
+                                .foregroundStyle(Theme.Color.textSecondary)
+                        }
+                    }
+                }
+                .padding(Theme.Layout.horizontalPadding)
+                .padding(.bottom, Spacing.xxxl)
+            }
+            .background(Theme.Color.background)
+            .navigationTitle("Privacy & Data")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                        .foregroundStyle(Theme.Color.accent)
+                }
+            }
+        }
+        .preferredColorScheme(.dark)
     }
 }
 
 #Preview {
     ProfileView()
-        .modelContainer(for: [UserProfile.self, Course.self], inMemory: true)
+        .modelContainer(for: [UserProfile.self, Round.self, Course.self], inMemory: true)
         .environment(SessionStore())
 }

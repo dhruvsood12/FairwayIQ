@@ -10,6 +10,8 @@ import MapKit
 
 struct ShotEntryView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
+    @Environment(SessionStore.self) private var session
     var round: Round
     var holeNumber: Int
     var onDismiss: () -> Void
@@ -26,7 +28,9 @@ struct ShotEntryView: View {
     @State private var locationManager = LocationManager()
     @State private var showingSaveError = false
     @State private var saveErrorMessage: String?
+    @State private var validationMessage: String?
 
+    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
     private var startCoordinate: CLLocationCoordinate2D? {
         if let startLat, let startLon { return CLLocationCoordinate2D(latitude: startLat, longitude: startLon) }
         return locationManager.lastLocation?.coordinate
@@ -52,6 +56,9 @@ struct ShotEntryView: View {
                     }
                 }
                 Section("Location") {
+                    Text(profile?.preferManualLocationLogging == true ? "Manual mode is enabled. GPS is optional for this shot." : "Location is only used for this shot log and stays on device.")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
                     if let loc = locationManager.lastLocation {
                         Text("Start: \(loc.coordinate.latitude, specifier: "%.5f"), \(loc.coordinate.longitude, specifier: "%.5f")")
                             .font(.caption)
@@ -114,6 +121,11 @@ struct ShotEntryView: View {
                     TextField("e.g. wind, miss, target", text: $notes, axis: .vertical)
                         .lineLimit(1...3)
                 }
+                if let validationMessage {
+                    Section {
+                        InlineValidationMessage(message: validationMessage)
+                    }
+                }
             }
             .scrollContentBackground(.hidden)
             .background(Theme.Color.background)
@@ -135,11 +147,13 @@ struct ShotEntryView: View {
                 }
             }
             .onAppear {
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.startUpdatingLocation()
-                if let loc = locationManager.lastLocation {
-                    startLat = loc.coordinate.latitude
-                    startLon = loc.coordinate.longitude
+                if profile?.preferManualLocationLogging == false {
+                    locationManager.requestWhenInUseAuthorization()
+                    locationManager.startUpdatingLocation()
+                    if let loc = locationManager.lastLocation {
+                        startLat = loc.coordinate.latitude
+                        startLon = loc.coordinate.longitude
+                    }
                 }
             }
             .onDisappear {
@@ -181,6 +195,18 @@ struct ShotEntryView: View {
         let lat = startLat ?? locationManager.lastLocation?.coordinate.latitude
         let lon = startLon ?? locationManager.lastLocation?.coordinate.longitude
         recalcDistance()
+
+        let distanceValidation = InputValidation.validateDistance(distanceYards)
+        guard distanceValidation.isValid else {
+            validationMessage = distanceValidation.errorMessage
+            return false
+        }
+        let coordinateValidation = InputValidation.validateCoordinate(latitude: lat, longitude: lon)
+        guard coordinateValidation.isValid else {
+            validationMessage = coordinateValidation.errorMessage
+            return false
+        }
+
         let shot = Shot(
             holeNumber: holeNumber,
             club: club.rawValue,
