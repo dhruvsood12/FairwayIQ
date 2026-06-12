@@ -1,0 +1,18 @@
+# SwiftFormat configuration. Mirrors the existing codebase style so lint
+# passes reflect real drift, not a wholesale reformat.
+
+--swiftversion 6.0
+
+--indent 4
+
+# The codebase uses no trailing commas in multiline collection literals.
+--commas inline
+
+# Multi-case switch getters use explicit return throughout Domain/Engines and
+# the model enums; rewriting them as switch expressions would be churn.
+--disable redundantReturn
+
+# Line wrapping is SwiftLint's job.
+--maxwidth none
+
+--exclude .build,.claude,DerivedData,scripts

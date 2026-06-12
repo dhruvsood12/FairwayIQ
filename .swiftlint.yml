@@ -1,0 +1,57 @@
+# SwiftLint configuration. Correctness rules gate CI (run with --strict);
+# pure formatting belongs to SwiftFormat. Thresholds are sized to this
+# codebase's larger SwiftUI views so zero violations stays reachable.
+
+excluded:
+  - .build
+  - .claude
+  - DerivedData
+  - scripts
+  # Test code force-unwraps idiomatically in assertions; SwiftLint cannot
+  # scope rules per path, so test trees are excluded from linting.
+  - FairwayIQTests
+  - Tests
+
+opt_in_rules:
+  - force_unwrapping
+  - empty_count
+  - first_where
+  - last_where
+  - sorted_first_last
+  - fatal_error_message
+
+disabled_rules:
+  # Button(action:) { } label: { } and friends make this rule noise in SwiftUI.
+  - multiple_closures_with_trailing_closure
+  - todo
+
+force_unwrapping:
+  severity: warning
+
+line_length:
+  warning: 170
+  error: 220
+  ignores_urls: true
+  ignores_comments: true
+
+identifier_name:
+  excluded: [x, y, d, i, id, db]
+
+file_length:
+  warning: 600
+  error: 1000
+
+type_body_length:
+  warning: 500
+  error: 800
+
+function_body_length:
+  warning: 100
+  error: 150
+
+cyclomatic_complexity:
+  warning: 15
+  error: 25
+
+nesting:
+  type_level: 2
