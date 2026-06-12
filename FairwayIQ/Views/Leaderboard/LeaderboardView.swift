@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct LeaderboardView: View {
     @Environment(\.modelContext) private var modelContext

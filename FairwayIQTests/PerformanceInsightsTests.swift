@@ -1,9 +1,8 @@
-import Testing
 @testable import FairwayIQ
+import Testing
 
 @Suite("PerformanceInsights Tests")
 struct PerformanceInsightsTests {
-
     private func makeRound(scores: [Int], putts: [Int]? = nil, penalties: [Int]? = nil) -> Round {
         let holeScores = scores.enumerated().map { idx, strokes in
             let p = putts?[idx] ?? 2
@@ -17,28 +16,30 @@ struct PerformanceInsightsTests {
             )
         }
         let round = Round(courseNameSnapshot: "Test", holeScores: holeScores)
-        for s in holeScores { s.round = round }
+        for s in holeScores {
+            s.round = round
+        }
         return round
     }
 
     // MARK: - Baseline Comparison
 
     @Test("Baseline comparison detects improvement")
-    func baselineDetectsImprovement() {
+    func baselineDetectsImprovement() throws {
         let round = makeRound(scores: Array(repeating: 4, count: 18)) // 72
         let baselines = [makeRound(scores: Array(repeating: 5, count: 18))] // 90
         let result = PerformanceInsights.baselineComparison(for: round, against: baselines)
         #expect(result != nil)
-        #expect(result!.isPositive)
+        #expect(try #require(result?.isPositive))
     }
 
     @Test("Baseline comparison detects regression")
-    func baselineDetectsRegression() {
+    func baselineDetectsRegression() throws {
         let round = makeRound(scores: Array(repeating: 6, count: 18)) // 108
         let baselines = [makeRound(scores: Array(repeating: 5, count: 18))] // 90
         let result = PerformanceInsights.baselineComparison(for: round, against: baselines)
         #expect(result != nil)
-        #expect(!result!.isPositive)
+        #expect(try !(#require(result?.isPositive)))
     }
 
     @Test("Baseline returns nil for no baselines")
@@ -59,12 +60,12 @@ struct PerformanceInsightsTests {
     // MARK: - Most Improved Metric
 
     @Test("Most improved metric with significant change")
-    func mostImprovedSignificant() {
+    func mostImprovedSignificant() throws {
         let recent = [makeRound(scores: Array(repeating: 4, count: 18))]
         let previous = [makeRound(scores: Array(repeating: 5, count: 18))]
         let result = PerformanceInsights.mostImprovedMetric(recentRounds: recent, previousRounds: previous)
         #expect(result != nil)
-        #expect(result!.isPositive)
+        #expect(try #require(result?.isPositive))
     }
 
     @Test("Most improved returns nil for empty rounds")

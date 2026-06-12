@@ -1,9 +1,8 @@
-import Testing
 @testable import FairwayIQ
+import Testing
 
 @Suite("StrategyEngine Tests")
 struct StrategyEngineTests {
-
     private func makeSummary(club: String, avgDistance: Double, sampleSize: Int) -> ClubSummary {
         ClubSummary(
             clubName: club,
@@ -43,7 +42,7 @@ struct StrategyEngineTests {
     func standardDriverOnPar4() {
         let clubs = [
             makeSummary(club: "Driver", avgDistance: 250, sampleSize: 10),
-            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10),
+            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10)
         ]
         let hole = HoleInfo(number: 1, par: 4, yardage: 400)
         let result = StrategyEngine.recommend(hole: hole, clubSummaries: clubs, missTendencies: [], mode: .standard)
@@ -55,7 +54,7 @@ struct StrategyEngineTests {
     func par3Approach() {
         let clubs = [
             makeSummary(club: "Driver", avgDistance: 250, sampleSize: 10),
-            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10),
+            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10)
         ]
         let hole = HoleInfo(number: 7, par: 3, yardage: 155)
         let result = StrategyEngine.recommend(hole: hole, clubSummaries: clubs, missTendencies: [], mode: .standard)
@@ -68,7 +67,7 @@ struct StrategyEngineTests {
         let clubs = [
             makeSummary(club: "Driver", avgDistance: 250, sampleSize: 10),
             makeSummary(club: "3-Wood", avgDistance: 230, sampleSize: 10),
-            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10),
+            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 10)
         ]
         let tendency = MissTendency(
             category: "Driver Miss",
@@ -86,7 +85,7 @@ struct StrategyEngineTests {
     func aggressiveLongest() {
         let clubs = [
             makeSummary(club: "Driver", avgDistance: 270, sampleSize: 10),
-            makeSummary(club: "3-Wood", avgDistance: 240, sampleSize: 10),
+            makeSummary(club: "3-Wood", avgDistance: 240, sampleSize: 10)
         ]
         let hole = HoleInfo(number: 1, par: 5, yardage: 500)
         let result = StrategyEngine.recommend(hole: hole, clubSummaries: clubs, missTendencies: [], mode: .aggressive)
@@ -95,7 +94,7 @@ struct StrategyEngineTests {
 
     @Test("Miss tendency detection - right miss")
     func detectRightMiss() {
-        let shots = (0..<10).map { i in
+        let shots = (0 ..< 10).map { i in
             ShotRecord(
                 club: "Driver",
                 lie: "Tee",
@@ -114,7 +113,7 @@ struct StrategyEngineTests {
 
     @Test("Miss tendency detection - approach short")
     func detectApproachShort() {
-        let shots = (0..<10).map { i in
+        let shots = (0 ..< 10).map { i in
             ShotRecord(
                 club: "7-Iron",
                 lie: "Fairway",
@@ -134,7 +133,7 @@ struct StrategyEngineTests {
     func lowConfidenceWarning() {
         let clubs = [
             makeSummary(club: "Driver", avgDistance: 250, sampleSize: 3),
-            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 3),
+            makeSummary(club: "7-Iron", avgDistance: 150, sampleSize: 3)
         ]
         let hole = HoleInfo(number: 1, par: 4, yardage: 400)
         let result = StrategyEngine.recommend(hole: hole, clubSummaries: clubs, missTendencies: [], mode: .standard)

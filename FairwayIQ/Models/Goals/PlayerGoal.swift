@@ -41,7 +41,9 @@ enum GoalMetricType: String, CaseIterable, Identifiable {
     case penaltiesPerRound = "Penalties per Round"
     case bestScore = "Best Score"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var icon: String {
         switch self {

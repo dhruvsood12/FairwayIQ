@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct CoursesView: View {
     @Query(sort: \Course.name, order: .forward) private var courses: [Course]
@@ -105,4 +105,3 @@ struct CoursesView: View {
     CoursesView()
         .modelContainer(for: [Course.self, Hole.self], inMemory: true)
 }
-

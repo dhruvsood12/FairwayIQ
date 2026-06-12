@@ -30,7 +30,7 @@ enum CourseSeed {
             websiteURL: "https://www.sandiego.gov/torreypines",
             latitude: 32.9019,
             longitude: -117.2512,
-            holes: standard18(pars: [4,4,3,4,4,5,4,3,5,4,4,3,4,5,4,3,4,5])
+            holes: standard18(pars: [4, 4, 3, 4, 4, 5, 4, 3, 5, 4, 4, 3, 4, 5, 4, 3, 4, 5])
         ),
         .init(
             id: "seed-bethpage-black",
@@ -41,7 +41,7 @@ enum CourseSeed {
             websiteURL: "https://parks.ny.gov/golf-courses/11/details.aspx",
             latitude: 40.7408,
             longitude: -73.4565,
-            holes: standard18(pars: [4,4,3,4,5,4,4,3,5,4,4,3,4,4,5,3,4,4])
+            holes: standard18(pars: [4, 4, 3, 4, 5, 4, 4, 3, 5, 4, 4, 3, 4, 4, 5, 3, 4, 4])
         ),
         .init(
             id: "seed-arcadia-bluffs",
@@ -52,7 +52,7 @@ enum CourseSeed {
             websiteURL: "https://www.arcadiabluffs.com/",
             latitude: 44.5246,
             longitude: -86.2320,
-            holes: standard18(pars: [4,4,3,5,4,4,5,3,4,4,5,3,4,4,3,5,4,4])
+            holes: standard18(pars: [4, 4, 3, 5, 4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 3, 5, 4, 4])
         ),
         .init(
             id: "seed-pinehurst-no2",
@@ -63,7 +63,7 @@ enum CourseSeed {
             websiteURL: "https://www.pinehurst.com/golf/pinehurst-no-2/",
             latitude: 35.1888,
             longitude: -79.4677,
-            holes: standard18(pars: [4,4,3,4,4,5,3,4,4,4,5,3,4,4,5,3,4,4])
+            holes: standard18(pars: [4, 4, 3, 4, 4, 5, 3, 4, 4, 4, 5, 3, 4, 4, 5, 3, 4, 4])
         ),
         .init(
             id: "seed-tpc-sawgrass",
@@ -74,7 +74,7 @@ enum CourseSeed {
             websiteURL: "https://tpcsawgrass.com/",
             latitude: 30.1975,
             longitude: -81.3955,
-            holes: standard18(pars: [4,4,5,3,4,4,4,3,5,4,4,5,3,4,4,5,3,4])
+            holes: standard18(pars: [4, 4, 5, 3, 4, 4, 4, 3, 5, 4, 4, 5, 3, 4, 4, 5, 3, 4])
         ),
         .init(
             id: "seed-chambers-bay",
@@ -85,7 +85,7 @@ enum CourseSeed {
             websiteURL: "https://chambersbaygolf.com/",
             latitude: 47.2131,
             longitude: -122.5508,
-            holes: standard18(pars: [4,4,3,4,4,3,5,4,4,4,3,4,4,5,3,4,5,4])
+            holes: standard18(pars: [4, 4, 3, 4, 4, 3, 5, 4, 4, 4, 3, 4, 4, 5, 3, 4, 5, 4])
         ),
         .init(
             id: "seed-whistling-straits",
@@ -96,7 +96,7 @@ enum CourseSeed {
             websiteURL: "https://www.destinationkohler.com/golf/whistling-straits",
             latitude: 43.8504,
             longitude: -87.7161,
-            holes: standard18(pars: [4,4,3,4,4,3,5,4,4,4,5,3,4,4,3,5,4,4])
+            holes: standard18(pars: [4, 4, 3, 4, 4, 3, 5, 4, 4, 4, 5, 3, 4, 4, 3, 5, 4, 4])
         ),
         .init(
             id: "seed-bandondunes",
@@ -107,14 +107,13 @@ enum CourseSeed {
             websiteURL: "https://bandondunesgolf.com/",
             latitude: 43.1112,
             longitude: -124.4081,
-            holes: standard18(pars: [4,4,3,5,4,4,3,5,4,4,4,3,5,4,4,3,5,4])
+            holes: standard18(pars: [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4])
         )
     ]
 
     private static func standard18(pars: [Int]) -> [CourseSeedRecord.HoleSeed] {
-        (1...18).map { i in
+        (1 ... 18).map { i in
             .init(number: i, par: pars.indices.contains(i - 1) ? pars[i - 1] : 4, yardage: nil)
         }
     }
 }
-

@@ -7,10 +7,9 @@ import Foundation
 import SwiftData
 
 enum SampleData {
-
     static func createSampleHoles(count: Int = 18) -> [Hole] {
         let pars = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4]
-        return (0..<min(count, pars.count)).map { i in
+        return (0 ..< min(count, pars.count)).map { i in
             Hole(number: i + 1, par: pars[i], handicapIndex: i + 1)
         }
     }
@@ -77,10 +76,10 @@ enum SampleData {
 
     static func createSampleRounds(modelContext: ModelContext, course: Course) -> Round {
         let holeCount = max(1, course.holes.count)
-        let holeScores: [HoleScore] = (1...holeCount).map { num in
+        let holeScores: [HoleScore] = (1 ... holeCount).map { num in
             let par = [4, 4, 3, 5, 4, 4, 3, 5, 4, 4, 4, 3, 5, 4, 4, 3, 5, 4][num - 1]
-            let strokes = par + Int.random(in: -1...2)
-            let putts = min(strokes, Int.random(in: 1...3))
+            let strokes = par + Int.random(in: -1 ... 2)
+            let putts = min(strokes, Int.random(in: 1 ... 3))
             let fairway: Bool? = (par >= 4) ? Bool.random() : nil
             let gir = strokes <= par && Bool.random()
             let score = HoleScore(
@@ -98,14 +97,16 @@ enum SampleData {
             course: course,
             courseNameSnapshot: course.name,
             teeBox: "Blue",
-            date: Date().addingTimeInterval(-Double.random(in: 1...14) * 86400),
+            date: Date().addingTimeInterval(-Double.random(in: 1 ... 14) * 86400),
             weather: "Sunny",
             playingPartners: nil,
             holeScores: holeScores,
             shots: [],
             createdAt: Date()
         )
-        for s in holeScores { s.round = round }
+        for s in holeScores {
+            s.round = round
+        }
         modelContext.insert(round)
         try? modelContext.save()
         return round

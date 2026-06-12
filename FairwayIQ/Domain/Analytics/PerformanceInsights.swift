@@ -25,7 +25,7 @@ struct HoleTypeInsight: Hashable {
     let roundsSampled: Int
 }
 
-struct PerformanceInsights {
+enum PerformanceInsights {
     static func baselineComparison(for round: Round, against baselineRounds: [Round]) -> BaselineComparison? {
         guard !baselineRounds.isEmpty else { return nil }
 
@@ -59,7 +59,7 @@ struct PerformanceInsights {
             ("Fairways", recentSummary.fairwayPct - previousSummary.fairwayPct, true),
             ("GIR", recentSummary.girPct - previousSummary.girPct, true),
             ("Putts", previousSummary.puttsPerRound - recentSummary.puttsPerRound, true),
-            ("Penalties", previousSummary.penaltiesPerRound - recentSummary.penaltiesPerRound, true),
+            ("Penalties", previousSummary.penaltiesPerRound - recentSummary.penaltiesPerRound, true)
         ]
 
         guard let best = candidates.max(by: { abs($0.1) < abs($1.1) }), abs(best.1) >= 0.5 else {
@@ -80,8 +80,8 @@ struct PerformanceInsights {
         var bestWindow: (start: Int, end: Int, total: Int)?
         var worstWindow: (start: Int, end: Int, total: Int)?
 
-        for index in 0...(scores.count - windowSize) {
-            let window = Array(scores[index..<(index + windowSize)])
+        for index in 0 ... (scores.count - windowSize) {
+            let window = Array(scores[index ..< (index + windowSize)])
             let relative = window.reduce(0) { partialResult, score in
                 partialResult + (score.strokes - par(for: score.holeNumber, round: round))
             }
@@ -114,14 +114,14 @@ struct PerformanceInsights {
     }
 
     static func costliestMistakeCategory(for round: Round) -> String? {
-        let threePutts = round.holeScores.filter { $0.putts >= 3 }.count
+        let threePutts = round.holeScores.count(where: { $0.putts >= 3 })
         let penalties = round.holeScores.reduce(0) { $0 + $1.penalties }
-        let missedGreens = round.holeScores.filter { !$0.gir }.count
+        let missedGreens = round.holeScores.count(where: { !$0.gir })
 
         let categories: [(String, Int)] = [
             ("Three-putts", threePutts),
             ("Penalties", penalties),
-            ("Missed greens", missedGreens),
+            ("Missed greens", missedGreens)
         ]
 
         guard let top = categories.max(by: { $0.1 < $1.1 }), top.1 > 0 else { return nil }

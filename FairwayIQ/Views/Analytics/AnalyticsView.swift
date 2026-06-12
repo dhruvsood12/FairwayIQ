@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import Charts
+import SwiftData
+import SwiftUI
 
 struct AnalyticsView: View {
     @Environment(SessionStore.self) private var session
@@ -10,9 +10,18 @@ struct AnalyticsView: View {
     @State private var viewModel = AnalyticsDashboardViewModel()
     @State private var selectedTab = 0
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedGoals: [PlayerGoal] { session.goalsForCurrentProfile(goals, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedGoals: [PlayerGoal] {
+        session.goalsForCurrentProfile(goals, profiles: profiles)
+    }
+
     private var goalProgress: [GoalProgress] {
         GoalEngine.evaluateProgress(goals: scopedGoals, recentRounds: Array(scopedRounds.suffix(10).reversed()), allRounds: scopedRounds)
     }
@@ -91,7 +100,8 @@ struct AnalyticsView: View {
         splitCard
         bestWorstCard
         if let bestType = PerformanceInsights.bestScoringHoleType(rounds: scopedRounds),
-           let toughType = PerformanceInsights.toughestHoleType(rounds: scopedRounds) {
+           let toughType = PerformanceInsights.toughestHoleType(rounds: scopedRounds)
+        {
             holeTypeCard(best: bestType, tough: toughType)
         }
     }
@@ -283,8 +293,8 @@ struct AnalyticsView: View {
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Putts/Round", value: String(format: "%.1f", viewModel.summary.puttsPerRound))
                     let allScores = scopedRounds.flatMap(\.holeScores)
-                    let threePutts = allScores.filter { $0.putts >= 3 }.count
-                    let onePutts = allScores.filter { $0.putts == 1 }.count
+                    let threePutts = allScores.count(where: { $0.putts >= 3 })
+                    let onePutts = allScores.count(where: { $0.putts == 1 })
                     StatTile(title: "1-Putts", value: "\(onePutts)", valueColor: Theme.Color.positive)
                     StatTile(title: "3-Putts", value: "\(threePutts)", valueColor: threePutts > 0 ? Theme.Color.negative : Theme.Color.textSecondary)
                 }
@@ -312,7 +322,7 @@ struct AnalyticsView: View {
                 SectionHeader(title: "Driving", eyebrow: "Off the tee")
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Fairways", value: String(format: "%.0f%%", viewModel.summary.fairwayPct))
-                    let penaltyHoles = scopedRounds.flatMap(\.holeScores).filter { $0.penalties > 0 }.count
+                    let penaltyHoles = scopedRounds.flatMap(\.holeScores).count(where: { $0.penalties > 0 })
                     StatTile(title: "Penalty Holes", value: "\(penaltyHoles)", valueColor: penaltyHoles == 0 ? Theme.Color.positive : Theme.Color.negative)
                     StatTile(title: "Pen/Round", value: String(format: "%.1f", viewModel.summary.penaltiesPerRound))
                 }

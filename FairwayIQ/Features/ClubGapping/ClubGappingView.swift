@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import Charts
+import SwiftData
+import SwiftUI
 
 struct ClubGappingView: View {
     @Environment(SessionStore.self) private var session
@@ -15,11 +15,25 @@ struct ClubGappingView: View {
     @State private var selectedShotTypeFilter: String?
     @State private var selectedClub: ClubSummary?
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedPracticeSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles) }
-    private var lies: [String] { Array(Set(allShotRecords.map(\.lie))).sorted() }
-    private var shotTypes: [String] { Array(Set(allShotRecords.map(\.shotType))).sorted() }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedPracticeSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles)
+    }
+
+    private var lies: [String] {
+        Array(Set(allShotRecords.map(\.lie))).sorted()
+    }
+
+    private var shotTypes: [String] {
+        Array(Set(allShotRecords.map(\.shotType))).sorted()
+    }
 
     private var allShotRecords: [ShotRecord] {
         var records: [ShotRecord] = []

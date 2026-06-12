@@ -42,7 +42,6 @@ struct ExportableStatsSnapshot {
 }
 
 enum ExportManager {
-
     static func roundSummaryText(summary: ExportableRoundSummary) -> String {
         var lines: [String] = []
         lines.append("FairwayIQ — Round Summary")
@@ -90,10 +89,10 @@ enum ExportManager {
         for club in clubs {
             lines.append(
                 padded(club.clubName, to: 18) +
-                padded("\(club.averageDistance)yd", to: 6) +
-                padded("\(club.medianDistance)yd", to: 6) +
-                padded("\(club.sampleSize)", to: 7) +
-                club.consistency
+                    padded("\(club.averageDistance)yd", to: 6) +
+                    padded("\(club.medianDistance)yd", to: 6) +
+                    padded("\(club.sampleSize)", to: 7) +
+                    club.consistency
             )
         }
         lines.append("")

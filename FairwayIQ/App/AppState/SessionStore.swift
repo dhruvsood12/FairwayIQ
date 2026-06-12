@@ -35,7 +35,8 @@ final class SessionStore {
 extension SessionStore {
     func resolvedProfile(in profiles: [UserProfile]) -> UserProfile? {
         if let currentProfileId,
-           let profile = profiles.first(where: { $0.id == currentProfileId }) {
+           let profile = profiles.first(where: { $0.id == currentProfileId })
+        {
             return profile
         }
         return profiles.sorted(by: { $0.createdAt < $1.createdAt }).first
@@ -53,4 +54,3 @@ extension SessionStore {
         }
     }
 }
-

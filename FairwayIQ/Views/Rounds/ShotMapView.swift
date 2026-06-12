@@ -3,16 +3,17 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import MapKit
 import SwiftData
+import SwiftUI
 
 struct ShotMapView: View {
     var shots: [Shot]
 
     private var coordinates: [CLLocationCoordinate2D] {
-        shots.compactMap { $0.startCoordinate } + shots.compactMap { $0.endCoordinate }
+        shots.compactMap(\.startCoordinate) + shots.compactMap(\.endCoordinate)
     }
+
     private var region: MKCoordinateRegion {
         guard !coordinates.isEmpty else {
             return MKCoordinateRegion(

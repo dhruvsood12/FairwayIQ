@@ -33,7 +33,6 @@ struct RoundBaseline {
 }
 
 enum CoachingEngine {
-
     static func analyze(
         round: Round,
         baseline: RoundBaseline?
@@ -58,12 +57,12 @@ enum CoachingEngine {
         let totalPenalties = scores.reduce(0) { $0 + $1.penalties }
         let holeCount = scores.count
         let puttsPerHole = Double(totalPutts) / Double(holeCount)
-        let threePutts = scores.filter { $0.putts >= 3 }.count
-        let onePutts = scores.filter { $0.putts == 1 }.count
+        let threePutts = scores.count(where: { $0.putts >= 3 })
+        let onePutts = scores.count(where: { $0.putts == 1 })
         let girCount = scores.filter(\.gir).count
         let girPct = Double(girCount) / Double(holeCount) * 100
         let fairwayScores = scores.filter { $0.fairwayHit != nil }
-        let fairwayHits = fairwayScores.filter { $0.fairwayHit == true }.count
+        let fairwayHits = fairwayScores.count(where: { $0.fairwayHit == true })
         let fairwayPct = fairwayScores.isEmpty ? 0 : Double(fairwayHits) / Double(fairwayScores.count) * 100
 
         // Putting analysis
@@ -116,7 +115,7 @@ enum CoachingEngine {
                 strokeCosts.append(StrokeCost(category: "Missed Greens", estimatedStrokesLost: missedGIRCost, description: "Below-average approach accuracy"))
                 actions.append("Work on approach distances. Check your club gapping for the 100-150 yard range.")
             }
-        } else if girPct < 25 && holeCount >= 9 {
+        } else if girPct < 25, holeCount >= 9 {
             weaknesses.append(CoachingInsight(
                 title: "Low GIR",
                 detail: String(format: "Only %.0f%% greens in regulation. Focus on approach accuracy.", girPct),
@@ -146,14 +145,14 @@ enum CoachingEngine {
         }
 
         // Fairway analysis
-        if fairwayPct >= 65 && fairwayScores.count >= 8 {
+        if fairwayPct >= 65, fairwayScores.count >= 8 {
             strengths.append(CoachingInsight(
                 title: "Finding fairways",
                 detail: String(format: "%.0f%% fairways hit — giving yourself good looks at greens.", fairwayPct),
                 metric: "\(fairwayHits)/\(fairwayScores.count)",
                 isPositive: true
             ))
-        } else if fairwayPct < 40 && fairwayScores.count >= 8 {
+        } else if fairwayPct < 40, fairwayScores.count >= 8 {
             weaknesses.append(CoachingInsight(
                 title: "Missing fairways",
                 detail: String(format: "Only %.0f%% fairways hit. This makes GIR harder and penalties more likely.", fairwayPct),
@@ -238,7 +237,7 @@ enum CoachingEngine {
         let avgGIR = totalHoles > 0 ? Double(girCount) / Double(totalHoles) * 100 : 0
 
         let fairwayScores = allScores.filter { $0.fairwayHit != nil }
-        let fairwayHits = fairwayScores.filter { $0.fairwayHit == true }.count
+        let fairwayHits = fairwayScores.count(where: { $0.fairwayHit == true })
         let avgFairway = fairwayScores.isEmpty ? 0 : Double(fairwayHits) / Double(fairwayScores.count) * 100
 
         let totalPens = allScores.reduce(0) { $0 + $1.penalties }
@@ -263,8 +262,8 @@ enum CoachingEngine {
     private static func findBestStretch(scores: [HoleScore], windowSize: Int, round: Round) -> StretchResult? {
         guard scores.count >= windowSize else { return nil }
         var best: StretchResult?
-        for i in 0...(scores.count - windowSize) {
-            let window = Array(scores[i..<(i + windowSize)])
+        for i in 0 ... (scores.count - windowSize) {
+            let window = Array(scores[i ..< (i + windowSize)])
             let relToPar = window.reduce(0) { total, score in
                 let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
                 return total + (score.strokes - par)
@@ -279,8 +278,8 @@ enum CoachingEngine {
     private static func findWorstStretch(scores: [HoleScore], windowSize: Int, round: Round) -> StretchResult? {
         guard scores.count >= windowSize else { return nil }
         var worst: StretchResult?
-        for i in 0...(scores.count - windowSize) {
-            let window = Array(scores[i..<(i + windowSize)])
+        for i in 0 ... (scores.count - windowSize) {
+            let window = Array(scores[i ..< (i + windowSize)])
             let relToPar = window.reduce(0) { total, score in
                 let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
                 return total + (score.strokes - par)
@@ -299,18 +298,16 @@ enum CoachingEngine {
         weaknesses: [CoachingInsight]
     ) -> String {
         let diff = score - par
-        var assessment: String
-
-        if diff <= 0 {
-            assessment = "Outstanding round at or under par."
+        var assessment = if diff <= 0 {
+            "Outstanding round at or under par."
         } else if diff <= 5 {
-            assessment = "Solid round, staying close to par."
+            "Solid round, staying close to par."
         } else if diff <= 10 {
-            assessment = "Decent round with room to improve."
+            "Decent round with room to improve."
         } else if diff <= 18 {
-            assessment = "Tough round, but there are clear areas to work on."
+            "Tough round, but there are clear areas to work on."
         } else {
-            assessment = "A challenging day on the course."
+            "A challenging day on the course."
         }
 
         if strengths.count > weaknesses.count {

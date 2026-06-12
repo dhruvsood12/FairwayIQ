@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct RoundSetupView: View {
     @Environment(\.modelContext) private var modelContext
@@ -24,14 +24,19 @@ struct RoundSetupView: View {
     @State private var saveErrorMessage: String?
     @State private var showingSaveError = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
 
     private struct RoundNavItem: Identifiable, Hashable {
         let id: UUID
     }
+
     private let teeBoxes = ["Black", "Blue", "White", "Gold", "Red"]
     private let weatherOptions = ["Sunny", "Partly Cloudy", "Cloudy", "Windy", "Rain", "Other"]
-    private var eligibleCourses: [Course] { courses.filter { $0.holes.count >= 18 } }
+    private var eligibleCourses: [Course] {
+        courses.filter { $0.holes.count >= 18 }
+    }
 
     var body: some View {
         NavigationStack {
@@ -92,13 +97,15 @@ struct RoundSetupView: View {
         }
     }
 
-    private var canStart: Bool { selectedCourse != nil }
+    private var canStart: Bool {
+        selectedCourse != nil
+    }
 
     private func startRound() {
         guard let course = selectedCourse else { return }
         isStarting = true
         let holeCount = max(1, course.holes.count)
-        let holeScores: [HoleScore] = (1...holeCount).map { num in
+        let holeScores: [HoleScore] = (1 ... holeCount).map { num in
             let score = HoleScore(
                 holeNumber: num,
                 strokes: 0,
@@ -122,7 +129,9 @@ struct RoundSetupView: View {
             shots: [],
             createdAt: Date()
         )
-        for s in holeScores { s.round = round }
+        for s in holeScores {
+            s.round = round
+        }
         modelContext.insert(round)
         do {
             try modelContext.save()

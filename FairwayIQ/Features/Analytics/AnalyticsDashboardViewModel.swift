@@ -4,9 +4,9 @@ import Foundation
 final class AnalyticsDashboardViewModel {
     private(set) var scoreTrend: [ScoreTrendPoint] = []
     private(set) var indexTrend: [HandicapTrendPoint] = []
-    private(set) var splitSummary: SplitSummary = SplitSummary(frontNineAverage: 0, backNineAverage: 0)
+    private(set) var splitSummary: SplitSummary = .init(frontNineAverage: 0, backNineAverage: 0)
     private(set) var coursePerformance: [CoursePerformance] = []
-    private(set) var summary: AnalyticsSummary = AnalyticsSummary(
+    private(set) var summary: AnalyticsSummary = .init(
         averageScore: 0,
         fairwayPct: 0,
         girPct: 0,
@@ -24,4 +24,3 @@ final class AnalyticsDashboardViewModel {
         coursePerformance = AnalyticsCalculators.coursePerformance(rounds: rounds)
     }
 }
-

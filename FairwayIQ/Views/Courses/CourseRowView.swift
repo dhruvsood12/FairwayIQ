@@ -37,4 +37,3 @@ struct CourseRowView: View {
         .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
     }
 }
-

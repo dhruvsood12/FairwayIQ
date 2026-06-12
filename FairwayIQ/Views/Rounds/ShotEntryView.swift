@@ -3,10 +3,10 @@
 //  FairwayIQ
 //
 
-import SwiftUI
-import SwiftData
 import CoreLocation
 import MapKit
+import SwiftData
+import SwiftUI
 
 struct ShotEntryView: View {
     @Environment(\.modelContext) private var modelContext
@@ -30,7 +30,10 @@ struct ShotEntryView: View {
     @State private var saveErrorMessage: String?
     @State private var validationMessage: String?
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
     private var startCoordinate: CLLocationCoordinate2D? {
         if let startLat, let startLon { return CLLocationCoordinate2D(latitude: startLat, longitude: startLon) }
         return locationManager.lastLocation?.coordinate
@@ -119,7 +122,7 @@ struct ShotEntryView: View {
 
                 Section("Notes (optional)") {
                     TextField("e.g. wind, miss, target", text: $notes, axis: .vertical)
-                        .lineLimit(1...3)
+                        .lineLimit(1 ... 3)
                 }
                 if let validationMessage {
                     Section {

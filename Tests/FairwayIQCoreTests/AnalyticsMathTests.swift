@@ -1,5 +1,5 @@
-import XCTest
 @testable import FairwayIQCore
+import XCTest
 
 final class AnalyticsMathTests: XCTestCase {
     func testSummaryHandlesEmptyRounds() {
@@ -14,7 +14,7 @@ final class AnalyticsMathTests: XCTestCase {
     func testSummaryUsesHolesPlayedDenominator() {
         let rounds = [
             RoundRollup(totalStrokes: 80, fairwaysHit: 6, fairwaysPossible: 10, girsHit: 8, holesPlayed: 18, totalPutts: 32, totalPenalties: 2),
-            RoundRollup(totalStrokes: 40, fairwaysHit: 3, fairwaysPossible: 5, girsHit: 4, holesPlayed: 9, totalPutts: 15, totalPenalties: 1),
+            RoundRollup(totalStrokes: 40, fairwaysHit: 3, fairwaysPossible: 5, girsHit: 4, holesPlayed: 9, totalPutts: 15, totalPenalties: 1)
         ]
         let s = AnalyticsMath.summary(rounds: rounds)
         XCTAssertEqual(s.averageScore, 60, accuracy: 0.0001)
@@ -37,4 +37,3 @@ final class AnalyticsMathTests: XCTestCase {
         XCTAssertEqual(s.girPct, (10.0 / 18.0) * 100, accuracy: 0.0001)
     }
 }
-

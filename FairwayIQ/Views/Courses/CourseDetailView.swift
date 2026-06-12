@@ -1,5 +1,5 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct CourseDetailView: View {
     let course: Course
@@ -102,4 +102,3 @@ struct CourseDetailView: View {
         }
     }
 }
-

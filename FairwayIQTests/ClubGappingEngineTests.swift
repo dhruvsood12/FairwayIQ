@@ -1,9 +1,8 @@
-import Testing
 @testable import FairwayIQ
+import Testing
 
 @Suite("ClubGappingEngine Tests")
 struct ClubGappingEngineTests {
-
     private func makeShot(club: String, distance: Double?, lie: String = "Tee", result: String? = nil, isPractice: Bool = false) -> ShotRecord {
         ShotRecord(
             club: club,
@@ -39,7 +38,7 @@ struct ClubGappingEngineTests {
             makeShot(club: "Driver", distance: 250),
             makeShot(club: "Driver", distance: 260),
             makeShot(club: "7-Iron", distance: 150),
-            makeShot(club: "7-Iron", distance: 155),
+            makeShot(club: "7-Iron", distance: 155)
         ]
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         #expect(result.count == 2)
@@ -50,7 +49,7 @@ struct ClubGappingEngineTests {
         let shots = [
             makeShot(club: "7-Iron", distance: 140),
             makeShot(club: "7-Iron", distance: 150),
-            makeShot(club: "7-Iron", distance: 160),
+            makeShot(club: "7-Iron", distance: 160)
         ]
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         #expect(result.count == 1)
@@ -66,7 +65,7 @@ struct ClubGappingEngineTests {
         let shots = [
             makeShot(club: "PW", distance: 100),
             makeShot(club: "PW", distance: 110),
-            makeShot(club: "PW", distance: 120),
+            makeShot(club: "PW", distance: 120)
         ]
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         let club = result[0]
@@ -77,9 +76,9 @@ struct ClubGappingEngineTests {
 
     @Test("Confidence levels based on sample size")
     func confidenceLevels() {
-        let lowShots = (0..<3).map { _ in makeShot(club: "Driver", distance: 250) }
-        let modShots = (0..<8).map { _ in makeShot(club: "5-Iron", distance: 180) }
-        let highShots = (0..<20).map { _ in makeShot(club: "PW", distance: 120) }
+        let lowShots = (0 ..< 3).map { _ in makeShot(club: "Driver", distance: 250) }
+        let modShots = (0 ..< 8).map { _ in makeShot(club: "5-Iron", distance: 180) }
+        let highShots = (0 ..< 20).map { _ in makeShot(club: "PW", distance: 120) }
 
         let all = lowShots + modShots + highShots
         let result = ClubGappingEngine.computeClubSummaries(shots: all)
@@ -95,7 +94,7 @@ struct ClubGappingEngineTests {
 
     @Test("Miss tendency detected correctly")
     func missTendency() {
-        let shots = (0..<10).map { i in
+        let shots = (0 ..< 10).map { i in
             makeShot(club: "Driver", distance: 250, result: i < 6 ? "Right" : "Straight")
         }
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
@@ -108,7 +107,7 @@ struct ClubGappingEngineTests {
     func filterPracticeOnly() {
         let shots = [
             makeShot(club: "Driver", distance: 250, isPractice: false),
-            makeShot(club: "Driver", distance: 260, isPractice: true),
+            makeShot(club: "Driver", distance: 260, isPractice: true)
         ]
         let filters = ClubGappingEngine.Filters(includePractice: true, includeRounds: false)
         let result = ClubGappingEngine.computeClubSummaries(shots: shots, filters: filters)
@@ -118,11 +117,11 @@ struct ClubGappingEngineTests {
     }
 
     @Test("Filter by recent days")
-    func filterRecentDays() {
-        let oldDate = Calendar.current.date(byAdding: .day, value: -60, to: Date())!
+    func filterRecentDays() throws {
+        let oldDate = try #require(Calendar.current.date(byAdding: .day, value: -60, to: Date()))
         let shots = [
             ShotRecord(club: "Driver", lie: "Tee", shotType: "Normal", distanceYards: 250, result: nil, date: oldDate, isPractice: false),
-            makeShot(club: "Driver", distance: 260),
+            makeShot(club: "Driver", distance: 260)
         ]
         let filters = ClubGappingEngine.Filters(recentDays: 30)
         let result = ClubGappingEngine.computeClubSummaries(shots: shots, filters: filters)
@@ -134,7 +133,7 @@ struct ClubGappingEngineTests {
     func nilDistance() {
         let shots = [
             makeShot(club: "Driver", distance: nil),
-            makeShot(club: "Driver", distance: 250),
+            makeShot(club: "Driver", distance: 250)
         ]
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         #expect(result[0].averageDistance == 250)
@@ -144,14 +143,14 @@ struct ClubGappingEngineTests {
     @Test("Consistency rating based on CV")
     func consistencyRating() {
         // Very consistent: low std dev relative to mean
-        let shots = (0..<10).map { _ in makeShot(club: "PW", distance: 120) }
+        let shots = (0 ..< 10).map { _ in makeShot(club: "PW", distance: 120) }
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         #expect(result[0].consistencyRating == "Very consistent")
     }
 
     @Test("Carry estimate is derived for tee shots")
     func carryEstimate() {
-        let shots = (0..<5).map { _ in makeShot(club: "Driver", distance: 250, lie: "Tee") }
+        let shots = (0 ..< 5).map { _ in makeShot(club: "Driver", distance: 250, lie: "Tee") }
         let result = ClubGappingEngine.computeClubSummaries(shots: shots)
         #expect(result[0].carryDistanceEstimate != nil)
         #expect((result[0].carryDistanceEstimate ?? 0) < result[0].totalDistanceEstimate ?? 0)

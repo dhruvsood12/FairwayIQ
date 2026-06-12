@@ -1,7 +1,10 @@
 import Foundation
 
 struct ClubSummary: Identifiable, Hashable {
-    var id: String { clubName }
+    var id: String {
+        clubName
+    }
+
     let clubName: String
     let sampleSize: Int
     let averageDistance: Double
@@ -17,13 +20,15 @@ struct ClubSummary: Identifiable, Hashable {
     let missLongCount: Int
     let totalMissCategorized: Int
 
-    var distanceRange: Double { maxDistance - minDistance }
+    var distanceRange: Double {
+        maxDistance - minDistance
+    }
 
     var confidence: ClubConfidence {
         switch sampleSize {
         case 0: return .noData
-        case 1...4: return .low
-        case 5...14: return .moderate
+        case 1 ... 4: return .low
+        case 5 ... 14: return .moderate
         default: return .high
         }
     }
@@ -32,9 +37,9 @@ struct ClubSummary: Identifiable, Hashable {
         guard sampleSize >= 3 else { return "Insufficient data" }
         let cv = averageDistance > 0 ? (standardDeviation / averageDistance * 100) : 0
         switch cv {
-        case 0..<5: return "Very consistent"
-        case 5..<10: return "Consistent"
-        case 10..<15: return "Moderate"
+        case 0 ..< 5: return "Very consistent"
+        case 5 ..< 10: return "Consistent"
+        case 10 ..< 15: return "Moderate"
         default: return "Inconsistent"
         }
     }
@@ -99,7 +104,6 @@ struct ShotRecord {
 }
 
 enum ClubGappingEngine {
-
     struct Filters {
         var lieFilter: String?
         var shotTypeFilter: String?
@@ -144,7 +148,7 @@ enum ClubGappingEngine {
             result = result.filter { !$0.isPractice }
         }
         if !filters.includeRounds {
-            result = result.filter { $0.isPractice }
+            result = result.filter(\.isPractice)
         }
         if let lie = filters.lieFilter {
             result = result.filter { $0.lie == lie }

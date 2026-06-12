@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct PracticeView: View {
     @Environment(SessionStore.self) private var session
@@ -7,8 +7,14 @@ struct PracticeView: View {
     @Query private var profiles: [UserProfile]
     @State private var showNewSession = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(sessions, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(sessions, profiles: profiles)
+    }
+
     private var recentShotRecords: [ShotRecord] {
         scopedSessions.flatMap { session in
             session.shots.map {
@@ -24,6 +30,7 @@ struct PracticeView: View {
             }
         }
     }
+
     private var topClubSummary: ClubSummary? {
         ClubGappingEngine.computeClubSummaries(
             shots: recentShotRecords,

@@ -79,8 +79,8 @@ public enum AnalyticsMath {
     }
 
     public static func yDomain(scores: [Int]) -> ClosedRange<Double> {
-        guard let minScore = scores.min(), let maxScore = scores.max() else { return 60...100 }
+        guard let minScore = scores.min(), let maxScore = scores.max() else { return 60 ... 100 }
         let pad = Swift.max(2, Int(Double(maxScore - minScore) * 0.15))
-        return Double(minScore - pad)...Double(maxScore + pad)
+        return Double(minScore - pad) ... Double(maxScore + pad)
     }
 }

@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import Charts
+import SwiftData
+import SwiftUI
 
 struct HomeView: View {
     @Environment(SessionStore.self) private var session
@@ -9,12 +9,30 @@ struct HomeView: View {
     @Query(sort: \PlayerGoal.createdAt) private var goals: [PlayerGoal]
     @State private var showRoundSetup = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedGoals: [PlayerGoal] { session.goalsForCurrentProfile(goals, profiles: profiles) }
-    private var recentRound: Round? { scopedRounds.first }
-    private var baselineRounds: [Round] { Array(scopedRounds.dropFirst().prefix(5)) }
-    private var bestHoleType: HoleTypeInsight? { PerformanceInsights.bestScoringHoleType(rounds: scopedRounds) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedGoals: [PlayerGoal] {
+        session.goalsForCurrentProfile(goals, profiles: profiles)
+    }
+
+    private var recentRound: Round? {
+        scopedRounds.first
+    }
+
+    private var baselineRounds: [Round] {
+        Array(scopedRounds.dropFirst().prefix(5))
+    }
+
+    private var bestHoleType: HoleTypeInsight? {
+        PerformanceInsights.bestScoringHoleType(rounds: scopedRounds)
+    }
+
     private var mostImprovedMetric: RecentImprovementInsight? {
         PerformanceInsights.mostImprovedMetric(
             recentRounds: Array(scopedRounds.prefix(5)),
@@ -317,13 +335,15 @@ struct HomeView: View {
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
                     if let recentRound,
-                       let costly = PerformanceInsights.costliestMistakeCategory(for: recentRound) {
+                       let costly = PerformanceInsights.costliestMistakeCategory(for: recentRound)
+                    {
                         Text("Most costly mistake lately: \(costly)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.negative)
                     }
                     if let recentRound,
-                       let baseline = PerformanceInsights.baselineComparison(for: recentRound, against: baselineRounds) {
+                       let baseline = PerformanceInsights.baselineComparison(for: recentRound, against: baselineRounds)
+                    {
                         HStack(spacing: Spacing.md) {
                             FIQChip(text: baseline.deltaText, color: baseline.isPositive ? Theme.Color.positive : Theme.Color.negative)
                             Text(baseline.detail)
@@ -351,7 +371,7 @@ struct HomeView: View {
         }
     }
 
-    private func navCard<Dest: View>(icon: String, title: String, destination: Dest) -> some View {
+    private func navCard(icon: String, title: String, destination: some View) -> some View {
         NavigationLink {
             destination
         } label: {

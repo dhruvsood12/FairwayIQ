@@ -1,13 +1,19 @@
 import Foundation
 
 struct ScoreTrendPoint: Identifiable, Hashable {
-    var id: Date { date }
+    var id: Date {
+        date
+    }
+
     let date: Date
     let score: Int
 }
 
 struct HandicapTrendPoint: Identifiable, Hashable {
-    var id: Date { date }
+    var id: Date {
+        date
+    }
+
     let date: Date
     let index: Double
 }
@@ -28,7 +34,10 @@ struct SplitSummary: Hashable {
 }
 
 struct CoursePerformance: Identifiable, Hashable {
-    var id: String { courseName }
+    var id: String {
+        courseName
+    }
+
     let courseName: String
     let roundsPlayed: Int
     let averageScore: Double
@@ -88,9 +97,9 @@ enum AnalyticsCalculators {
     }
 
     static func yDomain(for scores: [Int]) -> ClosedRange<Double> {
-        guard let minScore = scores.min(), let maxScore = scores.max() else { return 60...100 }
+        guard let minScore = scores.min(), let maxScore = scores.max() else { return 60 ... 100 }
         let pad = Swift.max(2, Int(Double(maxScore - minScore) * 0.15))
-        return Double(minScore - pad)...Double(maxScore + pad)
+        return Double(minScore - pad) ... Double(maxScore + pad)
     }
 
     static func frontBackSplit(rounds: [Round]) -> SplitSummary {
@@ -124,4 +133,3 @@ enum AnalyticsCalculators {
         }
     }
 }
-

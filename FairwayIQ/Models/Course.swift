@@ -3,9 +3,9 @@
 //  FairwayIQ
 //
 
+import CoreLocation
 import Foundation
 import SwiftData
-import CoreLocation
 
 @Model
 final class Course {

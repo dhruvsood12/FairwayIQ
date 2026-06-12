@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import CoreLocation
+import SwiftData
+import SwiftUI
 
 struct PracticeSessionEntryView: View {
     @Environment(\.modelContext) private var modelContext
@@ -16,7 +16,9 @@ struct PracticeSessionEntryView: View {
     @State private var saveErrorMessage: String?
     @State private var locationManager = LocationManager()
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
 
     var body: some View {
         NavigationStack {
@@ -53,7 +55,7 @@ struct PracticeSessionEntryView: View {
 
                 Section("Notes (optional)") {
                     TextField("Session notes", text: $notes, axis: .vertical)
-                        .lineLimit(1...3)
+                        .lineLimit(1 ... 3)
                 }
             }
             .scrollContentBackground(.hidden)
@@ -227,7 +229,7 @@ struct PracticeShotEntrySheet: View {
                 }
                 Section("Notes") {
                     TextField("Optional notes", text: $notes, axis: .vertical)
-                        .lineLimit(1...2)
+                        .lineLimit(1 ... 2)
                 }
                 if let validationError {
                     Section {

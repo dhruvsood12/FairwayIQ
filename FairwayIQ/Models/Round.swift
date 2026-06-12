@@ -35,11 +35,11 @@ final class Round {
     }
 
     var fairwaysHit: Int {
-        holeScores.compactMap(\.fairwayHit).filter { $0 }.count
+        holeScores.compactMap(\.fairwayHit).count(where: { $0 })
     }
 
     var fairwaysPossible: Int {
-        holeScores.filter { $0.fairwayHit != nil }.count
+        holeScores.count(where: { $0.fairwayHit != nil })
     }
 
     var girsHit: Int {

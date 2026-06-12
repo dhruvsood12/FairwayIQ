@@ -1,7 +1,6 @@
 import Foundation
 
 enum InputValidation {
-
     struct ValidationResult {
         let isValid: Bool
         let errorMessage: String?
@@ -81,10 +80,10 @@ enum InputValidation {
 
     static func validateCoordinate(latitude: Double?, longitude: Double?) -> ValidationResult {
         if let lat = latitude {
-            guard lat >= -90 && lat <= 90 else { return .invalid("Invalid latitude.") }
+            guard lat >= -90, lat <= 90 else { return .invalid("Invalid latitude.") }
         }
         if let lon = longitude {
-            guard lon >= -180 && lon <= 180 else { return .invalid("Invalid longitude.") }
+            guard lon >= -180, lon <= 180 else { return .invalid("Invalid longitude.") }
         }
         return .valid
     }

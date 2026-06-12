@@ -11,7 +11,9 @@ final class PracticeSession {
     @Relationship(deleteRule: .cascade, inverse: \PracticeShot.session)
     var shots: [PracticeShot] = []
 
-    var shotCount: Int { shots.count }
+    var shotCount: Int {
+        shots.count
+    }
 
     var clubsUsed: [String] {
         Array(Set(shots.map(\.club))).sorted()
@@ -44,7 +46,9 @@ enum PracticeSessionType: String, CaseIterable, Identifiable {
     case putting = "Putting"
     case mixed = "Mixed"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var icon: String {
         switch self {

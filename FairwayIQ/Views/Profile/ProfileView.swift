@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.modelContext) private var modelContext
@@ -13,8 +13,13 @@ struct ProfileView: View {
     @State private var exportText = ""
     @State private var showShareSheet = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
 
     var body: some View {
         NavigationStack {
@@ -210,12 +215,12 @@ struct ProfileView: View {
             }
 
             #if DEBUG
-            Button {
-                SampleData.seedIfNeeded(modelContext: modelContext)
-                SampleData.ensureDemoProfile(modelContext: modelContext)
-            } label: {
-                settingsRow(icon: "ladybug", title: "Reset Sample Data (Debug)")
-            }
+                Button {
+                    SampleData.seedIfNeeded(modelContext: modelContext)
+                    SampleData.ensureDemoProfile(modelContext: modelContext)
+                } label: {
+                    settingsRow(icon: "ladybug", title: "Reset Sample Data (Debug)")
+                }
             #endif
         }
     }
