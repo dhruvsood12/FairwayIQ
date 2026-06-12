@@ -64,9 +64,24 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
+      - name: Install pinned lint tools
+        # Pinned to the exact versions the repo is kept clean against;
+        # preinstalled runner versions drift and change rule defaults.
+        run: |
+          mkdir -p "$HOME/lint-tools"
+          curl -sL -o /tmp/swiftformat.zip https://github.com/nicklockwood/SwiftFormat/releases/download/0.61.1/swiftformat.zip
+          unzip -o -q /tmp/swiftformat.zip -d /tmp/swiftformat
+          mv /tmp/swiftformat/swiftformat "$HOME/lint-tools/"
+          curl -sL -o /tmp/swiftlint.zip https://github.com/realm/SwiftLint/releases/download/0.63.3/portable_swiftlint.zip
+          unzip -o -q /tmp/swiftlint.zip -d /tmp/swiftlint
+          mv /tmp/swiftlint/swiftlint "$HOME/lint-tools/"
+          chmod +x "$HOME/lint-tools/swiftformat" "$HOME/lint-tools/swiftlint"
+          echo "$HOME/lint-tools" >> "$GITHUB_PATH"
       - name: SwiftFormat (lint mode)
-        run: swiftformat --lint .
-      - name: Install SwiftLint
-        run: brew install swiftlint
+        run: |
+          swiftformat --version
+          swiftformat --lint .
       - name: SwiftLint
-        run: swiftlint --strict --reporter github-actions-logging
+        run: |
+          swiftlint version
+          swiftlint --strict --reporter github-actions-logging
