@@ -1,5 +1,7 @@
 # FairwayIQ
 
+[![CI (v2 branch)](https://github.com/dhruvsood12/FairwayIQ/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dhruvsood12/FairwayIQ/actions/workflows/ci.yml)
+
 FairwayIQ is a native iOS golf performance and strategy app built with SwiftUI, SwiftData, MapKit/CoreLocation, and Swift Charts. It is local-first, privacy-conscious, and designed to feel like a polished sports-tech dashboard rather than a basic CRUD score tracker.
 
 The product vision is simple: help golfers record rounds, learn real club distances, understand miss tendencies, set measurable goals, and make smarter on-course decisions.
