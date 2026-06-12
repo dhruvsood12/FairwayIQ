@@ -17,6 +17,9 @@ final class UserProfile {
     var homeCourse: Course?
     var clubsInBag: String
     var hasCompletedOnboarding: Bool
+    var hideExactLocationInExports: Bool
+    var preferManualLocationLogging: Bool
+    var preferredStrategyModeRaw: String
     var createdAt: Date
     var updatedAt: Date
 
@@ -30,6 +33,11 @@ final class UserProfile {
         }
     }
 
+    var preferredStrategyMode: StrategyMode {
+        get { StrategyMode(rawValue: preferredStrategyModeRaw) ?? .standard }
+        set { preferredStrategyModeRaw = newValue.rawValue }
+    }
+
     init(
         id: UUID = UUID(),
         playerName: String = "",
@@ -39,6 +47,9 @@ final class UserProfile {
         homeCourse: Course? = nil,
         clubsInBag: String = "Driver, 3-Wood, 5-Wood, 4-Iron, 5-Iron, 6-Iron, 7-Iron, 8-Iron, 9-Iron, PW, SW, Putter",
         hasCompletedOnboarding: Bool = false,
+        hideExactLocationInExports: Bool = true,
+        preferManualLocationLogging: Bool = false,
+        preferredStrategyModeRaw: String = StrategyMode.standard.rawValue,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -50,6 +61,9 @@ final class UserProfile {
         self.homeCourse = homeCourse
         self.clubsInBag = clubsInBag
         self.hasCompletedOnboarding = hasCompletedOnboarding
+        self.hideExactLocationInExports = hideExactLocationInExports
+        self.preferManualLocationLogging = preferManualLocationLogging
+        self.preferredStrategyModeRaw = preferredStrategyModeRaw
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
