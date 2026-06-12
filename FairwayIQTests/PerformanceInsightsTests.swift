@@ -39,7 +39,7 @@ struct PerformanceInsightsTests {
         let baselines = [makeRound(scores: Array(repeating: 5, count: 18))] // 90
         let result = PerformanceInsights.baselineComparison(for: round, against: baselines)
         #expect(result != nil)
-        #expect(try !(#require(result?.isPositive)))
+        #expect(try !#require(result?.isPositive))
     }
 
     @Test("Baseline returns nil for no baselines")
