@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned to match the local toolchain (Xcode 26.3 / Swift 6.2.4). The pin is
+  # not permanent: runner images keep only the most recent Xcode versions, so
+  # the assert step fails loudly if 26.3 is removed. If that happens, move to
+  # the image default after verifying the iOS 26.2 deployment target still
+  # builds.
+  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+
+jobs:
+  package:
+    name: Swift Package
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Assert pinned Xcode exists
+        run: |
+          ls /Applications | grep '^Xcode'
+          test -d /Applications/Xcode_26.3.app
+      - name: Show toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
+
+  app:
+    name: iOS App Build
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Assert pinned Xcode exists
+        run: |
+          ls /Applications | grep '^Xcode'
+          test -d /Applications/Xcode_26.3.app
+      - name: Build for iOS Simulator
+        run: >
+          xcodebuild build
+          -project FairwayIQ.xcodeproj
+          -scheme FairwayIQ
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+
+  lint:
+    name: Lint
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: SwiftFormat (lint mode)
+        run: swiftformat --lint .
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: SwiftLint
+        run: swiftlint --strict --reporter github-actions-logging
