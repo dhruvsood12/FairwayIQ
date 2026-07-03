@@ -146,9 +146,6 @@ struct ExportManagerTests {
     func roundExportPrivacyNote() {
         let scores = (1 ... 9).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: $0 % 2 == 0, penalties: 0) }
         let round = Round(courseNameSnapshot: "Privacy Test", holeScores: scores)
-        for score in scores {
-            score.round = round
-        }
 
         let export = ExportManager.buildRoundExport(
             round: round,

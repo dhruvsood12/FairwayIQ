@@ -1,4 +1,5 @@
 @testable import FairwayIQ
+import Foundation
 import Testing
 
 @Suite("StrategyEngine Tests")

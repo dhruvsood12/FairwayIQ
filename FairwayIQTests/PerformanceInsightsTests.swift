@@ -15,11 +15,7 @@ struct PerformanceInsightsTests {
                 penalties: pen
             )
         }
-        let round = Round(courseNameSnapshot: "Test", holeScores: holeScores)
-        for s in holeScores {
-            s.round = round
-        }
-        return round
+        return Round(courseNameSnapshot: "Test", holeScores: holeScores)
     }
 
     // MARK: - Baseline Comparison

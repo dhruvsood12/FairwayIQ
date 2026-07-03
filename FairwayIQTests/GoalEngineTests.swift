@@ -26,11 +26,7 @@ struct GoalEngineTests {
                 penalties: penalties / 18
             )
         }
-        let round = Round(courseNameSnapshot: "Test", holeScores: scores)
-        for s in scores {
-            s.round = round
-        }
-        return round
+        return Round(courseNameSnapshot: "Test", holeScores: scores)
     }
 
     @Test("No rounds produces no-data progress")
@@ -48,9 +44,6 @@ struct GoalEngineTests {
         // Round with ~80 total (each hole ~4.4)
         let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: true, penalties: 0) }
         let round = Round(courseNameSnapshot: "Test", holeScores: scores)
-        for s in scores {
-            s.round = round
-        }
 
         let result = GoalEngine.evaluate(goal: goal, recentRounds: [round], allRounds: [round])
         #expect(result.isAchieved)
@@ -61,9 +54,6 @@ struct GoalEngineTests {
         let goal = makeGoal(metricType: .girPercentage, targetValue: 50)
         let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: $0 <= 12, penalties: 0) }
         let round = Round(courseNameSnapshot: "Test", holeScores: scores)
-        for s in scores {
-            s.round = round
-        }
 
         let result = GoalEngine.evaluate(goal: goal, recentRounds: [round], allRounds: [round])
         // 12/18 = 66.7%, target 50% above => achieved
@@ -78,20 +68,12 @@ struct GoalEngineTests {
         // Recent rounds: average 85
         let recent = (0 ..< 5).map { _ -> Round in
             let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 5, putts: 2, gir: false, penalties: 0) }
-            let r = Round(courseNameSnapshot: "Test", holeScores: scores)
-            for s in scores {
-                s.round = r
-            }
-            return r
+            return Round(courseNameSnapshot: "Test", holeScores: scores)
         }
         // Older rounds: average 95
         let older = (0 ..< 5).map { _ -> Round in
             let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 5, putts: 2, gir: false, penalties: 0) }
-            let r = Round(courseNameSnapshot: "Test", holeScores: scores)
-            for s in scores {
-                s.round = r
-            }
-            return r
+            return Round(courseNameSnapshot: "Test", holeScores: scores)
         }
 
         let allRecent = recent + older
@@ -105,9 +87,6 @@ struct GoalEngineTests {
         let goal = makeGoal(targetValue: 80)
         let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 5, putts: 2, gir: false, penalties: 0) }
         let round = Round(courseNameSnapshot: "Test", holeScores: scores)
-        for s in scores {
-            s.round = round
-        }
 
         let result = GoalEngine.evaluate(goal: goal, recentRounds: [round], allRounds: [round])
         #expect(result.progressPercentage >= 0)
@@ -122,9 +101,6 @@ struct GoalEngineTests {
         ]
         let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 5, putts: 2, gir: false, penalties: 0) }
         let round = Round(courseNameSnapshot: "Test", holeScores: scores)
-        for s in scores {
-            s.round = round
-        }
 
         let results = GoalEngine.evaluateProgress(goals: goals, recentRounds: [round], allRounds: [round])
         #expect(results.count == 2)
