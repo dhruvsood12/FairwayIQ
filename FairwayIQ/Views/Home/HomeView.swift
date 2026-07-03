@@ -1,4 +1,5 @@
 import Charts
+import FairwayIQCore
 import SwiftData
 import SwiftUI
 
@@ -266,7 +267,7 @@ struct HomeView: View {
                             TrendBadge(trend: improvement.text, isPositive: improvement.isPositive)
                         }
                     }
-                    let trend = AnalyticsCalculators.scoreTrend(rounds: Array(scopedRounds.prefix(10)))
+                    let trend = AnalyticsMath.scoreTrend(rounds: scopedRounds.prefix(10).map(\.snapshot))
                     Chart {
                         ForEach(trend) { item in
                             LineMark(x: .value("Date", item.date), y: .value("Score", item.score))
@@ -277,7 +278,7 @@ struct HomeView: View {
                                 .symbolSize(20)
                         }
                     }
-                    .chartYScale(domain: AnalyticsCalculators.yDomain(for: trend.map(\.score)))
+                    .chartYScale(domain: AnalyticsMath.yDomain(scores: trend.map(\.score)))
                     .frame(height: 100)
                     .chartXAxis(.hidden)
                 }

@@ -4,6 +4,7 @@
 //
 
 import CoreLocation
+import FairwayIQCore
 import MapKit
 import SwiftData
 import SwiftUI
@@ -186,16 +187,12 @@ struct ShotEntryView: View {
     }
 
     private func recalcDistance() {
-        guard
-            let start = startCoordinate,
-            let end = endCoordinate
-        else {
-            distanceYards = nil
-            return
-        }
-        let startLocation = CLLocation(latitude: start.latitude, longitude: start.longitude)
-        let endLocation = CLLocation(latitude: end.latitude, longitude: end.longitude)
-        distanceYards = startLocation.distance(from: endLocation) / 0.9144
+        distanceYards = GeoMath.distanceYards(
+            fromLatitude: startCoordinate?.latitude,
+            fromLongitude: startCoordinate?.longitude,
+            toLatitude: endCoordinate?.latitude,
+            toLongitude: endCoordinate?.longitude
+        )
     }
 
     private func saveShot() -> Bool {

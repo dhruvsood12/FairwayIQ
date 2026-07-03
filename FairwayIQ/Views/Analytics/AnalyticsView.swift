@@ -1,4 +1,5 @@
 import Charts
+import FairwayIQCore
 import SwiftData
 import SwiftUI
 
@@ -143,7 +144,7 @@ struct AnalyticsView: View {
                             }
                     }
                 }
-                .chartYScale(domain: AnalyticsCalculators.yDomain(for: viewModel.scoreTrend.map(\.score)))
+                .chartYScale(domain: AnalyticsMath.yDomain(scores: viewModel.scoreTrend.map(\.score)))
                 .frame(height: 200)
             }
         }
@@ -459,7 +460,7 @@ private extension AnalyticsView {
     }
 
     func refreshDashboard() {
-        viewModel.refresh(rounds: scopedRounds, profileIndexEstimate: profile?.handicapEstimate)
+        viewModel.refresh(rounds: scopedRounds)
     }
 }
 

@@ -1,3 +1,4 @@
+import FairwayIQCore
 import Foundation
 import SwiftUI
 

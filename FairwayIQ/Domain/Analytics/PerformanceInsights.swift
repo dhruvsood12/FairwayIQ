@@ -1,3 +1,4 @@
+import FairwayIQCore
 import Foundation
 
 struct BaselineComparison: Hashable {
@@ -51,8 +52,8 @@ enum PerformanceInsights {
     static func mostImprovedMetric(recentRounds: [Round], previousRounds: [Round]) -> RecentImprovementInsight? {
         guard !recentRounds.isEmpty, !previousRounds.isEmpty else { return nil }
 
-        let recentSummary = AnalyticsCalculators.summary(rounds: recentRounds)
-        let previousSummary = AnalyticsCalculators.summary(rounds: previousRounds)
+        let recentSummary = AnalyticsMath.summary(rounds: recentRounds.map(\.rollup))
+        let previousSummary = AnalyticsMath.summary(rounds: previousRounds.map(\.rollup))
 
         let candidates: [(String, Double, Bool)] = [
             ("Scoring", previousSummary.averageScore - recentSummary.averageScore, true),

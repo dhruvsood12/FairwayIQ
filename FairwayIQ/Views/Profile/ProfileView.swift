@@ -1,3 +1,4 @@
+import FairwayIQCore
 import SwiftData
 import SwiftUI
 
@@ -105,7 +106,7 @@ struct ProfileView: View {
                         .font(.caption)
                         .foregroundStyle(Theme.Color.textSecondary)
                 } else {
-                    let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+                    let summary = AnalyticsMath.summary(rounds: scopedRounds.map(\.rollup))
                     HStack(spacing: Spacing.md) {
                         StatTile(title: "Avg Score", value: String(format: "%.0f", summary.averageScore))
                         StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
@@ -246,7 +247,7 @@ struct ProfileView: View {
 
     private func exportAllData() {
         guard let profile else { return }
-        let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+        let summary = AnalyticsMath.summary(rounds: scopedRounds.map(\.rollup))
         let snapshot = ExportManager.buildStatsExport(
             profile: profile,
             summary: summary,

@@ -1,9 +1,9 @@
+import FairwayIQCore
 import Foundation
 
 @Observable
 final class AnalyticsDashboardViewModel {
     private(set) var scoreTrend: [ScoreTrendPoint] = []
-    private(set) var indexTrend: [HandicapTrendPoint] = []
     private(set) var splitSummary: SplitSummary = .init(frontNineAverage: 0, backNineAverage: 0)
     private(set) var coursePerformance: [CoursePerformance] = []
     private(set) var summary: AnalyticsSummary = .init(
@@ -16,11 +16,11 @@ final class AnalyticsDashboardViewModel {
         worstRoundScore: nil
     )
 
-    func refresh(rounds: [Round], profileIndexEstimate: Double?) {
-        scoreTrend = AnalyticsCalculators.scoreTrend(rounds: rounds)
-        indexTrend = AnalyticsCalculators.indexTrend(rounds: rounds, profileIndexEstimate: profileIndexEstimate)
-        summary = AnalyticsCalculators.summary(rounds: rounds)
-        splitSummary = AnalyticsCalculators.frontBackSplit(rounds: rounds)
-        coursePerformance = AnalyticsCalculators.coursePerformance(rounds: rounds)
+    func refresh(rounds: [Round]) {
+        let snapshots = rounds.map(\.snapshot)
+        scoreTrend = AnalyticsMath.scoreTrend(rounds: snapshots)
+        summary = AnalyticsMath.summary(rounds: rounds.map(\.rollup))
+        splitSummary = AnalyticsMath.frontBackSplit(rounds: snapshots)
+        coursePerformance = AnalyticsMath.coursePerformance(rounds: snapshots)
     }
 }
