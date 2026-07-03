@@ -1,7 +1,8 @@
 // swift-tools-version: 6.0
 //
-// SwiftPM test harness for core math (run: `swift test`)
-// This does not affect the iOS app target; it exists to keep analytics logic testable in CI.
+// Core analytics library for the FairwayIQ app (run tests with `swift test`).
+// The iOS app target links this package; it is the single source of truth
+// for analytics math.
 
 import PackageDescription
 

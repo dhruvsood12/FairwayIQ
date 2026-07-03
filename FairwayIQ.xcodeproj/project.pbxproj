@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B0E752324CB73A3812CFC822 /* FairwayIQCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF6F0990323D366FB3F6F46F /* FairwayIQCore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		281B96082F675C0C00AEA9CC /* FairwayIQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairwayIQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		286735282F7C422800FA6642 /* InputValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationTests.swift; sourceTree = "<group>"; };
@@ -20,6 +24,8 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		281B960A2F675C0C00AEA9CC /* FairwayIQ */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = FairwayIQ;
 			sourceTree = "<group>";
 		};
@@ -30,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E752324CB73A3812CFC822 /* FairwayIQCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +94,7 @@
 			);
 			name = FairwayIQ;
 			packageProductDependencies = (
+				EF6F0990323D366FB3F6F46F /* FairwayIQCore */,
 			);
 			productName = FairwayIQ;
 			productReference = 281B96082F675C0C00AEA9CC /* FairwayIQ.app */;
@@ -116,6 +124,9 @@
 			);
 			mainGroup = 281B95FF2F675C0C00AEA9CC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BFD905820AA41C31AF085D10 /* XCLocalSwiftPackageReference "." */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 281B96092F675C0C00AEA9CC /* Products */;
 			projectDirPath = "";
@@ -352,6 +363,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BFD905820AA41C31AF085D10 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF6F0990323D366FB3F6F46F /* FairwayIQCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FairwayIQCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 281B96002F675C0C00AEA9CC /* Project object */;
 }
