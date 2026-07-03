@@ -22,13 +22,23 @@ struct CourseRowView: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 4) {
-                Text("\(course.holes.count) holes")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(Theme.Color.textSecondary)
-                if course.totalPar > 0 {
-                    Text("Par \(course.totalPar)")
+                if !course.holes.isEmpty {
+                    Text("\(course.holes.count) holes")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Theme.Color.textSecondary)
+                } else if let holeCount = course.sourceHoleCount {
+                    Text("\(holeCount) holes")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Theme.Color.textSecondary)
+                }
+                if let par = course.parIfKnown {
+                    Text("Par \(par)")
                         .font(.caption.weight(.medium))
                         .foregroundStyle(Theme.Color.accent)
+                } else {
+                    Text("Par unavailable")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
                 }
             }
         }

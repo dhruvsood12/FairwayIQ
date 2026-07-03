@@ -103,10 +103,15 @@ struct RoundSummaryView: View {
                     Text("\(round.totalStrokes)")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundStyle(Theme.Color.accent)
-                    let diff = round.scoreRelativeToPar
-                    Text(diff >= 0 ? "+\(diff)" : "\(diff)")
-                        .font(.title2.weight(.semibold))
-                        .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                    if let diff = round.scoreRelativeToPar {
+                        Text(diff >= 0 ? "+\(diff)" : "\(diff)")
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                    } else {
+                        Text("Par unavailable")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
                     Spacer()
                     Text(coaching.overallAssessment)
                         .font(.caption)
@@ -210,16 +215,20 @@ struct RoundSummaryView: View {
                     Text("+/-").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     ForEach(sortedScores, id: \.holeNumber) { holeScore in
                         let par = parForHole(holeScore.holeNumber)
-                        let diff = holeScore.strokes - par
+                        let diff = par.map { holeScore.strokes - $0 }
                         Text("\(holeScore.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
-                        Text("\(par)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        Text(par.map(String.init) ?? "?").font(.caption).foregroundStyle(Theme.Color.textSecondary)
                         Text("\(holeScore.strokes)")
                             .font(.caption.weight(.semibold))
-                            .foregroundStyle(scoreColor(diff))
+                            .foregroundStyle(diff.map(scoreColor) ?? Theme.Color.textPrimary)
                         Text("\(holeScore.putts)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
-                        Text(diff > 0 ? "+\(diff)" : "\(diff)")
-                            .font(.caption)
-                            .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                        if let diff {
+                            Text(diff > 0 ? "+\(diff)" : "\(diff)")
+                                .font(.caption)
+                                .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                        } else {
+                            Text("?").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        }
                     }
                 }
             }
@@ -398,8 +407,8 @@ struct RoundSummaryView: View {
         .buttonStyle(.plain)
     }
 
-    private func parForHole(_ holeNumber: Int) -> Int {
-        round.course?.holes.first(where: { $0.number == holeNumber })?.par ?? 4
+    private func parForHole(_ holeNumber: Int) -> Int? {
+        round.par(forHole: holeNumber)
     }
 }
 

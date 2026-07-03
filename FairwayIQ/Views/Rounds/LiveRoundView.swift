@@ -39,16 +39,17 @@ struct LiveRoundView: View {
     }
 
     private var holeCount: Int {
-        round?.holeScores.count ?? round?.course?.holes.count ?? 18
+        if let scored = round?.holeScores.count, scored > 0 { return scored }
+        if let holes = round?.course?.holes.count, holes > 0 { return holes }
+        return round?.course?.sourceHoleCount ?? 18
     }
 
     private var currentHoleNumber: Int {
         currentHoleIndex + 1
     }
 
-    private var par: Int {
-        guard let course = round?.course else { return 4 }
-        return course.holes.first(where: { $0.number == currentHoleNumber })?.par ?? 4
+    private var par: Int? {
+        round?.par(forHole: currentHoleNumber)
     }
 
     private var isPar3: Bool {
@@ -208,10 +209,10 @@ struct LiveRoundView: View {
     private var parCard: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Par \(par)")
+                Text(par.map { "Par \($0)" } ?? "Par unavailable")
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundStyle(Theme.Color.greenPrimary)
+                    .foregroundStyle(par == nil ? Theme.Color.textSecondary : Theme.Color.greenPrimary)
                 Text("Hole \(currentHoleNumber)")
                     .font(.subheadline)
                     .foregroundStyle(Theme.Color.textSecondary)

@@ -46,17 +46,17 @@ final class Round {
         holeScores.filter(\.gir).count
     }
 
-    var totalPar: Int {
-        if let course {
-            return course.totalPar
-        }
-        // Fallback for legacy/demo rounds until migration is complete.
-        let holes = holeScores.count
-        return holes == 18 ? 72 : (holes == 9 ? 36 : holes * 4)
+    var totalPar: Int? {
+        course?.parIfKnown
     }
 
-    var scoreRelativeToPar: Int {
-        totalStrokes - totalPar
+    var scoreRelativeToPar: Int? {
+        guard let totalPar else { return nil }
+        return totalStrokes - totalPar
+    }
+
+    func par(forHole holeNumber: Int) -> Int? {
+        course?.holes.first(where: { $0.number == holeNumber })?.par
     }
 
     init(

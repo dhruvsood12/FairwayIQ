@@ -83,8 +83,10 @@ enum PerformanceInsights {
 
         for index in 0 ... (scores.count - windowSize) {
             let window = Array(scores[index ..< (index + windowSize)])
-            let relative = window.reduce(0) { partialResult, score in
-                partialResult + (score.strokes - par(for: score.holeNumber, round: round))
+            let pars = window.map { round.par(forHole: $0.holeNumber) }
+            guard !pars.contains(nil) else { continue }
+            let relative = zip(window, pars).reduce(0) { partialResult, pair in
+                partialResult + (pair.0.strokes - (pair.1 ?? 0))
             }
             let candidate = (start: window.first?.holeNumber ?? 0, end: window.last?.holeNumber ?? 0, total: relative)
 
@@ -134,7 +136,7 @@ enum PerformanceInsights {
 
         for round in rounds {
             for score in round.holeScores {
-                let par = par(for: score.holeNumber, round: round)
+                guard let par = round.par(forHole: score.holeNumber) else { continue }
                 let key = "Par \(par)s"
                 grouped[key, default: []].append(score.strokes - par)
             }
@@ -149,9 +151,5 @@ enum PerformanceInsights {
             )
         }
         .sorted { $0.averageRelativeToPar < $1.averageRelativeToPar }
-    }
-
-    private static func par(for holeNumber: Int, round: Round) -> Int {
-        round.course?.holes.first(where: { $0.number == holeNumber })?.par ?? 4
     }
 }

@@ -93,17 +93,25 @@ struct CoachingEngineTests {
 
     @Test("Assessment text varies by score")
     func assessmentText() {
-        // Under par
         let goodScores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 3, putts: 1, gir: true, penalties: 0) }
-        let goodRound = Round(courseNameSnapshot: "Test", holeScores: goodScores)
+        let goodCourse = Course(id: "test:good", name: "Par Course", holes: (1 ... 18).map { Hole(number: $0, par: 4) })
+        let goodRound = Round(course: goodCourse, courseNameSnapshot: "Test", holeScores: goodScores)
         let goodResult = CoachingEngine.analyze(round: goodRound, baseline: nil)
         #expect(goodResult.overallAssessment.contains("Outstanding") || goodResult.overallAssessment.contains("under par"))
 
-        // Way over par
         let badScores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 7, putts: 3, gir: false, penalties: 1) }
-        let badRound = Round(courseNameSnapshot: "Test", holeScores: badScores)
+        let badCourse = Course(id: "test:bad", name: "Par Course", holes: (1 ... 18).map { Hole(number: $0, par: 4) })
+        let badRound = Round(course: badCourse, courseNameSnapshot: "Test", holeScores: badScores)
         let badResult = CoachingEngine.analyze(round: badRound, baseline: nil)
         #expect(badResult.overallAssessment.contains("challenging"))
+    }
+
+    @Test("Assessment without recorded par is judged against history")
+    func assessmentWithoutPar() {
+        let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: true, penalties: 0) }
+        let round = Round(courseNameSnapshot: "Test", holeScores: scores)
+        let result = CoachingEngine.analyze(round: round, baseline: nil)
+        #expect(result.overallAssessment.contains("not on record"))
     }
 
     @Test("Action items capped at 5")

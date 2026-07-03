@@ -264,9 +264,10 @@ enum CoachingEngine {
         var best: StretchResult?
         for i in 0 ... (scores.count - windowSize) {
             let window = Array(scores[i ..< (i + windowSize)])
-            let relToPar = window.reduce(0) { total, score in
-                let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
-                return total + (score.strokes - par)
+            let pars = window.map { round.par(forHole: $0.holeNumber) }
+            guard !pars.contains(nil) else { continue }
+            let relToPar = zip(window, pars).reduce(0) { total, pair in
+                total + (pair.0.strokes - (pair.1 ?? 0))
             }
             guard let firstHole = window.first, let lastHole = window.last else { continue }
             if best.map({ relToPar < $0.totalRelativeToPar }) ?? true {
@@ -281,9 +282,10 @@ enum CoachingEngine {
         var worst: StretchResult?
         for i in 0 ... (scores.count - windowSize) {
             let window = Array(scores[i ..< (i + windowSize)])
-            let relToPar = window.reduce(0) { total, score in
-                let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
-                return total + (score.strokes - par)
+            let pars = window.map { round.par(forHole: $0.holeNumber) }
+            guard !pars.contains(nil) else { continue }
+            let relToPar = zip(window, pars).reduce(0) { total, pair in
+                total + (pair.0.strokes - (pair.1 ?? 0))
             }
             guard let firstHole = window.first, let lastHole = window.last else { continue }
             if worst.map({ relToPar > $0.totalRelativeToPar }) ?? true {
@@ -295,10 +297,19 @@ enum CoachingEngine {
 
     private static func buildAssessment(
         score: Int,
-        par: Int,
+        par: Int?,
         strengths: [CoachingInsight],
         weaknesses: [CoachingInsight]
     ) -> String {
+        guard let par else {
+            var assessment = "Scored \(score). Par for this course is not on record, so the round is judged against your own history."
+            if strengths.count > weaknesses.count {
+                assessment += " More positives than negatives today."
+            } else if weaknesses.count > strengths.count + 1 {
+                assessment += " Focus on the action items below to save strokes next time."
+            }
+            return assessment
+        }
         let diff = score - par
         var assessment = if diff <= 0 {
             "Outstanding round at or under par."

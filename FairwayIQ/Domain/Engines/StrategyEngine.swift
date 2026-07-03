@@ -218,8 +218,7 @@ enum StrategyEngine {
         }
 
         let par4and5Scores = holeScores.filter { score in
-            guard let round = score.round, let course = round.course else { return false }
-            let holePar = course.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
+            guard let round = score.round, let holePar = round.par(forHole: score.holeNumber) else { return false }
             return holePar >= 4
         }
         if par4and5Scores.count >= 10 {

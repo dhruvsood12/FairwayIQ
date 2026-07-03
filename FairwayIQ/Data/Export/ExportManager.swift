@@ -9,7 +9,7 @@ struct ExportPrivacyOptions: Hashable {
 
 struct ExportableHoleLine {
     let hole: Int
-    let par: Int
+    let par: Int?
     let score: Int
     let putts: Int
 }
@@ -18,7 +18,7 @@ struct ExportableRoundSummary {
     let courseName: String
     let date: String
     let totalScore: Int
-    let relativeToPar: Int
+    let relativeToPar: Int?
     let totalPutts: Int
     let fairwaysHit: String
     let gir: String
@@ -57,7 +57,11 @@ enum ExportManager {
         lines.append("")
         lines.append("Course: \(summary.courseName)")
         lines.append("Date: \(summary.date)")
-        lines.append("Score: \(summary.totalScore) (\(summary.relativeToPar >= 0 ? "+" : "")\(summary.relativeToPar))")
+        if let relative = summary.relativeToPar {
+            lines.append("Score: \(summary.totalScore) (\(relative >= 0 ? "+" : "")\(relative))")
+        } else {
+            lines.append("Score: \(summary.totalScore) (par unavailable)")
+        }
         lines.append("")
         lines.append("Stats")
         lines.append("  Putts: \(summary.totalPutts)")
@@ -68,7 +72,8 @@ enum ExportManager {
         lines.append("Scorecard")
         lines.append("  Hole  Par  Score  Putts")
         for holeScore in summary.holeScores {
-            lines.append(String(format: "  %2d    %d    %2d     %d", holeScore.hole, holeScore.par, holeScore.score, holeScore.putts))
+            let par = holeScore.par.map(String.init) ?? "-"
+            lines.append(String(format: "  %2d    %@    %2d     %d", holeScore.hole, par, holeScore.score, holeScore.putts))
         }
         if !summary.coachingHighlights.isEmpty {
             lines.append("")
@@ -135,8 +140,7 @@ enum ExportManager {
     ) -> ExportableRoundSummary {
         let scores = round.holeScores.sorted { $0.holeNumber < $1.holeNumber }
         let holeData: [ExportableHoleLine] = scores.map { score in
-            let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
-            return ExportableHoleLine(hole: score.holeNumber, par: par, score: score.strokes, putts: score.putts)
+            ExportableHoleLine(hole: score.holeNumber, par: round.par(forHole: score.holeNumber), score: score.strokes, putts: score.putts)
         }
 
         var highlights: [String] = []

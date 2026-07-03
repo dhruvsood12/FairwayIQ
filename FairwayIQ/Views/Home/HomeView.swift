@@ -192,10 +192,15 @@ struct HomeView: View {
                             Text("\(round.totalStrokes)")
                                 .font(.title2.weight(.bold))
                                 .foregroundStyle(Theme.Color.accent)
-                            let diff = round.scoreRelativeToPar
-                            Text(diff >= 0 ? "+\(diff)" : "\(diff)")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                            if let diff = round.scoreRelativeToPar {
+                                Text(diff >= 0 ? "+\(diff)" : "\(diff)")
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                            } else {
+                                Text("Par unavailable")
+                                    .font(.caption)
+                                    .foregroundStyle(Theme.Color.textSecondary)
+                            }
                         }
                     }
                     HStack(spacing: Spacing.lg) {

@@ -452,7 +452,7 @@ struct AnalyticsView: View {
 private extension AnalyticsView {
     var refreshKey: String {
         let roundsKey = rounds.map {
-            "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar)"
+            "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar.map(String.init) ?? "na")"
         }.joined(separator: "|")
         let profileKey = session.currentProfileId?.uuidString ?? "no-profile"
         let handicapKey = profile.map { String(format: "%.1f", $0.handicapEstimate) } ?? "no-index"
