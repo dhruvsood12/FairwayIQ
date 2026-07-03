@@ -178,9 +178,17 @@ Run the SwiftPM core tests:
 swift test
 ```
 
-Run app tests from Xcode using the FairwayIQ test target when simulator runtimes are available.
+Run the app test bundle (88 tests in 7 suites):
 
-See [TESTING.md](TESTING.md) for coverage details and known environment limitations.
+```sh
+xcodebuild test \
+  -project FairwayIQ.xcodeproj \
+  -scheme FairwayIQ \
+  -destination 'platform=iOS Simulator,name=iPhone 17'
+```
+
+CI runs both suites on every push. See [TESTING.md](TESTING.md) for coverage
+details.
 
 ## Documentation
 

@@ -50,7 +50,9 @@ App-target tests under `FairwayIQTests/` cover:
 
 ## SwiftPM Core Tests
 
-The repo also includes a lightweight Swift Package test harness for `Sources/FairwayIQCore`.
+`Sources/FairwayIQCore` is the app's single analytics implementation, and its
+package tests cover the analytics math, the golden parity fixtures, and the
+shot distance conversion.
 
 Run:
 
@@ -60,15 +62,18 @@ swift test
 
 ## App Test Command
 
-When an iOS simulator runtime is installed and available:
+The FairwayIQTests unit-test bundle runs 88 tests in 7 suites against any
+installed iPhone simulator:
 
 ```sh
 xcodebuild test \
   -project FairwayIQ.xcodeproj \
   -scheme FairwayIQ \
-  -destination 'platform=iOS Simulator,name=iPhone 16' \
-  -derivedDataPath .build/DerivedData
+  -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
+
+CI runs the same bundle on every push, picking the first available iPhone
+simulator on the runner by name.
 
 ## UI Test Scenarios To Maintain
 
