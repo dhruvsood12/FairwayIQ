@@ -28,22 +28,6 @@ enum CourseSeedLoader {
         }
     }
 
-    /// Legacy small starter set when the store is empty and no catalog was applied.
-    static func seedIfNeeded(modelContext: ModelContext, records: [CourseSeedRecord] = CourseSeed.starterUS) {
-        let existing = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
-        guard existing.isEmpty else { return }
-
-        for record in records {
-            insertCourse(record, modelContext: modelContext)
-        }
-
-        do {
-            try modelContext.save()
-        } catch {
-            // Seeding failure should never block app startup; course list can be empty.
-        }
-    }
-
     private static func upsert(records: [CourseSeedRecord], modelContext: ModelContext) throws {
         let existing = try modelContext.fetch(FetchDescriptor<Course>())
         var byId = Dictionary(uniqueKeysWithValues: existing.map { ($0.id, $0) })

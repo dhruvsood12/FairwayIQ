@@ -16,62 +16,52 @@ enum SampleData {
 
     static func createSampleCourses(modelContext: ModelContext) -> [Course] {
         let holes1 = createSampleHoles(count: 18)
-        let pebble = Course(
-            id: "pebble-beach",
-            name: "Pebble Beach Golf Links",
-            city: "Pebble Beach",
+        let links = Course(
+            id: "sample-links",
+            name: "Sample Links",
+            city: "Sampleton",
             state: "CA",
-            kind: "Resort",
-            websiteURL: "https://www.pebblebeach.com/golf/pebble-beach-golf-links/",
-            latitude: 36.5674,
-            longitude: -121.9500,
+            kind: "Sample",
             holes: []
         )
-        modelContext.insert(pebble)
+        modelContext.insert(links)
         for hole in holes1 {
             modelContext.insert(hole)
-            hole.course = pebble
-            pebble.holes.append(hole)
+            links.holes.append(hole)
         }
 
         let holes2 = createSampleHoles(count: 18)
-        let augusta = Course(
-            id: "augusta-national",
-            name: "Augusta National",
-            city: "Augusta",
+        let parkland = Course(
+            id: "sample-parkland",
+            name: "Sample Parkland",
+            city: "Sampleton",
             state: "GA",
-            kind: "Private",
-            latitude: 33.5023,
-            longitude: -82.0197,
+            kind: "Sample",
             holes: []
         )
-        modelContext.insert(augusta)
+        modelContext.insert(parkland)
         for hole in holes2 {
             modelContext.insert(hole)
-            hole.course = augusta
-            augusta.holes.append(hole)
+            parkland.holes.append(hole)
         }
 
         let holes3 = createSampleHoles(count: 9)
         let local = Course(
-            id: "local-muni",
-            name: "Riverside Municipal",
-            city: "Riverside",
+            id: "sample-muni-nine",
+            name: "Sample Muni Nine",
+            city: "Sampleton",
             state: "CA",
-            kind: "Municipal",
-            latitude: nil,
-            longitude: nil,
+            kind: "Sample",
             holes: []
         )
         modelContext.insert(local)
         for hole in holes3 {
             modelContext.insert(hole)
-            hole.course = local
             local.holes.append(hole)
         }
 
         try? modelContext.save()
-        return [pebble, augusta, local]
+        return [links, parkland, local]
     }
 
     static func createSampleRounds(modelContext: ModelContext, course: Course) -> Round {
@@ -104,38 +94,9 @@ enum SampleData {
             shots: [],
             createdAt: Date()
         )
-        for holeScore in holeScores {
-            holeScore.round = round
-        }
         modelContext.insert(round)
         try? modelContext.save()
         return round
-    }
-
-    static func createSampleFriendEntries(modelContext: ModelContext) -> [FriendEntry] {
-        let names = [
-            ("Alex Chen", 72, 75, 76.2, 8.5),
-            ("Jordan Smith", 74, 78, 77.8, 12.0),
-            ("Sam Williams", 71, 73, 74.5, 6.2),
-            ("Casey Davis", 76, 79, 78.0, 14.0),
-            ("Riley Brown", 73, 76, 75.5, 10.0)
-        ]
-        var entries: [FriendEntry] = []
-        for (index, friend) in names.enumerated() {
-            let entry = FriendEntry(
-                id: "friend-\(index)",
-                displayName: friend.0,
-                weeklyBestScore: friend.1,
-                latestRoundScore: friend.2,
-                averageScore: friend.3,
-                handicapEstimate: friend.4,
-                sortOrder: index
-            )
-            modelContext.insert(entry)
-            entries.append(entry)
-        }
-        try? modelContext.save()
-        return entries
     }
 
     static func createOrUpdateSampleUser(modelContext: ModelContext) -> UserProfile {
@@ -145,7 +106,7 @@ enum SampleData {
             return existing
         }
         let homeCourse = (try? modelContext.fetch(FetchDescriptor<Course>(
-            predicate: #Predicate { $0.id == "pebble-beach" }
+            predicate: #Predicate { $0.id == "sample-links" }
         )))?.first
         let profile = UserProfile(
             playerName: "Demo Player",
@@ -165,7 +126,6 @@ enum SampleData {
         let existing = (try? modelContext.fetch(descriptor)) ?? []
         if existing.isEmpty {
             _ = createSampleCourses(modelContext: modelContext)
-            _ = createSampleFriendEntries(modelContext: modelContext)
             let courses = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
             for course in courses.prefix(2) {
                 _ = createSampleRounds(modelContext: modelContext, course: course)
