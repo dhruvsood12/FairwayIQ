@@ -3,6 +3,7 @@ DerivedData/
 scripts/course-data/out/
 .venv/
 *.xcuserstate
+xcuserdata/
 .DS_Store
 .claude/worktrees/
 .claude/settings.local.json
