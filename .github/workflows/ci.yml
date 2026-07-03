@@ -40,9 +40,9 @@ jobs:
         run: swift test
 
   app:
-    name: iOS App Build
+    name: iOS App Build + Test
     runs-on: macos-26
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
       - name: Assert pinned Xcode exists
@@ -55,6 +55,22 @@ jobs:
           -project FairwayIQ.xcodeproj
           -scheme FairwayIQ
           -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+      - name: Pick a simulator
+        # The first available iPhone by name, so device renames on runner
+        # image updates never break the job.
+        run: |
+          DEVICE=$(xcrun simctl list devices available | grep -E '^ +iPhone' | head -1 | sed -E 's/^ +//; s/ \([0-9A-F-]+\).*$//')
+          test -n "$DEVICE"
+          echo "SIMULATOR_NAME=$DEVICE" >> "$GITHUB_ENV"
+          echo "picked: $DEVICE"
+      - name: Run the app test bundle
+        run: >
+          xcodebuild test
+          -project FairwayIQ.xcodeproj
+          -scheme FairwayIQ
+          -destination "platform=iOS Simulator,name=$SIMULATOR_NAME"
           CODE_SIGNING_ALLOWED=NO
           CODE_SIGNING_REQUIRED=NO
 
