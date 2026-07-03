@@ -9,6 +9,18 @@ final class AnalyticsMathTests: XCTestCase {
         XCTAssertEqual(s.girPct, 0)
         XCTAssertEqual(s.puttsPerRound, 0)
         XCTAssertEqual(s.penaltiesPerRound, 0)
+        XCTAssertNil(s.bestRoundScore)
+        XCTAssertNil(s.worstRoundScore)
+    }
+
+    func testSummaryReportsBestAndWorstRoundScores() {
+        let rounds = [
+            RoundRollup(totalStrokes: 80, fairwaysHit: 6, fairwaysPossible: 10, girsHit: 8, holesPlayed: 18, totalPutts: 32, totalPenalties: 2),
+            RoundRollup(totalStrokes: 74, fairwaysHit: 8, fairwaysPossible: 12, girsHit: 9, holesPlayed: 18, totalPutts: 30, totalPenalties: 0)
+        ]
+        let s = AnalyticsMath.summary(rounds: rounds)
+        XCTAssertEqual(s.bestRoundScore, 74)
+        XCTAssertEqual(s.worstRoundScore, 80)
     }
 
     func testSummaryUsesHolesPlayedDenominator() {
@@ -26,6 +38,20 @@ final class AnalyticsMathTests: XCTestCase {
         let domain = AnalyticsMath.yDomain(scores: [72, 74, 73, 80])
         XCTAssertLessThan(domain.lowerBound, 72)
         XCTAssertGreaterThan(domain.upperBound, 80)
+    }
+
+    func testYDomainPinsExactPaddedBounds() {
+        XCTAssertEqual(AnalyticsMath.yDomain(scores: [72, 74, 73, 80]), 70.0 ... 82.0)
+        XCTAssertEqual(AnalyticsMath.yDomain(scores: [72]), 70.0 ... 74.0)
+        XCTAssertEqual(AnalyticsMath.yDomain(scores: []), 60.0 ... 100.0)
+    }
+
+    func testTrendAndSplitHandleEmptyInput() {
+        XCTAssertEqual(AnalyticsMath.scoreTrend(rounds: []), [])
+        let split = AnalyticsMath.frontBackSplit(rounds: [])
+        XCTAssertEqual(split.frontNineAverage, 0)
+        XCTAssertEqual(split.backNineAverage, 0)
+        XCTAssertEqual(AnalyticsMath.coursePerformance(rounds: []), [])
     }
 
     func testSummaryHandlesZeroFairwayDenominator() {

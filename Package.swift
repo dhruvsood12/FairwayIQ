@@ -8,7 +8,8 @@ import PackageDescription
 let package = Package(
     name: "FairwayIQCore",
     platforms: [
-        .macOS(.v14)
+        .macOS(.v14),
+        .iOS("26.2")
     ],
     products: [
         .library(name: "FairwayIQCore", targets: ["FairwayIQCore"])
