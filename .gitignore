@@ -7,3 +7,4 @@ xcuserdata/
 .DS_Store
 .claude/worktrees/
 .claude/settings.local.json
+__pycache__/

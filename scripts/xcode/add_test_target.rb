@@ -43,6 +43,17 @@ unless test_target
   puts "added FairwayIQTests target"
 end
 
+test_group = project.main_group["FairwayIQTests"]
+abort "FairwayIQTests group not found" unless test_group
+known_paths = test_group.files.map(&:path)
+Dir.glob(File.expand_path("../../FairwayIQTests/*.swift", __dir__)).sort.each do |file|
+  base = File.basename(file)
+  next if known_paths.include?(base)
+  reference = test_group.new_reference(base)
+  test_target.add_file_references([reference])
+  puts "added #{base} to FairwayIQTests"
+end
+
 project.save
 
 scheme_path = File.join(Xcodeproj::XCScheme.shared_data_dir(project_path), "FairwayIQ.xcscheme")

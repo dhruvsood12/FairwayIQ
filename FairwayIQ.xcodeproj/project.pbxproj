@@ -16,6 +16,7 @@
 		C1BDE325BCEEA2543A979B73 /* StrategyEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */; };
 		CB7B3576464E8469C0B5FC36 /* CoachingEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */; };
 		CE5DA065A7CE48C4889C4D9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F74BFBAC4B077714D2FC44 /* Foundation.framework */; };
+		D853C2E30BD0F08E9C5E3812 /* CourseSeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8957BA9501ED528775E329 /* CourseSeedTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingEngineTests.swift; sourceTree = "<group>"; };
 		2883B0E02F7BA216006B73B8 /* GoalEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEngineTests.swift; sourceTree = "<group>"; };
 		2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyEngineTests.swift; sourceTree = "<group>"; };
+		3D8957BA9501ED528775E329 /* CourseSeedTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSeedTests.swift; sourceTree = "<group>"; };
 		729BEFE3403338B1BDF831FF /* FairwayIQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FairwayIQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F74BFBAC4B077714D2FC44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 				286735282F7C422800FA6642 /* InputValidationTests.swift */,
 				286735292F7C424000FA6642 /* ExportManagerTests.swift */,
 				2867352A2F7C425400FA6642 /* PerformanceInsightsTests.swift */,
+				3D8957BA9501ED528775E329 /* CourseSeedTests.swift */,
 			);
 			path = FairwayIQTests;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				61082EC806091651DDDC1996 /* InputValidationTests.swift in Sources */,
 				0ADED8D95B8C9E8B8CA4638F /* ExportManagerTests.swift in Sources */,
 				514F2BF57A463C81B29BA1CB /* PerformanceInsightsTests.swift in Sources */,
+				D853C2E30BD0F08E9C5E3812 /* CourseSeedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

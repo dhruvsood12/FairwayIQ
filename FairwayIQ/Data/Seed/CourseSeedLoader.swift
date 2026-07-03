@@ -3,7 +3,7 @@ import SwiftData
 
 enum CourseSeedLoader {
     /// Increment when replacing `courses_catalog.json` so installs pick up the new dataset.
-    private static let bundledCatalogVersion = 1
+    private static let bundledCatalogVersion = 2
 
     private enum DefaultsKey {
         static let appliedCatalogVersion = "fairwayiq.catalog.bundledVersion"
@@ -57,9 +57,9 @@ enum CourseSeedLoader {
                 course.websiteURL = record.websiteURL
                 course.latitude = record.latitude
                 course.longitude = record.longitude
-                if course.holes.isEmpty {
-                    insertHoles(from: record, course: course, modelContext: modelContext)
-                }
+                course.sourcePar = record.coursePar
+                course.sourceHoleCount = record.holeCount
+                replaceHoles(from: record, course: course, modelContext: modelContext)
             } else {
                 let course = insertCourse(record, modelContext: modelContext)
                 byId[record.id] = course
@@ -80,11 +80,21 @@ enum CourseSeedLoader {
             websiteURL: record.websiteURL,
             latitude: record.latitude,
             longitude: record.longitude,
+            sourcePar: record.coursePar,
+            sourceHoleCount: record.holeCount,
             holes: []
         )
         modelContext.insert(course)
         insertHoles(from: record, course: course, modelContext: modelContext)
         return course
+    }
+
+    private static func replaceHoles(from record: CourseSeedRecord, course: Course, modelContext: ModelContext) {
+        for hole in course.holes {
+            modelContext.delete(hole)
+        }
+        course.holes.removeAll()
+        insertHoles(from: record, course: course, modelContext: modelContext)
     }
 
     private static func insertHoles(from record: CourseSeedRecord, course: Course, modelContext: ModelContext) {

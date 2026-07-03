@@ -18,6 +18,8 @@ final class Course {
     var websiteURL: String?
     var latitude: Double?
     var longitude: Double?
+    var sourcePar: Int?
+    var sourceHoleCount: Int?
     @Relationship(deleteRule: .cascade, inverse: \Hole.course)
     var holes: [Hole] = []
 
@@ -39,6 +41,15 @@ final class Course {
         holes.reduce(0) { $0 + $1.par }
     }
 
+    /// The course par when it is actually known: summed from per-hole data
+    /// when holes exist, otherwise the source-stated course par, otherwise nil.
+    var parIfKnown: Int? {
+        if !holes.isEmpty {
+            return totalPar
+        }
+        return sourcePar
+    }
+
     init(
         id: String,
         name: String,
@@ -48,6 +59,8 @@ final class Course {
         websiteURL: String? = nil,
         latitude: Double? = nil,
         longitude: Double? = nil,
+        sourcePar: Int? = nil,
+        sourceHoleCount: Int? = nil,
         holes: [Hole] = []
     ) {
         self.id = id
@@ -58,6 +71,8 @@ final class Course {
         self.websiteURL = websiteURL
         self.latitude = latitude
         self.longitude = longitude
+        self.sourcePar = sourcePar
+        self.sourceHoleCount = sourceHoleCount
         self.holes = holes
     }
 }
