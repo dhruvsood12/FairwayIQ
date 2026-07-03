@@ -84,6 +84,20 @@ def center_lat_lon(element: Dict[str, Any]) -> Tuple[Optional[float], Optional[f
     return None, None
 
 
+def parse_int_tag(tags: Dict[str, Any], key: str) -> Optional[int]:
+    """A tag value is used only when it is a plain positive integer.
+
+    OSM values like "30 + 30 + 30" or ranges stay null rather than being
+    guessed at. Null means the source does not state the value.
+    """
+    v = tags.get(key)
+    if isinstance(v, int) and v > 0:
+        return v
+    if isinstance(v, str) and re.fullmatch(r"[1-9][0-9]*", v.strip()):
+        return int(v.strip())
+    return None
+
+
 @dataclass(frozen=True)
 class NormalizedCourse:
     id: str
@@ -94,6 +108,8 @@ class NormalizedCourse:
     websiteURL: Optional[str]
     latitude: Optional[float]
     longitude: Optional[float]
+    coursePar: Optional[int]
+    holeCount: Optional[int]
     holes: List[Dict[str, Any]]
     source: Dict[str, Any]
 
@@ -128,7 +144,9 @@ def normalize(raw: Dict[str, Any], public_only: bool = False) -> List[Dict[str, 
             websiteURL=canonical_website(tags),
             latitude=lat,
             longitude=lon,
-            holes=[{"number": i, "par": 4, "yardage": None} for i in range(1, 19)],
+            coursePar=parse_int_tag(tags, "golf:par"),
+            holeCount=parse_int_tag(tags, "golf:holes"),
+            holes=[],
             source={
                 "provider": "osm",
                 "osmType": osm_type,
@@ -156,6 +174,8 @@ def normalize(raw: Dict[str, Any], public_only: bool = False) -> List[Dict[str, 
                 "websiteURL": c.websiteURL,
                 "latitude": c.latitude,
                 "longitude": c.longitude,
+                "coursePar": c.coursePar,
+                "holeCount": c.holeCount,
                 "holes": c.holes,
                 "source": c.source,
             }
@@ -164,7 +184,7 @@ def normalize(raw: Dict[str, Any], public_only: bool = False) -> List[Dict[str, 
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Normalize Overpass golf courses to FairwayIQ seed schema v1.")
+    p = argparse.ArgumentParser(description="Normalize Overpass golf courses to FairwayIQ seed schema v2. Holes carry only source data; par and hole counts are null unless OSM states them.")
     p.add_argument("--in", dest="inp", type=str, required=True)
     p.add_argument("--out", dest="outp", type=str, required=True)
     p.add_argument(
