@@ -3,8 +3,8 @@
 ## Layout
 
 The authoritative structure lives in [ARCHITECTURE.md](ARCHITECTURE.md).
-In short: the app target under `FairwayIQ/` (App, Core, Data, Domain,
-Features, Models, Services, Views), the analytics package under
+In short: the app target under `FairwayIQ/` (App, Components, Core, Data,
+Domain, Features, Models, Services, Views), the analytics package under
 `Sources/FairwayIQCore` with its tests under `Tests/FairwayIQCoreTests`,
 app-target tests under `FairwayIQTests/`, and the course data pipeline under
 `scripts/course-data/`.
