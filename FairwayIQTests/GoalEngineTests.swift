@@ -41,7 +41,6 @@ struct GoalEngineTests {
     @Test("Goal achieved when score below target")
     func goalAchievedBelow() {
         let goal = makeGoal(targetValue: 100)
-        // Round with ~80 total (each hole ~4.4)
         let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: true, penalties: 0) }
         let round = Round(courseNameSnapshot: "Test", holeScores: scores)
 
