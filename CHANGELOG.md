@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- A runnable FairwayIQTests unit-test bundle (88 tests in 7 suites) wired into the shared scheme and CI.
+- A World Handicap System index computed in FairwayIQCore from score differentials, validated against published worked examples, with an index trend chart and explicit low-data states.
+- Optional course rating and slope rating entry at round setup, validated and stored per round.
+- A runnable FairwayIQTests unit-test bundle (now 102 tests in 9 suites) wired into the shared scheme and CI.
 - FairwayIQCore trend, split, course performance, and shot distance functions with golden parity tests against the previous app implementation.
 
 - Smart Caddie rules engine with explainable tee and approach recommendations.
@@ -26,7 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The handicap shown across the app is the computed WHS index when enough qualifying rounds exist; the profile estimate is always labeled self-reported.
 - FairwayIQCore is the single analytics implementation; the app renders from it and the duplicate app-side calculators were deleted.
+
 - Course performance ordering is deterministic: ties on rounds played and average score now break by course name.
 - Analytics screens now include richer tabs for overview, scoring, putting, driving/approach, clubs, and goals.
 - Home dashboard now surfaces goals, score trend, most-improved metric, hole-type insight, and recent mistake category.
@@ -34,6 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Round summaries now include baseline context and best/worst stretch insights.
 - Practice, goals, and club gapping are scoped to the active profile.
 - README rewritten for final-project/recruiter presentation.
+
+### Removed
+
+- The placeholder handicap trend and the unused analytics service that carried it.
+- Fabricated course, hole, and leaderboard sample data; demo courses are now clearly fictional.
 
 ### Security
 

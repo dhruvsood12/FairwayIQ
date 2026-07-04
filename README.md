@@ -178,7 +178,7 @@ Run the SwiftPM core tests:
 swift test
 ```
 
-Run the app test bundle (88 tests in 7 suites):
+Run the app test bundle (102 tests in 9 suites):
 
 ```sh
 xcodebuild test \
@@ -201,15 +201,19 @@ details.
 ## Known Limitations
 
 - The course catalog is local and intentionally lightweight.
-- Hole yardage depends on available seed data.
-- Handicap is a user estimate, not a full WHS implementation.
+- Bundled catalog courses carry no per-hole par or yardage, so rounds on them
+  cannot yet produce a handicap differential; the analytics screen states the
+  requirements.
+- The WHS index uses the par plus five cap only, 18-hole rounds only, PCC
+  fixed at zero, and no Rule 5.8 caps; see MODEL.md.
 - Smart Caddie is rules-based and intentionally does not overclaim when data is sparse.
 - PDF export can be added later; current exports are privacy-safe formatted text.
 - Simulator-based UI tests require a local Xcode simulator runtime.
 
 ## Future Improvements
 
-- Full WHS-style handicap calculations.
+- Per-hole par entry so any course can produce handicap differentials.
+- Net double bogey adjusted gross scores once stroke indexes exist.
 - Better tee-specific course metadata.
 - Optional iCloud backup/sync while preserving local-first defaults.
 - Apple Watch shot capture.

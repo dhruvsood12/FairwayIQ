@@ -89,7 +89,7 @@ FairwayIQ/
                           PracticeShot, PlayerGoal. SampleData seeds demo rows
                           (including 5 fabricated leaderboard friends, DEBUG only).
   Services/               Older @Observable services: RoundService, CourseService,
-                          LeaderboardService, AnalyticsService, LocationManager.
+                          LeaderboardService, LocationManager.
   Views/                  Original screens by tab: Home, Courses, Rounds
                           (LiveRoundView, ShotEntryView, ShotMapView), Analytics,
                           Leaderboard, Profile, Onboarding.

@@ -30,7 +30,6 @@ FairwayIQ/
 ├── Services/
 │   ├── LocationManager.swift
 │   ├── RoundService.swift
-│   ├── AnalyticsService.swift
 │   ├── CourseService.swift
 │   └── LeaderboardService.swift
 ├── Managers/                       # Shared app state / managers

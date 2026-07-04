@@ -19,7 +19,13 @@ A round counts toward the index only when nothing about it needs inventing:
 
 Rounds that fail any test are excluded and the analytics screen says how many
 rounds qualify. With fewer than three qualifying rounds the app shows an
-explicit unavailable state, never a number.
+explicit unavailable state, never a number. A hole with zero strokes marks an
+unplayed placeholder and disqualifies its round.
+
+Reachability, stated plainly: no bundled catalog course carries per-hole
+pars, so today only courses with real hole detail can host qualifying rounds,
+and the shipped catalog alone cannot produce an index. The analytics screen
+says so. Per-hole par entry is the planned path out.
 
 Method limits, stated plainly:
 

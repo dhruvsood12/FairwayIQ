@@ -34,6 +34,7 @@ against the R&A rule pages:
 | Adjusted gross, established index | per hole at most par + 2 + strokes received (net double bogey) | Rule 3.1b |
 | Adjusted gross, no index yet | per hole at most par + 5 | Rule 3.1a |
 | Slope rating validity | greater than zero required; the official scale is 55 to 155 | Rules of Handicapping, Appendix G |
+| Course rating input window | 40.0 to 90.0 | app-side sanity bounds, not an official constant: wide enough for any rated 18-hole course (typical ratings run the low 60s to the low 80s) while rejecting entry mistakes |
 
 ## Worked examples pinned in tests (Tests/FairwayIQCoreTests/HandicapMathTests.swift)
 
