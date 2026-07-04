@@ -122,12 +122,11 @@ enum SampleData {
     }
 
     static func seedIfNeeded(modelContext: ModelContext) {
-        let descriptor = FetchDescriptor<Course>()
-        let existing = (try? modelContext.fetch(descriptor)) ?? []
-        if existing.isEmpty {
-            _ = createSampleCourses(modelContext: modelContext)
-            let courses = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
-            for course in courses.prefix(2) {
+        let descriptor = FetchDescriptor<Course>(predicate: #Predicate { $0.kind == "Sample" })
+        let existingSamples = (try? modelContext.fetch(descriptor)) ?? []
+        if existingSamples.isEmpty {
+            let sampleCourses = createSampleCourses(modelContext: modelContext)
+            for course in sampleCourses.prefix(2) {
                 _ = createSampleRounds(modelContext: modelContext, course: course)
             }
         }

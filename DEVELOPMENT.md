@@ -41,8 +41,9 @@ CI runs all of the above on every push (.github/workflows/ci.yml).
 
 1. Open `FairwayIQ.xcodeproj` in Xcode.
 2. Select the FairwayIQ scheme and an iPhone simulator.
-3. Run. Debug builds seed clearly labeled sample data (fictional courses)
-   when the store is empty.
+3. Run. Debug builds seed clearly labeled sample data (fictional Sample
+   courses with rounds) when no sample courses exist yet; the bundled
+   catalog loads independently.
 
 ## Project scripts
 
