@@ -99,8 +99,8 @@ python scripts/course-data/merge_catalogs.py \
 
 ### Honest limitations (OSM)
 
-- **“Public”** is inferred from OSM tags (`access`, text hints); many courses are untagged — use `--public-only` as a best-effort filter, not a legal guarantee.
-- Hole pars / yardages in the seed are **placeholders** unless you enrich from another source.
+- **“Public”** is inferred from OSM tags (`access`, text hints); many courses are untagged. Use `--public-only` as a best-effort filter, not a legal guarantee.
+- The normalizer emits no per-hole data at all, because the Overpass course query carries none: hole arrays are empty, and course-level par or hole count appears only when OSM states a plain integer. Nothing is invented; nulls mean the source does not say.
 - This pipeline **does not scrape** private club websites; it uses structured OSM data.
 
 Later (beyond MVP), you can:

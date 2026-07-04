@@ -50,9 +50,12 @@ App-target tests under `FairwayIQTests/` cover:
 
 ## SwiftPM Core Tests
 
-`Sources/FairwayIQCore` is the app's single analytics implementation, and its
-package tests cover the analytics math, the golden parity fixtures, and the
-shot distance conversion.
+`Sources/FairwayIQCore` is the single implementation of the analytics math
+the dashboards render (summaries, trends, splits, course performance, the
+WHS handicap calculation, and shot distance). Its package tests cover that
+math, the golden parity fixtures, the published WHS worked examples, and the
+shot distance conversion. Simple display counts inside views are view
+formatting, not calculator logic.
 
 Run:
 

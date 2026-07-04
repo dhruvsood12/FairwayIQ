@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The handicap shown across the app is the computed WHS index when enough qualifying rounds exist; the profile estimate is always labeled self-reported.
-- FairwayIQCore is the single analytics implementation; the app renders from it and the duplicate app-side calculators were deleted.
+- FairwayIQCore is the single implementation of the dashboard analytics math; the app renders from it and the duplicate app-side calculators were deleted.
 
 - Course performance ordering is deterministic: ties on rounds played and average score now break by course name.
 - Analytics screens now include richer tabs for overview, scoring, putting, driving/approach, clubs, and goals.
