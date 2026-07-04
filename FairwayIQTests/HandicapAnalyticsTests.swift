@@ -36,6 +36,25 @@ struct HandicapAnalyticsTests {
         #expect(HandicapAnalytics.differential(for: round(strokesPerHole: 5, epoch: 1, course: nil)) == nil)
     }
 
+    @Test("Freshly started and partially scored rounds never qualify")
+    func unscoredHolesDisqualify() {
+        let course = parCourse()
+        let fresh = round(strokesPerHole: 0, epoch: 1, course: course)
+        #expect(HandicapAnalytics.differential(for: fresh) == nil)
+
+        let scores = (1 ... 18).map { HoleScore(holeNumber: $0, strokes: $0 == 18 ? 0 : 4, putts: 2) }
+        let abandoned = Round(
+            course: course,
+            courseNameSnapshot: "Rated Course",
+            courseRating: 72.0,
+            slopeRating: 113,
+            date: Date(timeIntervalSince1970: 2),
+            holeScores: scores
+        )
+        #expect(HandicapAnalytics.differential(for: abandoned) == nil)
+        #expect(HandicapAnalytics.qualifyingRoundCount(rounds: [fresh, abandoned]) == 0)
+    }
+
     @Test("Qualifying round produces the hand-computed differential")
     func differentialValue() {
         // 18 holes of 5 on a par-4 course: gross 90, the par plus five cap

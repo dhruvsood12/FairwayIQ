@@ -143,7 +143,8 @@ struct AnalyticsView: View {
                 if trend.isEmpty {
                     Text(
                         "Your index trend appears once \(HandicapAnalytics.minimumQualifyingRounds) rounds "
-                            + "have a course rating, a slope rating, and known pars for all 18 holes."
+                            + "have a course rating, a slope rating, all 18 holes scored, and known pars "
+                            + "for every hole. Bundled catalog courses do not carry per-hole pars yet."
                     )
                     .font(.subheadline)
                     .foregroundStyle(Theme.Color.textSecondary)

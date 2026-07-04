@@ -15,9 +15,12 @@ enum HandicapAnalytics {
 
     /// A round produces a score differential only when nothing about it has
     /// to be invented: a user-entered course rating and slope, exactly 18
-    /// scored holes, and a known par for every hole. The adjusted gross
-    /// score uses the par plus five cap of Rule 3.1a because per-hole stroke
-    /// indexes are not in the data model yet; MODEL.md records the decision.
+    /// holes each actually scored with at least one stroke, and a known par
+    /// for every hole. A zero-stroke placeholder from a started or abandoned
+    /// round disqualifies the round rather than entering the record as a
+    /// fabricated gross. The adjusted gross score uses the par plus five cap
+    /// of Rule 3.1a because per-hole stroke indexes are not in the data
+    /// model yet; MODEL.md records the decision.
     static func differential(for round: Round) -> Double? {
         guard
             let rating = round.courseRating,
@@ -29,6 +32,7 @@ enum HandicapAnalytics {
 
         var holes: [HoleScoreInput] = []
         for score in round.holeScores {
+            guard score.strokes >= 1 else { return nil }
             guard let par = round.par(forHole: score.holeNumber) else { return nil }
             holes.append(HoleScoreInput(strokes: score.strokes, par: par, strokesReceived: 0))
         }
