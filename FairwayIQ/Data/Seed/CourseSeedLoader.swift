@@ -83,7 +83,7 @@ enum CourseSeedLoader {
 
     private static func insertHoles(from record: CourseSeedRecord, course: Course, modelContext: ModelContext) {
         for holeSeed in record.holes {
-            let hole = Hole(number: holeSeed.number, par: holeSeed.par, handicapIndex: holeSeed.number, yardage: holeSeed.yardage)
+            let hole = Hole(number: holeSeed.number, par: holeSeed.par, yardage: holeSeed.yardage)
             hole.course = course
             modelContext.insert(hole)
             course.holes.append(hole)

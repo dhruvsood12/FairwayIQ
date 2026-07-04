@@ -6,7 +6,7 @@ struct ExportManagerTests {
     @Test("Round summary text contains key fields")
     func roundSummaryText() {
         let summary = ExportableRoundSummary(
-            courseName: "Pebble Beach",
+            courseName: "Sample Links",
             date: "March 15, 2025",
             totalScore: 82,
             relativeToPar: 10,
@@ -23,7 +23,7 @@ struct ExportManagerTests {
         )
         let text = ExportManager.roundSummaryText(summary: summary)
 
-        #expect(text.contains("Pebble Beach"))
+        #expect(text.contains("Sample Links"))
         #expect(text.contains("82"))
         #expect(text.contains("+10"))
         #expect(text.contains("34"))

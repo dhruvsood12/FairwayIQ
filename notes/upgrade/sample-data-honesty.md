@@ -17,4 +17,7 @@ places that do not exist. The starter seed with real venue names is deleted
 with its loader fallback. The double-link loops are gone.
 
 Proof pattern for the phase gate: grep for FriendEntry( outside the model
-file returns nothing, and grep for the real venue names returns nothing.
+file returns nothing, and grep for the real venue names across Swift sources
+(--include='*.swift') returns nothing. The bundled OSM catalog legitimately
+contains real venue names such as Torrey Pines; those entries carry only
+source data with null par and no holes, so they are the expected exception.
