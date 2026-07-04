@@ -150,7 +150,7 @@ See [SECURITY.md](SECURITY.md) for threat model, risks, mitigations, and limitat
 | Maps/location | MapKit, CoreLocation |
 | Charts | Swift Charts |
 | Architecture | MVVM-ish views + pure domain engines |
-| Testing | Swift Testing app bundle (102 tests) + XCTest SwiftPM core tests (34 tests) |
+| Testing | Swift Testing app bundle (104 tests) + XCTest SwiftPM core tests (34 tests) |
 | Platform | iOS |
 
 ## How To Run
@@ -187,7 +187,7 @@ Run the SwiftPM core tests:
 swift test
 ```
 
-Run the app test bundle (102 tests in 9 suites):
+Run the app test bundle (104 tests in 10 suites):
 
 ```sh
 xcodebuild test \

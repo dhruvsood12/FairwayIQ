@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A World Handicap System index computed in FairwayIQCore from score differentials, validated against published worked examples, with an index trend chart and explicit low-data states.
 - Optional course rating and slope rating entry at round setup, validated and stored per round.
-- A runnable FairwayIQTests unit-test bundle (now 102 tests in 9 suites) wired into the shared scheme and CI.
+- A runnable FairwayIQTests unit-test bundle (now 104 tests in 10 suites) wired into the shared scheme and CI.
 - FairwayIQCore trend, split, course performance, and shot distance functions with golden parity tests against the previous app implementation.
 
 - Smart Caddie rules engine with explainable tee and approach recommendations.

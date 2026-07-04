@@ -65,7 +65,7 @@ swift test
 
 ## App Test Command
 
-The FairwayIQTests unit-test bundle runs 102 tests in 9 suites against any
+The FairwayIQTests unit-test bundle runs 104 tests in 10 suites against any
 installed iPhone simulator:
 
 ```sh
