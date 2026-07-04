@@ -40,6 +40,7 @@ struct ExportableClubSummary {
 struct ExportableStatsSnapshot {
     let playerName: String
     let handicapEstimate: Double
+    let computedIndex: Double?
     let roundsPlayed: Int
     let averageScore: Double
     let fairwayPct: Double
@@ -118,7 +119,10 @@ enum ExportManager {
         lines.append("FairwayIQ — Stats Snapshot")
         lines.append(String(repeating: "=", count: 40))
         lines.append("Player: \(snapshot.playerName)")
-        lines.append("Handicap: \(String(format: "%.1f", snapshot.handicapEstimate))")
+        if let index = snapshot.computedIndex {
+            lines.append("Index (WHS, computed): \(String(format: "%.1f", index))")
+        }
+        lines.append("Handicap estimate (self-reported): \(String(format: "%.1f", snapshot.handicapEstimate))")
         lines.append("Rounds: \(snapshot.roundsPlayed)")
         lines.append("Generated: \(snapshot.generatedDate)")
         lines.append("")
@@ -179,10 +183,11 @@ enum ExportManager {
         }
     }
 
-    static func buildStatsExport(profile: UserProfile, summary: AnalyticsSummary, roundCount: Int) -> ExportableStatsSnapshot {
+    static func buildStatsExport(profile: UserProfile, summary: AnalyticsSummary, roundCount: Int, computedIndex: Double?) -> ExportableStatsSnapshot {
         ExportableStatsSnapshot(
             playerName: profile.playerName,
             handicapEstimate: profile.handicapEstimate,
+            computedIndex: computedIndex,
             roundsPlayed: roundCount,
             averageScore: summary.averageScore,
             fairwayPct: summary.fairwayPct,

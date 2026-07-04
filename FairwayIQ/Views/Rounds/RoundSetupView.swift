@@ -19,6 +19,9 @@ struct RoundSetupView: View {
     @State private var roundDate = Date()
     @State private var weather = "Sunny"
     @State private var playingPartners = ""
+    @State private var courseRatingText = ""
+    @State private var slopeRatingText = ""
+    @State private var ratingValidationMessage: String?
     @State private var isStarting = false
     @State private var startedRoundItem: RoundNavItem?
     @State private var saveErrorMessage: String?
@@ -62,6 +65,22 @@ struct RoundSetupView: View {
                     }
                     TextField("Playing partners (optional)", text: $playingPartners)
                         .textFieldStyle(.roundedBorder)
+                }
+                Section("Handicap scoring (optional)") {
+                    TextField("Course rating, for example 71.2", text: $courseRatingText)
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(.roundedBorder)
+                    TextField("Slope rating, 55 to 155", text: $slopeRatingText)
+                        .keyboardType(.numberPad)
+                        .textFieldStyle(.roundedBorder)
+                    if let ratingValidationMessage {
+                        Text(ratingValidationMessage)
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.negative)
+                    }
+                    Text("From the scorecard of the tees you play. Rounds without both values do not count toward your handicap index.")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Color.textSecondary)
                 }
             }
             .background(Theme.Color.background)
@@ -108,8 +127,32 @@ struct RoundSetupView: View {
         return course.sourceHoleCount ?? 18
     }
 
+    private func parsedRatings() -> (rating: Double?, slope: Int?)? {
+        let ratingText = courseRatingText.trimmingCharacters(in: .whitespaces)
+        let slopeText = slopeRatingText.trimmingCharacters(in: .whitespaces)
+        if ratingText.isEmpty, slopeText.isEmpty { return (nil, nil) }
+
+        guard let rating = Double(ratingText), let slope = Int(slopeText) else {
+            ratingValidationMessage = "Enter both a course rating and a slope rating, or leave both empty."
+            return nil
+        }
+        let ratingResult = InputValidation.validateCourseRating(rating)
+        guard ratingResult.isValid else {
+            ratingValidationMessage = ratingResult.errorMessage
+            return nil
+        }
+        let slopeResult = InputValidation.validateSlopeRating(slope)
+        guard slopeResult.isValid else {
+            ratingValidationMessage = slopeResult.errorMessage
+            return nil
+        }
+        ratingValidationMessage = nil
+        return (rating, slope)
+    }
+
     private func startRound() {
         guard let course = selectedCourse else { return }
+        guard let ratings = parsedRatings() else { return }
         isStarting = true
         let holeCount = scoringHoleCount(for: course)
         let holeScores: [HoleScore] = (1 ... holeCount).map { num in
@@ -128,6 +171,8 @@ struct RoundSetupView: View {
             course: course,
             courseNameSnapshot: course.name,
             teeBox: teeBox,
+            courseRating: ratings.rating,
+            slopeRating: ratings.slope,
             date: roundDate,
             weather: weather,
             playingPartners: playingPartners.isEmpty ? nil : playingPartners,

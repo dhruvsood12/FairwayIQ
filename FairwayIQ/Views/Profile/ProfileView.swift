@@ -66,7 +66,7 @@ struct ProfileView: View {
                         Text(String(format: "%.1f", profile.handicapEstimate))
                             .font(.headline)
                             .foregroundStyle(Theme.Color.accent)
-                        Text("Handicap")
+                        Text("Handicap (self-reported)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
@@ -251,7 +251,8 @@ struct ProfileView: View {
         let snapshot = ExportManager.buildStatsExport(
             profile: profile,
             summary: summary,
-            roundCount: scopedRounds.count
+            roundCount: scopedRounds.count,
+            computedIndex: HandicapAnalytics.computedIndex(rounds: scopedRounds)
         )
         let snapshotText = ExportManager.statsSnapshotText(snapshot: snapshot)
         let latestRoundText: String

@@ -54,6 +54,7 @@ struct ExportManagerTests {
         let snapshot = ExportableStatsSnapshot(
             playerName: "Demo Player",
             handicapEstimate: 12.5,
+            computedIndex: 11.9,
             roundsPlayed: 10,
             averageScore: 85.3,
             fairwayPct: 55.0,
@@ -79,6 +80,7 @@ struct ExportManagerTests {
         let snapshot = ExportableStatsSnapshot(
             playerName: "Test",
             handicapEstimate: 18.0,
+            computedIndex: nil,
             roundsPlayed: 0,
             averageScore: 0,
             fairwayPct: 0,

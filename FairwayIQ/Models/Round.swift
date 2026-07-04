@@ -12,6 +12,8 @@ final class Round {
     var course: Course?
     var courseNameSnapshot: String
     var teeBox: String
+    var courseRating: Double?
+    var slopeRating: Int?
     var date: Date
     var weather: String?
     var playingPartners: String?
@@ -64,6 +66,8 @@ final class Round {
         course: Course? = nil,
         courseNameSnapshot: String,
         teeBox: String = "Blue",
+        courseRating: Double? = nil,
+        slopeRating: Int? = nil,
         date: Date = Date(),
         weather: String? = nil,
         playingPartners: String? = nil,
@@ -76,6 +80,8 @@ final class Round {
         self.course = course
         self.courseNameSnapshot = courseNameSnapshot
         self.teeBox = teeBox
+        self.courseRating = courseRating
+        self.slopeRating = slopeRating
         self.date = date
         self.weather = weather
         self.playingPartners = playingPartners

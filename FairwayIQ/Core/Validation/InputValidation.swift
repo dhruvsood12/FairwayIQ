@@ -50,6 +50,20 @@ enum InputValidation {
 
     // MARK: - Profile Validation
 
+    static func validateCourseRating(_ value: Double) -> ValidationResult {
+        guard value >= 40, value <= 90 else {
+            return .invalid("Course rating should be between 40 and 90.")
+        }
+        return .valid
+    }
+
+    static func validateSlopeRating(_ value: Int) -> ValidationResult {
+        guard value >= 55, value <= 155 else {
+            return .invalid("Slope rating must be between 55 and 155.")
+        }
+        return .valid
+    }
+
     static func validateHandicap(_ value: Double) -> ValidationResult {
         guard value >= 0 else { return .invalid("Handicap cannot be negative.") }
         guard value <= 54 else { return .invalid("Handicap cannot exceed 54.") }

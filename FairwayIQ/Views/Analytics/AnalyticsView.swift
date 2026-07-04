@@ -94,6 +94,7 @@ struct AnalyticsView: View {
     @ViewBuilder
     private var overviewContent: some View {
         overviewCard
+        indexTrendCard
         if !viewModel.scoreTrend.isEmpty {
             scoreTrendCard
         }
@@ -114,7 +115,46 @@ struct AnalyticsView: View {
                 HStack(spacing: Spacing.lg) {
                     StatTile(title: "Avg Score", value: String(format: "%.1f", viewModel.summary.averageScore))
                     StatTile(title: "Rounds", value: "\(scopedRounds.count)", valueColor: Theme.Color.textPrimary)
-                    StatTile(title: "Index", value: String(format: "%.1f", profile?.handicapEstimate ?? 0), valueColor: Theme.Color.greenPrimary)
+                    indexTile
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var indexTile: some View {
+        if let index = HandicapAnalytics.computedIndex(rounds: scopedRounds) {
+            StatTile(title: "Index (WHS)", value: String(format: "%.1f", index), valueColor: Theme.Color.greenPrimary)
+        } else {
+            let qualifying = HandicapAnalytics.qualifyingRoundCount(rounds: scopedRounds)
+            StatTile(
+                title: "Index",
+                value: "\(qualifying)/\(HandicapAnalytics.minimumQualifyingRounds) scores",
+                valueColor: Theme.Color.textSecondary
+            )
+        }
+    }
+
+    private var indexTrendCard: some View {
+        FIQCard {
+            VStack(alignment: .leading, spacing: Spacing.md) {
+                SectionHeader(title: "Handicap Index Trend")
+                let trend = HandicapAnalytics.indexTrend(rounds: scopedRounds)
+                if trend.isEmpty {
+                    Text(
+                        "Your index trend appears once \(HandicapAnalytics.minimumQualifyingRounds) rounds "
+                            + "have a course rating, a slope rating, and known pars for all 18 holes."
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.Color.textSecondary)
+                } else {
+                    Chart(trend) { point in
+                        LineMark(x: .value("Date", point.date), y: .value("Index", point.index))
+                            .foregroundStyle(Theme.Color.greenPrimary)
+                        PointMark(x: .value("Date", point.date), y: .value("Index", point.index))
+                            .foregroundStyle(Theme.Color.greenPrimary)
+                    }
+                    .frame(height: 180)
                 }
             }
         }
@@ -455,7 +495,9 @@ private extension AnalyticsView {
             "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar.map(String.init) ?? "na")"
         }.joined(separator: "|")
         let profileKey = session.currentProfileId?.uuidString ?? "no-profile"
-        let handicapKey = profile.map { String(format: "%.1f", $0.handicapEstimate) } ?? "no-index"
+        let handicapKey = rounds.map {
+            "\($0.courseRating.map { String($0) } ?? "nr"):\($0.slopeRating.map { String($0) } ?? "ns")"
+        }.joined(separator: "|")
         return [profileKey, handicapKey, roundsKey].joined(separator: "#")
     }
 

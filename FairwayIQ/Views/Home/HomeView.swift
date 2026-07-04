@@ -89,12 +89,21 @@ struct HomeView: View {
                     .foregroundStyle(Theme.Color.textPrimary)
             }
             HStack(spacing: Spacing.lg) {
-                if let handicap = profile?.handicapEstimate {
+                if let index = HandicapAnalytics.computedIndex(rounds: scopedRounds) {
+                    HStack(spacing: Spacing.xs) {
+                        Text(String(format: "%.1f", index))
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.accent)
+                        Text("index (WHS)")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                } else if let handicap = profile?.handicapEstimate {
                     HStack(spacing: Spacing.xs) {
                         Text(String(format: "%.1f", handicap))
                             .font(.headline)
                             .foregroundStyle(Theme.Color.accent)
-                        Text("handicap")
+                        Text("handicap (self-reported)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
