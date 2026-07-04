@@ -88,7 +88,7 @@ struct PracticeView: View {
                     let allDistances = scopedSessions.flatMap(\.shots).compactMap(\.distanceYards)
                     StatTile(
                         title: "Avg Distance",
-                        value: allDistances.isEmpty ? "—" : "\(Int(allDistances.reduce(0, +) / Double(allDistances.count)))y"
+                        value: allDistances.isEmpty ? "-" : "\(Int(allDistances.reduce(0, +) / Double(allDistances.count)))y"
                     )
                 }
             }
@@ -104,7 +104,7 @@ struct PracticeView: View {
                     .foregroundStyle(Theme.Color.textPrimary)
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Avg", value: "\(Int(summary.averageDistance))y")
-                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")
+                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")
                     StatTile(title: "Trust", value: summary.trustLabel, valueColor: Theme.Color.positive)
                 }
             }

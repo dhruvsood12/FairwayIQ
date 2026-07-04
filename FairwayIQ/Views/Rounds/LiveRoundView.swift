@@ -135,7 +135,6 @@ struct LiveRoundView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Theme.Color.background)
                         .onAppear {
-                            // If the round isn't in the store, don't soft-lock the user here.
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                                 if round == nil { loadFailed = true }
                             }

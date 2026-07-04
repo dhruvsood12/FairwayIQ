@@ -175,7 +175,6 @@ struct GoalsView: View {
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
 
-                // Delete button
                 Button(role: .destructive) {
                     deleteGoal(progress.goal)
                 } label: {

@@ -91,7 +91,7 @@ struct ExportManagerTests {
             generatedDate: "Test"
         )
         let text = ExportManager.statsSnapshotText(snapshot: snapshot)
-        #expect(text.contains("—"))
+        #expect(text.contains("Best Score: -"))
         #expect(!text.contains("Index (WHS, computed)"))
         #expect(text.contains("Handicap estimate (self-reported): 18.0"))
     }

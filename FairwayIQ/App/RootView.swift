@@ -75,7 +75,6 @@ struct RootView: View {
         CourseSeedLoader.applyBundledCatalogIfNeeded(modelContext: modelContext)
 
         #if DEBUG
-            // Keep demo data available for previews/dev runs, but avoid silently turning production into a demo.
             SampleData.seedIfNeeded(modelContext: modelContext)
         #endif
     }

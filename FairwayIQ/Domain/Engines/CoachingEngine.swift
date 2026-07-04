@@ -65,7 +65,6 @@ enum CoachingEngine {
         let fairwayHits = fairwayScores.count(where: { $0.fairwayHit == true })
         let fairwayPct = fairwayScores.isEmpty ? 0 : Double(fairwayHits) / Double(fairwayScores.count) * 100
 
-        // Putting analysis
         if threePutts >= 3 {
             let cost = Double(threePutts)
             weaknesses.append(CoachingInsight(
@@ -79,7 +78,7 @@ enum CoachingEngine {
         } else if threePutts == 0 {
             strengths.append(CoachingInsight(
                 title: "Clean putting",
-                detail: "No three-putts this round — solid green reading and distance control.",
+                detail: "No three-putts this round: solid green reading and distance control.",
                 metric: "0 three-putts",
                 isPositive: true
             ))
@@ -94,7 +93,6 @@ enum CoachingEngine {
             ))
         }
 
-        // GIR analysis
         if let base = baseline, base.roundCount >= 3 {
             let girDiff = girPct - base.averageGIR
             if girDiff > 5 {
@@ -125,7 +123,6 @@ enum CoachingEngine {
             actions.append("Practice approach shots to your most common yardages.")
         }
 
-        // Penalty analysis
         if totalPenalties >= 3 {
             weaknesses.append(CoachingInsight(
                 title: "Penalties added up",
@@ -144,11 +141,10 @@ enum CoachingEngine {
             ))
         }
 
-        // Fairway analysis
         if fairwayPct >= 65, fairwayScores.count >= 8 {
             strengths.append(CoachingInsight(
                 title: "Finding fairways",
-                detail: String(format: "%.0f%% fairways hit — giving yourself good looks at greens.", fairwayPct),
+                detail: String(format: "%.0f%% fairways hit, giving yourself good looks at greens.", fairwayPct),
                 metric: "\(fairwayHits)/\(fairwayScores.count)",
                 isPositive: true
             ))
@@ -162,7 +158,6 @@ enum CoachingEngine {
             actions.append("Consider hitting 3-wood or long iron off the tee for better accuracy.")
         }
 
-        // Stretch analysis
         let bestStretch = findBestStretch(scores: scores, windowSize: 3, round: round)
         let worstStretch = findWorstStretch(scores: scores, windowSize: 3, round: round)
 
@@ -183,7 +178,6 @@ enum CoachingEngine {
             ))
         }
 
-        // Score vs baseline
         if let base = baseline, base.roundCount >= 3 {
             let scoreDiff = Double(round.totalStrokes) - base.averageScore
             if scoreDiff < -2 {
@@ -203,7 +197,6 @@ enum CoachingEngine {
             }
         }
 
-        // Overall assessment
         let assessment = buildAssessment(
             score: round.totalStrokes,
             par: round.totalPar,
@@ -211,7 +204,6 @@ enum CoachingEngine {
             weaknesses: weaknesses
         )
 
-        // Limit to actionable count
         let limitedStrengths = Array(strengths.prefix(5))
         let limitedWeaknesses = Array(weaknesses.prefix(5))
         let limitedActions = Array(actions.prefix(5))

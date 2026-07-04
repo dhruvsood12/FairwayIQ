@@ -72,7 +72,7 @@ struct ShotEntryView: View {
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     } else {
-                        Text("Location unavailable — you can still log the shot and add landing later.")
+                        Text("Location unavailable. You can still log the shot and add landing later.")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
@@ -137,7 +137,7 @@ struct ShotEntryView: View {
             }
             .scrollContentBackground(.hidden)
             .background(Theme.Color.background)
-            .navigationTitle("Shot — Hole \(holeNumber)")
+            .navigationTitle("Shot: Hole \(holeNumber)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

@@ -202,8 +202,8 @@ struct AnalyticsView: View {
                 }
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Penalties/Rnd", value: String(format: "%.1f", viewModel.summary.penaltiesPerRound))
-                    StatTile(title: "Best", value: viewModel.summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
-                    StatTile(title: "Worst", value: viewModel.summary.worstRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.negative)
+                    StatTile(title: "Best", value: viewModel.summary.bestRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.positive)
+                    StatTile(title: "Worst", value: viewModel.summary.worstRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.negative)
                 }
             }
         }

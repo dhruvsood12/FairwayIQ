@@ -53,7 +53,7 @@ struct ExportableStatsSnapshot {
 enum ExportManager {
     static func roundSummaryText(summary: ExportableRoundSummary) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Round Summary")
+        lines.append("FairwayIQ Round Summary")
         lines.append(String(repeating: "=", count: 40))
         lines.append("")
         lines.append("Course: \(summary.courseName)")
@@ -94,7 +94,7 @@ enum ExportManager {
 
     static func clubGappingText(clubs: [ExportableClubSummary], playerName: String) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Club Gapping Report")
+        lines.append("FairwayIQ Club Gapping Report")
         lines.append(String(repeating: "=", count: 40))
         lines.append("Player: \(playerName)")
         lines.append("")
@@ -116,7 +116,7 @@ enum ExportManager {
 
     static func statsSnapshotText(snapshot: ExportableStatsSnapshot) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Stats Snapshot")
+        lines.append("FairwayIQ Stats Snapshot")
         lines.append(String(repeating: "=", count: 40))
         lines.append("Player: \(snapshot.playerName)")
         if let index = snapshot.computedIndex {
@@ -128,7 +128,7 @@ enum ExportManager {
         lines.append("")
         lines.append("Performance")
         lines.append("  Average Score: \(String(format: "%.1f", snapshot.averageScore))")
-        lines.append("  Best Score: \(snapshot.bestScore.map(String.init) ?? "—")")
+        lines.append("  Best Score: \(snapshot.bestScore.map(String.init) ?? "-")")
         lines.append("  Fairways: \(String(format: "%.0f%%", snapshot.fairwayPct))")
         lines.append("  GIR: \(String(format: "%.0f%%", snapshot.girPct))")
         lines.append("  Putts/Round: \(String(format: "%.1f", snapshot.puttsPerRound))")

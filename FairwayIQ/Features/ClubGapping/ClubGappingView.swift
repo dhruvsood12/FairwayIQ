@@ -196,7 +196,7 @@ struct ClubGappingView: View {
                 Text("\(Int(club.averageDistance))y")
                     .font(.headline)
                     .foregroundStyle(Theme.Color.accent)
-                Text("carry \(club.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")")
+                Text("carry \(club.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")")
                     .font(.caption)
                     .foregroundStyle(Theme.Color.textSecondary)
                 Text("\(club.sampleSize) shots")
@@ -285,8 +285,8 @@ struct ClubDetailSheet: View {
                     StatTile(title: "Median", value: "\(Int(summary.medianDistance))y")
                 }
                 HStack(spacing: Spacing.md) {
-                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")
-                    StatTile(title: "Total", value: summary.totalDistanceEstimate.map { "\(Int($0))y" } ?? "—")
+                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")
+                    StatTile(title: "Total", value: summary.totalDistanceEstimate.map { "\(Int($0))y" } ?? "-")
                 }
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Min", value: "\(Int(summary.minDistance))y", valueColor: Theme.Color.textSecondary)

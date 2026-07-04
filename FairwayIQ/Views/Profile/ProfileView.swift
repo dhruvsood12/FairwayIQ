@@ -109,7 +109,7 @@ struct ProfileView: View {
                     let summary = AnalyticsMath.summary(rounds: scopedRounds.map(\.rollup))
                     HStack(spacing: Spacing.md) {
                         StatTile(title: "Avg Score", value: String(format: "%.0f", summary.averageScore))
-                        StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
+                        StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.positive)
                         StatTile(title: "Putts/Rnd", value: String(format: "%.1f", summary.puttsPerRound))
                     }
                 }

@@ -345,7 +345,7 @@ enum StrategyEngine {
 
         return ClubRecommendation(
             club: club.clubName,
-            rationale: "Your \(club.clubName) averages \(Int(club.averageDistance)) yards — \(overUnder) for this \(context).",
+            rationale: "Your \(club.clubName) averages \(Int(club.averageDistance)) yards, \(overUnder) for this \(context).",
             confidence: club.confidence,
             expectedDistance: club.averageDistance
         )
