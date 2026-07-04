@@ -6,8 +6,8 @@ FairwayIQ is organized around local persistence, thin SwiftUI screens, and testa
 
 ```text
 FairwayIQ/
+├── FairwayIQApp.swift
 ├── App/
-│   ├── FairwayIQApp.swift
 │   ├── RootView.swift
 │   ├── MainTabView.swift
 │   └── AppState/SessionStore.swift
@@ -29,10 +29,14 @@ FairwayIQ/
 │   ├── Goals/
 │   ├── Practice/
 │   └── SmartCaddie/
+├── Components/
 ├── Models/
 ├── Services/
 └── Views/
 ```
+
+`FairwayIQApp.swift` sits at the target root; `Components/Theme.swift` holds
+the color and layout constants every view uses.
 
 ## App Layer
 

@@ -1,6 +1,6 @@
 # Testing
 
-FairwayIQ includes a growing test suite focused on pure domain behavior and safety-critical edge cases.
+FairwayIQ's tests focus on pure domain behavior and safety-critical edge cases.
 
 ## Unit Test Coverage
 

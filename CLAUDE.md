@@ -52,7 +52,8 @@ swiftlint --strict
 ```
 
 Toolchain, verified 2026-07-04: Xcode 26.3, Swift 6.2.4, iOS 26.3 simulator
-runtimes (iPhone 17 family; there is no iPhone 16 device). Tools live in
+runtimes (iPhone 17 family plus iPhone 16e; no device named iPhone 16).
+Tools live in
 ~/.local/bin: swiftformat 0.61.1 and swiftlint 0.63.3, matching the pinned
 CI versions; the xcodeproj gem is 1.27.0. CI runs on macos-26 with Xcode
 26.3 pinned behind an existence assertion and picks its simulator by name at
@@ -66,11 +67,12 @@ FairwayIQ.xcodeproj       Two native targets: FairwayIQ (iOS app) and
                           FairwayIQTests (unit-test bundle hosted by the app).
                           The shared scheme runs both.
 FairwayIQ/
-  App/                    Composition root. FairwayIQApp builds the SwiftData
-                          ModelContainer (10-model schema, in-memory fallback),
-                          RootView routes onboarding vs main and applies the
+  FairwayIQApp.swift      App entry at the target root: builds the SwiftData
+                          ModelContainer (10-model schema, in-memory fallback).
+  App/                    RootView routes onboarding vs main and applies the
                           bundled catalog, MainTabView holds 5 tabs.
                           AppState/SessionStore scopes data to the profile.
+  Components/             Theme colors and layout constants.
   Core/                   DesignSystem components, InputValidation (pure bounds
                           checks), utilities (PlayerScopedData, DebugLogger).
   Data/                   ProfileRepository, Seed/ (CourseSeedLoader +
@@ -111,7 +113,8 @@ boundaries.
 
 ## Repo state to respect
 
-- `main` is the trunk; `v2` carries the upgrade and is the working branch.
+- `main` is the trunk and the GitHub default branch; `v2` carries the
+  upgrade and is the working branch, with pull request 1 targeting `main`.
   The remote is `origin` (github.com/dhruvsood12/FairwayIQ). The backup
   branch `backup/pre-filter-2026-06-11` preserves pre-rewrite history until
   the final merge gate and is not to be deleted before then.
@@ -147,4 +150,5 @@ primary working tree. Long commands run in the background.
   layer violations, duplicate symbols), `analytics-quant` (strokes gained,
   dispersion, handicap math and tests; tests first, cited baselines),
   `repo-hygiene` (history rewrite, CI, lint configs; backup branch before
-  any destructive step).
+  any destructive step), and `ruthless-reviewer` (adversarial phase-close
+  and final-gate auditor; reviews and blocks, never fixes).

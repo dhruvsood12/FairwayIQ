@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Post-round coaching summaries with strengths, weaknesses, stroke-cost categories, action items, baseline comparisons, and best/worst stretches.
 - Privacy-first export DTOs and text reports for round summaries, stats snapshots, and club gapping.
 - Profile privacy controls for hiding exact location in exports and preferring manual location logging.
-- Shared design system components for premium cards, chips, stat tiles, progress rings, validation messages, and buttons.
+- Shared design system components for cards, chips, stat tiles, progress rings, validation messages, and buttons.
 - Input validation utilities for score, distance, handicap, goal, and coordinate data.
 - Tests for club gapping, strategy, coaching, goals, validation, export formatting, and performance insights.
 - `ARCHITECTURE.md`, `SECURITY.md`, and `TESTING.md`.

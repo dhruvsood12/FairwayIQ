@@ -2,7 +2,7 @@
 
 [![CI (v2 branch)](https://github.com/dhruvsood12/FairwayIQ/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dhruvsood12/FairwayIQ/actions/workflows/ci.yml)
 
-FairwayIQ is a native iOS golf performance and strategy app built with SwiftUI, SwiftData, MapKit/CoreLocation, and Swift Charts. It is local-first, privacy-conscious, and designed to feel like a polished sports-tech dashboard rather than a basic CRUD score tracker.
+FairwayIQ is a native iOS golf performance and strategy app built with SwiftUI, SwiftData, MapKit/CoreLocation, and Swift Charts. It is local-first and privacy-conscious, built around honest data and tested analytics rather than score entry alone.
 
 The product vision is simple: help golfers record rounds, learn real club distances, understand miss tendencies, set measurable goals, and make smarter on-course decisions.
 
@@ -63,7 +63,7 @@ Post-round coaching identifies:
 - what cost strokes
 - three-putts, penalties, GIR changes, and baseline comparisons
 - best and worst stretches
-- 3-5 actionable practice takeaways
+- up to 5 actionable practice takeaways
 
 ### Goals + Progress
 
@@ -81,10 +81,12 @@ FairwayIQ uses a production-style, MVVM-oriented layout:
 
 ```text
 FairwayIQ/
-├── App/                  App entry, root routing, session state
+├── FairwayIQApp.swift    App entry: builds the SwiftData container
+├── App/                  Root routing, tabs, session state
+├── Components/           Theme colors and layout constants
 ├── Core/                 Design system, validation, shared utilities
 ├── Data/                 Repositories, seed loaders, export helpers
-├── Domain/               Pure analytics, strategy, coaching, goal engines
+├── Domain/               Engine and analytics mappings
 ├── Features/             Practice, Club Gapping, Smart Caddie, Goals, Analytics
 ├── Models/               SwiftData persistence models
 ├── Services/             Platform services such as location
@@ -158,10 +160,11 @@ See [SECURITY.md](SECURITY.md) for threat model, risks, mitigations, and limitat
 3. Run on an iPhone simulator or device.
 4. Complete onboarding, seed/sample data if needed, and start logging rounds or practice sessions.
 
-For command-line builds, use a local derived data path:
+For command-line builds:
 
 ```sh
-xcodebuild -project FairwayIQ.xcodeproj -scheme FairwayIQ -derivedDataPath .build/DerivedData build
+xcodebuild build -project FairwayIQ.xcodeproj -scheme FairwayIQ \
+  -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO
 ```
 
 ## Testing
@@ -216,7 +219,7 @@ details.
   fixed at zero, and no Rule 5.8 caps; see MODEL.md.
 - Smart Caddie is rules-based and intentionally does not overclaim when data is sparse.
 - PDF export can be added later; current exports are privacy-safe formatted text.
-- Simulator-based UI tests require a local Xcode simulator runtime.
+- The app-hosted test bundle requires a local Xcode simulator runtime; there is no UI test suite.
 
 ## Future Improvements
 
