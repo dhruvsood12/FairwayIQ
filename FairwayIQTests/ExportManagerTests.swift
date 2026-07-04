@@ -66,7 +66,8 @@ struct ExportManagerTests {
         let text = ExportManager.statsSnapshotText(snapshot: snapshot)
 
         #expect(text.contains("Demo Player"))
-        #expect(text.contains("12.5"))
+        #expect(text.contains("Index (WHS, computed): 11.9"))
+        #expect(text.contains("Handicap estimate (self-reported): 12.5"))
         #expect(text.contains("10"))
         #expect(text.contains("85.3"))
         #expect(text.contains("55%"))
@@ -91,6 +92,8 @@ struct ExportManagerTests {
         )
         let text = ExportManager.statsSnapshotText(snapshot: snapshot)
         #expect(text.contains("—"))
+        #expect(!text.contains("Index (WHS, computed)"))
+        #expect(text.contains("Handicap estimate (self-reported): 18.0"))
     }
 
     @Test("Build club exports from summaries")
