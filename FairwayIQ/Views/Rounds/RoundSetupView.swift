@@ -35,7 +35,7 @@ struct RoundSetupView: View {
     private let teeBoxes = ["Black", "Blue", "White", "Gold", "Red"]
     private let weatherOptions = ["Sunny", "Partly Cloudy", "Cloudy", "Windy", "Rain", "Other"]
     private var eligibleCourses: [Course] {
-        courses.filter { $0.holes.count >= 18 }
+        courses
     }
 
     var body: some View {
@@ -101,10 +101,17 @@ struct RoundSetupView: View {
         selectedCourse != nil
     }
 
+    private func scoringHoleCount(for course: Course) -> Int {
+        if !course.holes.isEmpty {
+            return course.holes.count
+        }
+        return course.sourceHoleCount ?? 18
+    }
+
     private func startRound() {
         guard let course = selectedCourse else { return }
         isStarting = true
-        let holeCount = max(1, course.holes.count)
+        let holeCount = scoringHoleCount(for: course)
         let holeScores: [HoleScore] = (1 ... holeCount).map { num in
             let score = HoleScore(
                 holeNumber: num,
@@ -129,9 +136,6 @@ struct RoundSetupView: View {
             shots: [],
             createdAt: Date()
         )
-        for holeScore in holeScores {
-            holeScore.round = round
-        }
         modelContext.insert(round)
         do {
             try modelContext.save()
