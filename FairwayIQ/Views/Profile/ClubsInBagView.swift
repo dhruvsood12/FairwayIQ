@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ClubsInBagView: View {
     @Environment(\.modelContext) private var modelContext
@@ -15,7 +15,9 @@ struct ClubsInBagView: View {
     @State private var saveErrorMessage: String?
     @State private var showingSaveError = false
 
-    private var clubs: [String] { profile.clubsList }
+    private var clubs: [String] {
+        profile.clubsList
+    }
 
     var body: some View {
         NavigationStack {
@@ -50,7 +52,7 @@ struct ClubsInBagView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button(showAddField ? "Done" : "Add club") {
-                        if showAddField && !newClubName.isEmpty {
+                        if showAddField, !newClubName.isEmpty {
                             addClub()
                             newClubName = ""
                         }

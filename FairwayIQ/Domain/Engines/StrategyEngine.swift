@@ -11,7 +11,9 @@ enum StrategyMode: String, CaseIterable, Identifiable {
     case standard = "Standard"
     case aggressive = "Aggressive"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var icon: String {
         switch self {
@@ -63,7 +65,6 @@ enum TendencySeverity: String {
 }
 
 enum StrategyEngine {
-
     static func recommend(
         hole: HoleInfo,
         clubSummaries: [ClubSummary],
@@ -120,7 +121,7 @@ enum StrategyEngine {
         }
 
         let driverTendency = missTendencies.first { $0.category == "Driver Miss" && $0.severity == .significant }
-        if driverTendency != nil && tee?.club == "Driver" {
+        if driverTendency != nil, tee?.club == "Driver" {
             warnings.append("Consider your driver miss tendency on this hole.")
         }
 
@@ -200,7 +201,7 @@ enum StrategyEngine {
         if !rounds.isEmpty {
             let totalPutts = rounds.reduce(0) { $0 + $1.totalPutts }
             let avgPutts = Double(totalPutts) / Double(rounds.count)
-            let threePuttHoles = holeScores.filter { $0.putts >= 3 }.count
+            let threePuttHoles = holeScores.count(where: { $0.putts >= 3 })
             let totalHoles = holeScores.count
             if totalHoles >= 18 {
                 let threePuttRate = Double(threePuttHoles) / Double(totalHoles)
@@ -217,8 +218,7 @@ enum StrategyEngine {
         }
 
         let par4and5Scores = holeScores.filter { score in
-            guard let round = score.round, let course = round.course else { return false }
-            let holePar = course.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
+            guard let round = score.round, let holePar = round.par(forHole: score.holeNumber) else { return false }
             return holePar >= 4
         }
         if par4and5Scores.count >= 10 {
@@ -254,12 +254,12 @@ enum StrategyEngine {
         switch mode {
         case .conservative:
             let targetDistance = Double(yardage) * 0.6
-            if driverMiss != nil {
+            if let driverMiss {
                 let safeClubs = clubs.filter { $0.clubName != "Driver" && $0.averageDistance >= targetDistance * 0.8 }
                 if let best = safeClubs.first {
                     return ClubRecommendation(
                         club: best.clubName,
-                        rationale: "Avoids your \(driverMiss!.description.lowercased()). Leaves a comfortable approach.",
+                        rationale: "Avoids your \(driverMiss.description.lowercased()). Leaves a comfortable approach.",
                         confidence: best.confidence,
                         expectedDistance: best.averageDistance
                     )
@@ -268,7 +268,7 @@ enum StrategyEngine {
             return recommendClubForDistance(targetDistance, clubs: clubs, mode: mode, context: "conservative tee shot")
 
         case .standard:
-            if driverMiss != nil, driverMiss!.severity == .significant {
+            if driverMiss?.severity == .significant {
                 let alt = clubs.filter { $0.clubName != "Driver" }
                     .max(by: { $0.averageDistance < $1.averageDistance })
                 if let alt {
@@ -308,14 +308,13 @@ enum StrategyEngine {
         yardage: Int,
         teeDistance: Double?,
         clubs: [ClubSummary],
-        tendencies: [MissTendency],
+        tendencies _: [MissTendency],
         mode: StrategyMode
     ) -> ClubRecommendation? {
-        let remaining: Double
-        if hole.par >= 4, let teeDist = teeDistance {
-            remaining = Double(yardage) - teeDist
+        let remaining = if hole.par >= 4, let teeDist = teeDistance {
+            Double(yardage) - teeDist
         } else {
-            remaining = Double(yardage)
+            Double(yardage)
         }
         guard remaining > 5 else { return nil }
 
@@ -325,7 +324,7 @@ enum StrategyEngine {
     private static func recommendClubForDistance(
         _ targetDistance: Double,
         clubs: [ClubSummary],
-        mode: StrategyMode,
+        mode _: StrategyMode,
         context: String
     ) -> ClubRecommendation? {
         let candidates = clubs.map { club -> (ClubSummary, Double) in
@@ -336,18 +335,17 @@ enum StrategyEngine {
         guard let best = candidates.first else { return nil }
         let club = best.0
 
-        let overUnder: String
-        if club.averageDistance > targetDistance + 5 {
-            overUnder = "slightly more club than needed"
+        let overUnder = if club.averageDistance > targetDistance + 5 {
+            "slightly more club than needed"
         } else if club.averageDistance < targetDistance - 5 {
-            overUnder = "slightly less club than needed"
+            "slightly less club than needed"
         } else {
-            overUnder = "matches the distance well"
+            "matches the distance well"
         }
 
         return ClubRecommendation(
             club: club.clubName,
-            rationale: "Your \(club.clubName) averages \(Int(club.averageDistance)) yards — \(overUnder) for this \(context).",
+            rationale: "Your \(club.clubName) averages \(Int(club.averageDistance)) yards, \(overUnder) for this \(context).",
             confidence: club.confidence,
             expectedDistance: club.averageDistance
         )
@@ -392,7 +390,7 @@ enum StrategyEngine {
         approach: ClubRecommendation?,
         warnings: [String]
     ) -> String {
-        let confidenceLevels = [tee?.confidence, approach?.confidence].compactMap { $0 }
+        let confidenceLevels = [tee?.confidence, approach?.confidence].compactMap(\.self)
         let lowest = confidenceLevels.min() ?? .noData
 
         if warnings.isEmpty, lowest >= .moderate {

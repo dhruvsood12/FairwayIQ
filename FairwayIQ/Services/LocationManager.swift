@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 @Observable
 final class LocationManager: NSObject {
@@ -42,7 +42,7 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastLocation = locations.last
     }
 }

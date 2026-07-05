@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct RoundsView: View {
     @Environment(SessionStore.self) private var session
@@ -12,7 +12,9 @@ struct RoundsView: View {
     @Query private var profiles: [UserProfile]
     @State private var showRoundSetup = false
 
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
 
     var body: some View {
         NavigationStack {

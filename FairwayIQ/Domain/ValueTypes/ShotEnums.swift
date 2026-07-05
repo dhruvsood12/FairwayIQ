@@ -18,7 +18,9 @@ enum ShotClub: String, CaseIterable, Identifiable {
     case lw = "Lob Wedge"
     case putter = "Putter"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 }
 
 enum ShotLie: String, CaseIterable, Identifiable {
@@ -29,7 +31,9 @@ enum ShotLie: String, CaseIterable, Identifiable {
     case green = "Green"
     case other = "Other"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 }
 
 enum ShotType: String, CaseIterable, Identifiable {
@@ -41,6 +45,7 @@ enum ShotType: String, CaseIterable, Identifiable {
     case draw = "Draw"
     case fade = "Fade"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 }
-

@@ -1,3 +1,4 @@
+import FairwayIQCore
 import Foundation
 
 struct BaselineComparison: Hashable {
@@ -25,7 +26,7 @@ struct HoleTypeInsight: Hashable {
     let roundsSampled: Int
 }
 
-struct PerformanceInsights {
+enum PerformanceInsights {
     static func baselineComparison(for round: Round, against baselineRounds: [Round]) -> BaselineComparison? {
         guard !baselineRounds.isEmpty else { return nil }
 
@@ -51,15 +52,15 @@ struct PerformanceInsights {
     static func mostImprovedMetric(recentRounds: [Round], previousRounds: [Round]) -> RecentImprovementInsight? {
         guard !recentRounds.isEmpty, !previousRounds.isEmpty else { return nil }
 
-        let recentSummary = AnalyticsCalculators.summary(rounds: recentRounds)
-        let previousSummary = AnalyticsCalculators.summary(rounds: previousRounds)
+        let recentSummary = AnalyticsMath.summary(rounds: recentRounds.map(\.rollup))
+        let previousSummary = AnalyticsMath.summary(rounds: previousRounds.map(\.rollup))
 
         let candidates: [(String, Double, Bool)] = [
             ("Scoring", previousSummary.averageScore - recentSummary.averageScore, true),
             ("Fairways", recentSummary.fairwayPct - previousSummary.fairwayPct, true),
             ("GIR", recentSummary.girPct - previousSummary.girPct, true),
             ("Putts", previousSummary.puttsPerRound - recentSummary.puttsPerRound, true),
-            ("Penalties", previousSummary.penaltiesPerRound - recentSummary.penaltiesPerRound, true),
+            ("Penalties", previousSummary.penaltiesPerRound - recentSummary.penaltiesPerRound, true)
         ]
 
         guard let best = candidates.max(by: { abs($0.1) < abs($1.1) }), abs(best.1) >= 0.5 else {
@@ -80,17 +81,19 @@ struct PerformanceInsights {
         var bestWindow: (start: Int, end: Int, total: Int)?
         var worstWindow: (start: Int, end: Int, total: Int)?
 
-        for index in 0...(scores.count - windowSize) {
-            let window = Array(scores[index..<(index + windowSize)])
-            let relative = window.reduce(0) { partialResult, score in
-                partialResult + (score.strokes - par(for: score.holeNumber, round: round))
+        for index in 0 ... (scores.count - windowSize) {
+            let window = Array(scores[index ..< (index + windowSize)])
+            let pars = window.map { round.par(forHole: $0.holeNumber) }
+            guard !pars.contains(nil) else { continue }
+            let relative = zip(window, pars).reduce(0) { partialResult, pair in
+                partialResult + (pair.0.strokes - (pair.1 ?? 0))
             }
             let candidate = (start: window.first?.holeNumber ?? 0, end: window.last?.holeNumber ?? 0, total: relative)
 
-            if bestWindow == nil || relative < bestWindow!.total {
+            if bestWindow.map({ relative < $0.total }) ?? true {
                 bestWindow = candidate
             }
-            if worstWindow == nil || relative > worstWindow!.total {
+            if worstWindow.map({ relative > $0.total }) ?? true {
                 worstWindow = candidate
             }
         }
@@ -114,14 +117,14 @@ struct PerformanceInsights {
     }
 
     static func costliestMistakeCategory(for round: Round) -> String? {
-        let threePutts = round.holeScores.filter { $0.putts >= 3 }.count
+        let threePutts = round.holeScores.count(where: { $0.putts >= 3 })
         let penalties = round.holeScores.reduce(0) { $0 + $1.penalties }
-        let missedGreens = round.holeScores.filter { !$0.gir }.count
+        let missedGreens = round.holeScores.count(where: { !$0.gir })
 
         let categories: [(String, Int)] = [
             ("Three-putts", threePutts),
             ("Penalties", penalties),
-            ("Missed greens", missedGreens),
+            ("Missed greens", missedGreens)
         ]
 
         guard let top = categories.max(by: { $0.1 < $1.1 }), top.1 > 0 else { return nil }
@@ -133,7 +136,7 @@ struct PerformanceInsights {
 
         for round in rounds {
             for score in round.holeScores {
-                let par = par(for: score.holeNumber, round: round)
+                guard let par = round.par(forHole: score.holeNumber) else { continue }
                 let key = "Par \(par)s"
                 grouped[key, default: []].append(score.strokes - par)
             }
@@ -148,9 +151,5 @@ struct PerformanceInsights {
             )
         }
         .sorted { $0.averageRelativeToPar < $1.averageRelativeToPar }
-    }
-
-    private static func par(for holeNumber: Int, round: Round) -> Int {
-        round.course?.holes.first(where: { $0.number == holeNumber })?.par ?? 4
     }
 }

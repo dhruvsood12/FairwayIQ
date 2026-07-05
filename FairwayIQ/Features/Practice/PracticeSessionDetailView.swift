@@ -58,8 +58,7 @@ struct PracticeSessionDetailView: View {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 SectionHeader(title: "Club Breakdown")
                 let clubGroups = Dictionary(grouping: sortedShots, by: \.club)
-                ForEach(clubGroups.keys.sorted(), id: \.self) { club in
-                    let clubShots = clubGroups[club]!
+                ForEach(clubGroups.sorted(by: { $0.key < $1.key }), id: \.key) { club, clubShots in
                     let distances = clubShots.compactMap(\.distanceYards)
                     HStack {
                         Text(club)

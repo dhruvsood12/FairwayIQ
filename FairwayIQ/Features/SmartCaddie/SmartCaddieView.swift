@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct SmartCaddieView: View {
     @Environment(SessionStore.self) private var session
@@ -12,10 +12,22 @@ struct SmartCaddieView: View {
     @State private var selectedHoleIndex = 0
     @State private var strategyMode: StrategyMode = .standard
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedPracticeSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles) }
-    private var availableCourses: [Course] { courses.filter { !$0.holes.isEmpty } }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedPracticeSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles)
+    }
+
+    private var availableCourses: [Course] {
+        courses.filter { !$0.holes.isEmpty }
+    }
+
     private var safestTeeOption: ClubSummary? {
         clubSummaries
             .filter { $0.sampleSize >= 5 && $0.missLeftCount + $0.missRightCount <= max(1, $0.sampleSize / 3) }

@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
@@ -37,7 +37,7 @@ struct RootView: View {
         }
         .alert("Couldn’t load your data", isPresented: $showingLoadError) {
             Button("Retry") { loadRoute() }
-            Button("Continue") { }
+            Button("Continue") {}
         } message: {
             Text(loadErrorMessage ?? "")
         }
@@ -73,11 +73,9 @@ struct RootView: View {
         }
 
         CourseSeedLoader.applyBundledCatalogIfNeeded(modelContext: modelContext)
-        CourseSeedLoader.seedIfNeeded(modelContext: modelContext)
 
         #if DEBUG
-        // Keep demo data available for previews/dev runs, but avoid silently turning production into a demo.
-        SampleData.seedIfNeeded(modelContext: modelContext)
+            SampleData.seedIfNeeded(modelContext: modelContext)
         #endif
     }
 }

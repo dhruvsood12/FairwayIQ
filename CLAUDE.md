@@ -8,9 +8,8 @@ the v2 execution contract; this file records what every phase must respect.
 
 - No AI artifacts. No `Co-Authored-By` trailers, no "Generated with" lines,
   no emoji in commits, no marketing adjectives in code or docs. Every commit
-  must read like a human engineer wrote it. This extends to prose: TESTING.md
-  currently leaks the phrase "Codex sandbox" and that class of artifact gets
-  removed on contact.
+  must read like a human engineer wrote it. This extends to prose; tool-name
+  leaks in docs get removed on contact.
 - Conventional Commits only, scoped and imperative: `fix(analytics): ...`,
   `feat(core): ...`, `chore(ci): ...`, `refactor(data): ...`. One logical
   change per commit.
@@ -41,100 +40,89 @@ swift test
 iOS app target (requires macOS + Xcode):
 
 ```
-xcodebuild -scheme FairwayIQ -destination 'platform=iOS Simulator,name=iPhone 16' build
-xcodebuild -scheme FairwayIQ -destination 'platform=iOS Simulator,name=iPhone 16' test
+xcodebuild build -project FairwayIQ.xcodeproj -scheme FairwayIQ -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO
+xcodebuild test -project FairwayIQ.xcodeproj -scheme FairwayIQ -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
 
 Lint / format:
 
 ```
 swiftformat --lint .
-swiftlint
+swiftlint --strict
 ```
 
-Toolchain reality on this machine, verified 2026-06-10: Xcode 26.3, Swift
-6.2.4, iOS 26.3 simulator runtimes only. There is no iPhone 16 simulator;
-substitute `name=iPhone 17` (or `iPhone 16e`) locally and pin the CI
-destination explicitly in the workflow. `swiftformat`, `swiftlint`,
-`git-filter-repo`, and `gh` are not installed yet; install via Homebrew
-before the phases that need them. Until a test bundle target exists in
-`FairwayIQ.xcodeproj`, `xcodebuild ... test` has nothing to run; the only
-runnable suite is `swift test`.
+Toolchain, verified 2026-07-04: Xcode 26.3, Swift 6.2.4, iOS 26.3 simulator
+runtimes (iPhone 17 family plus iPhone 16e; no device named iPhone 16).
+Tools live in
+~/.local/bin: swiftformat 0.61.1 and swiftlint 0.63.3, matching the pinned
+CI versions; the xcodeproj gem is 1.27.0. CI runs on macos-26 with Xcode
+26.3 pinned behind an existence assertion and picks its simulator by name at
+run time. The FairwayIQTests bundle (102 tests in 9 suites) runs through the
+shared scheme; the package suite is `swift test` (34 tests).
 
 ## Architecture
 
 ```
-FairwayIQ.xcodeproj       One native target: FairwayIQ (iOS app). No test bundle
-                          target and no shared scheme; FairwayIQTests/ files are
-                          grouped in the project but cannot currently run.
+FairwayIQ.xcodeproj       Two native targets: FairwayIQ (iOS app) and
+                          FairwayIQTests (unit-test bundle hosted by the app).
+                          The shared scheme runs both.
 FairwayIQ/
-  App/                    Composition root. FairwayIQApp builds the SwiftData
-                          ModelContainer (10-model schema, in-memory fallback),
-                          RootView routes onboarding vs main, MainTabView holds
-                          5 tabs. AppState/SessionStore scopes data to the
-                          active profile.
+  FairwayIQApp.swift      App entry at the target root: builds the SwiftData
+                          ModelContainer (10-model schema, in-memory fallback).
+  App/                    RootView routes onboarding vs main and applies the
+                          bundled catalog, MainTabView holds 5 tabs.
+                          AppState/SessionStore scopes data to the profile.
+  Components/             Theme colors and layout constants.
   Core/                   DesignSystem components, InputValidation (pure bounds
                           checks), utilities (PlayerScopedData, DebugLogger).
-  Data/                   ProfileRepository (protocol-fronted), Seed/
-                          (CourseSeedLoader + Resources/courses_catalog.json),
-                          Export/ExportManager (DTO-based, privacy-aware).
+  Data/                   ProfileRepository, Seed/ (CourseSeedLoader +
+                          Resources/courses_catalog.json, honest nulls),
+                          Export/ExportManager (DTO-based, labeled values).
   Domain/Engines/         Pure rules engines: ClubGappingEngine, StrategyEngine,
-                          CoachingEngine, GoalEngine. No SwiftUI imports.
-  Domain/Analytics/       AnalyticsCalculators (the math the app actually runs,
-                          including its own AnalyticsSummary), PerformanceInsights.
-  Features/               Newer screens, @Query-driven: Analytics, ClubGapping,
-                          Goals, Practice, SmartCaddie.
+                          CoachingEngine, GoalEngine.
+  Domain/Analytics/       RoundAnalytics and HandicapAnalytics (mappings into
+                          FairwayIQCore), PerformanceInsights.
+  Features/               @Query-driven screens: Analytics, ClubGapping, Goals,
+                          Practice, SmartCaddie.
   Models/                 SwiftData @Model classes: UserProfile, Course, Hole,
                           Round, HoleScore, Shot, FriendEntry, PracticeSession,
-                          PracticeShot, PlayerGoal. SampleData seeds demo rows
-                          (including 5 fabricated leaderboard friends, DEBUG only).
-  Services/               Older @Observable services: RoundService, CourseService,
-                          LeaderboardService, AnalyticsService, LocationManager.
-  Views/                  Original screens by tab: Home, Courses, Rounds
-                          (LiveRoundView, ShotEntryView, ShotMapView), Analytics,
-                          Leaderboard, Profile, Onboarding.
-Sources/FairwayIQCore/    SwiftPM package, one file (AnalyticsMath.swift). A
-                          parallel reimplementation of AnalyticsCalculators with
-                          a second AnalyticsSummary type. The app does not import
-                          it anywhere. Phase 2 makes this the single source of
-                          truth.
-Tests/FairwayIQCoreTests/ XCTest, 4 tests over AnalyticsMath. The only suite
-                          that runs today.
-FairwayIQTests/           7 Swift Testing files, 88 @Test functions targeting the
-                          app's Domain engines. Real tests, no runnable target.
-scripts/course-data/      OSM Overpass ingestion pipeline. normalize.py currently
-                          fabricates every course as 18 holes of par 4 with null
-                          yardage; the bundled catalog (79 courses) inherits that.
+                          PracticeShot, PlayerGoal. SampleData seeds fictional
+                          demo data, DEBUG only.
+  Services/               RoundService, CourseService, LeaderboardService,
+                          LocationManager.
+  Views/                  Screens by tab: Home, Courses, Rounds, Analytics,
+                          Leaderboard (empty scaffold), Profile, Onboarding.
+Sources/FairwayIQCore/    The single implementation of the dashboard analytics
+                          math: AnalyticsMath, HandicapMath (WHS), GeoMath.
+                          The app links this package.
+Tests/FairwayIQCoreTests/ XCTest: 34 tests including golden parity fixtures
+                          and published WHS worked examples.
+FairwayIQTests/           Swift Testing: 102 tests in 9 suites over the app
+                          engines, seeds, exports, and handicap qualification.
+scripts/course-data/      OSM Overpass pipeline; emits only source data,
+                          nulls where the source is silent (13 unit tests).
+scripts/xcode/            Idempotent xcodeproj-gem scripts for the package
+                          link and the test bundle target.
 ```
 
 Data flow: views declare `@Query`, SessionStore/PlayerScopedData filter to the
-active profile, views map models to value objects, pure Domain engines compute,
-DesignSystem components render. Writes go through `modelContext` with
-InputValidation at the boundaries.
+active profile, views map models to value objects, FairwayIQCore and the pure
+engines compute, DesignSystem components render with explicit unavailable
+states. Writes go through `modelContext` with InputValidation at the
+boundaries.
 
 ## Repo state to respect
 
-- Current branch is `core-schema`, not `main`. `main` exists locally. The
-  single remote is named `a` (github.com/dhruvsood12/FairwayIQ.git) and only
-  `core-schema` is pushed.
-- The working tree carries roughly 6,700 uncommitted lines (staged, unstaged,
-  and untracked), including load-bearing untracked files
-  (`FairwayIQ/Domain/Analytics/PerformanceInsights.swift`,
-  `FairwayIQ/Core/Utilities/PlayerScopedData.swift`). The staged set alone
-  likely does not compile. This must be committed or resolved before any
-  history rewrite.
-- `.build/` has 222 tracked files (about 56 MB), all added in commit
-  `a169f62`, six days before `.gitignore` existed. The ignore file is correct;
-  the tracked files are the problem. Phase 1 purges them from history.
-- The committed `Sources/FairwayIQCore/AnalyticsMath.swift` at HEAD does not
-  compile (`let max` shadows `Swift.max`); an uncommitted working-tree edit
-  already fixes it. `swift build` and `swift test` are green only because of
-  that uncommitted change.
-- History: 18 commits, no AI trailers, 13 with non-conventional verbose
-  subjects.
-- A linked git worktree exists at `.claude/worktrees/hardcore-noether`
-  (branch `claude/hardcore-noether`, same commit as HEAD). Do not touch it
-  without checking `git worktree list` first.
+- `main` is the trunk and the GitHub default branch; `v2` carries the
+  upgrade and is the working branch, with pull request 1 targeting `main`.
+  The remote is `origin` (github.com/dhruvsood12/FairwayIQ). The backup
+  branch `backup/pre-filter-2026-06-11` preserves pre-rewrite history until
+  the final merge gate and is not to be deleted before then.
+- History is clean: all subjects Conventional, no AI trailers, no tracked
+  build artifacts (`git ls-files | grep .build` is empty).
+- Data honesty is load-bearing: par, yardage, ratings, and handicaps are
+  real, user-entered, or explicitly unavailable. The bundled catalog carries
+  no per-hole data; DATA.md and MODEL.md record every constant and method.
 
 ## Workflow for every phase
 
@@ -162,4 +150,5 @@ primary working tree. Long commands run in the background.
   layer violations, duplicate symbols), `analytics-quant` (strokes gained,
   dispersion, handicap math and tests; tests first, cited baselines),
   `repo-hygiene` (history rewrite, CI, lint configs; backup branch before
-  any destructive step).
+  any destructive step), and `ruthless-reviewer` (adversarial phase-close
+  and final-gate auditor; reviews and blocks, never fixes).

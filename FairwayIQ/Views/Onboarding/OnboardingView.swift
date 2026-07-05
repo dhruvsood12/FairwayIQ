@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct OnboardingView: View {
     @Environment(\.modelContext) private var modelContext
@@ -53,7 +53,7 @@ struct OnboardingView: View {
 
     private var progressIndicator: some View {
         HStack(spacing: 6) {
-            ForEach(0..<5, id: \.self) { i in
+            ForEach(0 ..< 5, id: \.self) { i in
                 Capsule()
                     .fill(i <= step ? Theme.Color.greenPrimary : Theme.Color.backgroundSecondary)
                     .frame(height: 4)
@@ -118,10 +118,15 @@ struct OnboardingView: View {
                 ForEach(skillLevels, id: \.self) { level in
                     Button {
                         skillLevel = level
-                        if level == "Beginner" { handicapEstimate = 25 }
-                        else if level == "Intermediate" { handicapEstimate = 18 }
-                        else if level == "Advanced" { handicapEstimate = 10 }
-                        else { handicapEstimate = 0 }
+                        if level == "Beginner" {
+                            handicapEstimate = 25
+                        } else if level == "Intermediate" {
+                            handicapEstimate = 18
+                        } else if level == "Advanced" {
+                            handicapEstimate = 10
+                        } else {
+                            handicapEstimate = 0
+                        }
                     } label: {
                         HStack {
                             Text(level)
@@ -281,7 +286,8 @@ struct OnboardingView: View {
         let existing = (try? modelContext.fetch(descriptor)) ?? []
         let profile: UserProfile
         if let currentProfileId = session.currentProfileId,
-           let current = existing.first(where: { $0.id == currentProfileId }) {
+           let current = existing.first(where: { $0.id == currentProfileId })
+        {
             profile = current
             profile.playerName = playerName.trimmingCharacters(in: .whitespaces)
             profile.skillLevel = skillLevel

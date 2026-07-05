@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import Charts
+import SwiftData
+import SwiftUI
 
 struct ClubGappingView: View {
     @Environment(SessionStore.self) private var session
@@ -15,11 +15,25 @@ struct ClubGappingView: View {
     @State private var selectedShotTypeFilter: String?
     @State private var selectedClub: ClubSummary?
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedPracticeSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles) }
-    private var lies: [String] { Array(Set(allShotRecords.map(\.lie))).sorted() }
-    private var shotTypes: [String] { Array(Set(allShotRecords.map(\.shotType))).sorted() }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedPracticeSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles)
+    }
+
+    private var lies: [String] {
+        Array(Set(allShotRecords.map(\.lie))).sorted()
+    }
+
+    private var shotTypes: [String] {
+        Array(Set(allShotRecords.map(\.shotType))).sorted()
+    }
 
     private var allShotRecords: [ShotRecord] {
         var records: [ShotRecord] = []
@@ -182,7 +196,7 @@ struct ClubGappingView: View {
                 Text("\(Int(club.averageDistance))y")
                     .font(.headline)
                     .foregroundStyle(Theme.Color.accent)
-                Text("carry \(club.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")")
+                Text("carry \(club.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")")
                     .font(.caption)
                     .foregroundStyle(Theme.Color.textSecondary)
                 Text("\(club.sampleSize) shots")
@@ -271,8 +285,8 @@ struct ClubDetailSheet: View {
                     StatTile(title: "Median", value: "\(Int(summary.medianDistance))y")
                 }
                 HStack(spacing: Spacing.md) {
-                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")
-                    StatTile(title: "Total", value: summary.totalDistanceEstimate.map { "\(Int($0))y" } ?? "—")
+                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")
+                    StatTile(title: "Total", value: summary.totalDistanceEstimate.map { "\(Int($0))y" } ?? "-")
                 }
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Min", value: "\(Int(summary.minDistance))y", valueColor: Theme.Color.textSecondary)

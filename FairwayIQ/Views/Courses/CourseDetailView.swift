@@ -1,5 +1,5 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct CourseDetailView: View {
     let course: Course
@@ -33,9 +33,15 @@ struct CourseDetailView: View {
                 if let kind = course.kind, !kind.isEmpty {
                     pill(kind)
                 }
-                pill("\(course.holes.count) holes")
-                if course.totalPar > 0 {
-                    pill("Par \(course.totalPar)")
+                if !course.holes.isEmpty {
+                    pill("\(course.holes.count) holes")
+                } else if let holeCount = course.sourceHoleCount {
+                    pill("\(holeCount) holes")
+                }
+                if let par = course.parIfKnown {
+                    pill("Par \(par)")
+                } else {
+                    pill("Par unavailable")
                 }
             }
 
@@ -76,30 +82,43 @@ struct CourseDetailView: View {
             Text("Holes")
                 .font(.headline)
                 .foregroundStyle(Theme.Color.textPrimary)
-            VStack(spacing: 0) {
-                ForEach(course.holes.sorted(by: { $0.number < $1.number }), id: \.number) { hole in
-                    HStack {
-                        Text("Hole \(hole.number)")
-                            .foregroundStyle(Theme.Color.textPrimary)
-                        Spacer()
-                        Text("Par \(hole.par)")
-                            .foregroundStyle(Theme.Color.textSecondary)
-                        if let y = hole.yardage {
-                            Text("• \(y) yd")
-                                .foregroundStyle(Theme.Color.textSecondary)
-                        }
-                    }
+            if course.holes.isEmpty {
+                Text("Hole details are unavailable for this course. The catalog source does not include per-hole par or yardage.")
                     .font(.subheadline)
-                    .padding(.vertical, 10)
-                    if hole.number != course.holes.count {
-                        Divider().background(Theme.Color.textSecondary.opacity(0.25))
-                    }
-                }
+                    .foregroundStyle(Theme.Color.textSecondary)
+                    .padding(Theme.Layout.cardPadding)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Theme.Color.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+            } else {
+                holeRows
             }
-            .padding(Theme.Layout.cardPadding)
-            .background(Theme.Color.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
         }
     }
-}
 
+    private var holeRows: some View {
+        VStack(spacing: 0) {
+            ForEach(course.holes.sorted(by: { $0.number < $1.number }), id: \.number) { hole in
+                HStack {
+                    Text("Hole \(hole.number)")
+                        .foregroundStyle(Theme.Color.textPrimary)
+                    Spacer()
+                    Text("Par \(hole.par)")
+                        .foregroundStyle(Theme.Color.textSecondary)
+                    if let y = hole.yardage {
+                        Text("• \(y) yd")
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                }
+                .font(.subheadline)
+                .padding(.vertical, 10)
+                if hole.number != course.holes.count {
+                    Divider().background(Theme.Color.textSecondary.opacity(0.25))
+                }
+            }
+        }
+        .padding(Theme.Layout.cardPadding)
+        .background(Theme.Color.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.Layout.cornerRadius))
+    }
+}

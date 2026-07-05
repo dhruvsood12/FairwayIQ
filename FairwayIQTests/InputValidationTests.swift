@@ -1,9 +1,8 @@
-import Testing
 @testable import FairwayIQ
+import Testing
 
 @Suite("InputValidation Tests")
 struct InputValidationTests {
-
     // MARK: - Strokes
 
     @Test("Valid strokes in range")

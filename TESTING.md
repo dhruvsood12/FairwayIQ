@@ -1,6 +1,6 @@
 # Testing
 
-FairwayIQ includes a growing test suite focused on pure domain behavior and safety-critical edge cases.
+FairwayIQ's tests focus on pure domain behavior and safety-critical edge cases.
 
 ## Unit Test Coverage
 
@@ -50,7 +50,12 @@ App-target tests under `FairwayIQTests/` cover:
 
 ## SwiftPM Core Tests
 
-The repo also includes a lightweight Swift Package test harness for `Sources/FairwayIQCore`.
+`Sources/FairwayIQCore` is the single implementation of the analytics math
+the dashboards render (summaries, trends, splits, course performance, the
+WHS handicap calculation, and shot distance). Its package tests cover that
+math, the golden parity fixtures, the published WHS worked examples, and the
+shot distance conversion. Simple display counts inside views are view
+formatting, not calculator logic.
 
 Run:
 
@@ -60,15 +65,18 @@ swift test
 
 ## App Test Command
 
-When an iOS simulator runtime is installed and available:
+The FairwayIQTests unit-test bundle runs 104 tests in 10 suites against any
+installed iPhone simulator:
 
 ```sh
 xcodebuild test \
   -project FairwayIQ.xcodeproj \
   -scheme FairwayIQ \
-  -destination 'platform=iOS Simulator,name=iPhone 16' \
-  -derivedDataPath .build/DerivedData
+  -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
+
+CI runs the same bundle on every push, picking the first available iPhone
+simulator on the runner by name.
 
 ## UI Test Scenarios To Maintain
 

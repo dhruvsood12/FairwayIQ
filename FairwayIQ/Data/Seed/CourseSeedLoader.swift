@@ -3,7 +3,7 @@ import SwiftData
 
 enum CourseSeedLoader {
     /// Increment when replacing `courses_catalog.json` so installs pick up the new dataset.
-    private static let bundledCatalogVersion = 1
+    private static let bundledCatalogVersion = 2
 
     private enum DefaultsKey {
         static let appliedCatalogVersion = "fairwayiq.catalog.bundledVersion"
@@ -28,22 +28,6 @@ enum CourseSeedLoader {
         }
     }
 
-    /// Legacy small starter set when the store is empty and no catalog was applied.
-    static func seedIfNeeded(modelContext: ModelContext, records: [CourseSeedRecord] = CourseSeed.starterUS) {
-        let existing = (try? modelContext.fetch(FetchDescriptor<Course>())) ?? []
-        guard existing.isEmpty else { return }
-
-        for record in records {
-            insertCourse(record, modelContext: modelContext)
-        }
-
-        do {
-            try modelContext.save()
-        } catch {
-            // Seeding failure should never block app startup; course list can be empty.
-        }
-    }
-
     private static func upsert(records: [CourseSeedRecord], modelContext: ModelContext) throws {
         let existing = try modelContext.fetch(FetchDescriptor<Course>())
         var byId = Dictionary(uniqueKeysWithValues: existing.map { ($0.id, $0) })
@@ -57,9 +41,9 @@ enum CourseSeedLoader {
                 course.websiteURL = record.websiteURL
                 course.latitude = record.latitude
                 course.longitude = record.longitude
-                if course.holes.isEmpty {
-                    insertHoles(from: record, course: course, modelContext: modelContext)
-                }
+                course.sourcePar = record.coursePar
+                course.sourceHoleCount = record.holeCount
+                replaceHoles(from: record, course: course, modelContext: modelContext)
             } else {
                 let course = insertCourse(record, modelContext: modelContext)
                 byId[record.id] = course
@@ -80,6 +64,8 @@ enum CourseSeedLoader {
             websiteURL: record.websiteURL,
             latitude: record.latitude,
             longitude: record.longitude,
+            sourcePar: record.coursePar,
+            sourceHoleCount: record.holeCount,
             holes: []
         )
         modelContext.insert(course)
@@ -87,9 +73,17 @@ enum CourseSeedLoader {
         return course
     }
 
+    private static func replaceHoles(from record: CourseSeedRecord, course: Course, modelContext: ModelContext) {
+        for hole in course.holes {
+            modelContext.delete(hole)
+        }
+        course.holes.removeAll()
+        insertHoles(from: record, course: course, modelContext: modelContext)
+    }
+
     private static func insertHoles(from record: CourseSeedRecord, course: Course, modelContext: ModelContext) {
         for holeSeed in record.holes {
-            let hole = Hole(number: holeSeed.number, par: holeSeed.par, handicapIndex: holeSeed.number, yardage: holeSeed.yardage)
+            let hole = Hole(number: holeSeed.number, par: holeSeed.par, yardage: holeSeed.yardage)
             hole.course = course
             modelContext.insert(hole)
             course.holes.append(hole)
@@ -97,9 +91,9 @@ enum CourseSeedLoader {
     }
 
     private static func mapUnknown(_ raw: String) -> String? {
-        let t = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        if t.isEmpty { return nil }
-        if t.caseInsensitiveCompare("Unknown") == .orderedSame { return nil }
-        return t
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty { return nil }
+        if trimmed.caseInsensitiveCompare("Unknown") == .orderedSame { return nil }
+        return trimmed
     }
 }

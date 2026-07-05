@@ -1,6 +1,6 @@
+import CoreLocation
 import Foundation
 import SwiftData
-import CoreLocation
 
 @Model
 final class PracticeShot {
@@ -69,5 +69,7 @@ enum PracticeShotResult: String, CaseIterable, Identifiable {
     case thinned = "Thinned"
     case fatShot = "Fat"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 }

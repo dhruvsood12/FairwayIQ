@@ -12,6 +12,8 @@ final class Round {
     var course: Course?
     var courseNameSnapshot: String
     var teeBox: String
+    var courseRating: Double?
+    var slopeRating: Int?
     var date: Date
     var weather: String?
     var playingPartners: String?
@@ -35,28 +37,28 @@ final class Round {
     }
 
     var fairwaysHit: Int {
-        holeScores.compactMap(\.fairwayHit).filter { $0 }.count
+        holeScores.compactMap(\.fairwayHit).count(where: { $0 })
     }
 
     var fairwaysPossible: Int {
-        holeScores.filter { $0.fairwayHit != nil }.count
+        holeScores.count(where: { $0.fairwayHit != nil })
     }
 
     var girsHit: Int {
         holeScores.filter(\.gir).count
     }
 
-    var totalPar: Int {
-        if let course {
-            return course.totalPar
-        }
-        // Fallback for legacy/demo rounds until migration is complete.
-        let holes = holeScores.count
-        return holes == 18 ? 72 : (holes == 9 ? 36 : holes * 4)
+    var totalPar: Int? {
+        course?.parIfKnown
     }
 
-    var scoreRelativeToPar: Int {
-        totalStrokes - totalPar
+    var scoreRelativeToPar: Int? {
+        guard let totalPar else { return nil }
+        return totalStrokes - totalPar
+    }
+
+    func par(forHole holeNumber: Int) -> Int? {
+        course?.holes.first(where: { $0.number == holeNumber })?.par
     }
 
     init(
@@ -64,6 +66,8 @@ final class Round {
         course: Course? = nil,
         courseNameSnapshot: String,
         teeBox: String = "Blue",
+        courseRating: Double? = nil,
+        slopeRating: Int? = nil,
         date: Date = Date(),
         weather: String? = nil,
         playingPartners: String? = nil,
@@ -76,6 +80,8 @@ final class Round {
         self.course = course
         self.courseNameSnapshot = courseNameSnapshot
         self.teeBox = teeBox
+        self.courseRating = courseRating
+        self.slopeRating = slopeRating
         self.date = date
         self.weather = weather
         self.playingPartners = playingPartners

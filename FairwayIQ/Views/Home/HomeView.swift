@@ -1,6 +1,7 @@
-import SwiftUI
-import SwiftData
 import Charts
+import FairwayIQCore
+import SwiftData
+import SwiftUI
 
 struct HomeView: View {
     @Environment(SessionStore.self) private var session
@@ -9,12 +10,30 @@ struct HomeView: View {
     @Query(sort: \PlayerGoal.createdAt) private var goals: [PlayerGoal]
     @State private var showRoundSetup = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedGoals: [PlayerGoal] { session.goalsForCurrentProfile(goals, profiles: profiles) }
-    private var recentRound: Round? { scopedRounds.first }
-    private var baselineRounds: [Round] { Array(scopedRounds.dropFirst().prefix(5)) }
-    private var bestHoleType: HoleTypeInsight? { PerformanceInsights.bestScoringHoleType(rounds: scopedRounds) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedGoals: [PlayerGoal] {
+        session.goalsForCurrentProfile(goals, profiles: profiles)
+    }
+
+    private var recentRound: Round? {
+        scopedRounds.first
+    }
+
+    private var baselineRounds: [Round] {
+        Array(scopedRounds.dropFirst().prefix(5))
+    }
+
+    private var bestHoleType: HoleTypeInsight? {
+        PerformanceInsights.bestScoringHoleType(rounds: scopedRounds)
+    }
+
     private var mostImprovedMetric: RecentImprovementInsight? {
         PerformanceInsights.mostImprovedMetric(
             recentRounds: Array(scopedRounds.prefix(5)),
@@ -70,12 +89,21 @@ struct HomeView: View {
                     .foregroundStyle(Theme.Color.textPrimary)
             }
             HStack(spacing: Spacing.lg) {
-                if let handicap = profile?.handicapEstimate {
+                if let index = HandicapAnalytics.computedIndex(rounds: scopedRounds) {
+                    HStack(spacing: Spacing.xs) {
+                        Text(String(format: "%.1f", index))
+                            .font(.headline)
+                            .foregroundStyle(Theme.Color.accent)
+                        Text("index (WHS)")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
+                } else if let handicap = profile?.handicapEstimate {
                     HStack(spacing: Spacing.xs) {
                         Text(String(format: "%.1f", handicap))
                             .font(.headline)
                             .foregroundStyle(Theme.Color.accent)
-                        Text("handicap")
+                        Text("handicap (self-reported)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
@@ -173,10 +201,15 @@ struct HomeView: View {
                             Text("\(round.totalStrokes)")
                                 .font(.title2.weight(.bold))
                                 .foregroundStyle(Theme.Color.accent)
-                            let diff = round.scoreRelativeToPar
-                            Text(diff >= 0 ? "+\(diff)" : "\(diff)")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                            if let diff = round.scoreRelativeToPar {
+                                Text(diff >= 0 ? "+\(diff)" : "\(diff)")
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                            } else {
+                                Text("Par unavailable")
+                                    .font(.caption)
+                                    .foregroundStyle(Theme.Color.textSecondary)
+                            }
                         }
                     }
                     HStack(spacing: Spacing.lg) {
@@ -248,7 +281,7 @@ struct HomeView: View {
                             TrendBadge(trend: improvement.text, isPositive: improvement.isPositive)
                         }
                     }
-                    let trend = AnalyticsCalculators.scoreTrend(rounds: Array(scopedRounds.prefix(10)))
+                    let trend = AnalyticsMath.scoreTrend(rounds: scopedRounds.prefix(10).map(\.snapshot))
                     Chart {
                         ForEach(trend) { item in
                             LineMark(x: .value("Date", item.date), y: .value("Score", item.score))
@@ -259,7 +292,7 @@ struct HomeView: View {
                                 .symbolSize(20)
                         }
                     }
-                    .chartYScale(domain: AnalyticsCalculators.yDomain(for: trend.map(\.score)))
+                    .chartYScale(domain: AnalyticsMath.yDomain(scores: trend.map(\.score)))
                     .frame(height: 100)
                     .chartXAxis(.hidden)
                 }
@@ -317,13 +350,15 @@ struct HomeView: View {
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
                     if let recentRound,
-                       let costly = PerformanceInsights.costliestMistakeCategory(for: recentRound) {
+                       let costly = PerformanceInsights.costliestMistakeCategory(for: recentRound)
+                    {
                         Text("Most costly mistake lately: \(costly)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.negative)
                     }
                     if let recentRound,
-                       let baseline = PerformanceInsights.baselineComparison(for: recentRound, against: baselineRounds) {
+                       let baseline = PerformanceInsights.baselineComparison(for: recentRound, against: baselineRounds)
+                    {
                         HStack(spacing: Spacing.md) {
                             FIQChip(text: baseline.deltaText, color: baseline.isPositive ? Theme.Color.positive : Theme.Color.negative)
                             Text(baseline.detail)
@@ -351,7 +386,7 @@ struct HomeView: View {
         }
     }
 
-    private func navCard<Dest: View>(icon: String, title: String, destination: Dest) -> some View {
+    private func navCard(icon: String, title: String, destination: some View) -> some View {
         NavigationLink {
             destination
         } label: {

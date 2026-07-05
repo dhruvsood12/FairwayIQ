@@ -1,6 +1,7 @@
-import SwiftUI
-import SwiftData
 import Charts
+import FairwayIQCore
+import SwiftData
+import SwiftUI
 
 struct AnalyticsView: View {
     @Environment(SessionStore.self) private var session
@@ -10,9 +11,18 @@ struct AnalyticsView: View {
     @State private var viewModel = AnalyticsDashboardViewModel()
     @State private var selectedTab = 0
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedGoals: [PlayerGoal] { session.goalsForCurrentProfile(goals, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedGoals: [PlayerGoal] {
+        session.goalsForCurrentProfile(goals, profiles: profiles)
+    }
+
     private var goalProgress: [GoalProgress] {
         GoalEngine.evaluateProgress(goals: scopedGoals, recentRounds: Array(scopedRounds.suffix(10).reversed()), allRounds: scopedRounds)
     }
@@ -84,6 +94,7 @@ struct AnalyticsView: View {
     @ViewBuilder
     private var overviewContent: some View {
         overviewCard
+        indexTrendCard
         if !viewModel.scoreTrend.isEmpty {
             scoreTrendCard
         }
@@ -91,7 +102,8 @@ struct AnalyticsView: View {
         splitCard
         bestWorstCard
         if let bestType = PerformanceInsights.bestScoringHoleType(rounds: scopedRounds),
-           let toughType = PerformanceInsights.toughestHoleType(rounds: scopedRounds) {
+           let toughType = PerformanceInsights.toughestHoleType(rounds: scopedRounds)
+        {
             holeTypeCard(best: bestType, tough: toughType)
         }
     }
@@ -103,7 +115,47 @@ struct AnalyticsView: View {
                 HStack(spacing: Spacing.lg) {
                     StatTile(title: "Avg Score", value: String(format: "%.1f", viewModel.summary.averageScore))
                     StatTile(title: "Rounds", value: "\(scopedRounds.count)", valueColor: Theme.Color.textPrimary)
-                    StatTile(title: "Index", value: String(format: "%.1f", profile?.handicapEstimate ?? 0), valueColor: Theme.Color.greenPrimary)
+                    indexTile
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var indexTile: some View {
+        if let index = HandicapAnalytics.computedIndex(rounds: scopedRounds) {
+            StatTile(title: "Index (WHS)", value: String(format: "%.1f", index), valueColor: Theme.Color.greenPrimary)
+        } else {
+            let qualifying = HandicapAnalytics.qualifyingRoundCount(rounds: scopedRounds)
+            StatTile(
+                title: "Index",
+                value: "\(qualifying)/\(HandicapAnalytics.minimumQualifyingRounds) scores",
+                valueColor: Theme.Color.textSecondary
+            )
+        }
+    }
+
+    private var indexTrendCard: some View {
+        FIQCard {
+            VStack(alignment: .leading, spacing: Spacing.md) {
+                SectionHeader(title: "Handicap Index Trend")
+                let trend = HandicapAnalytics.indexTrend(rounds: scopedRounds)
+                if trend.isEmpty {
+                    Text(
+                        "Your index trend appears once \(HandicapAnalytics.minimumQualifyingRounds) rounds "
+                            + "have a course rating, a slope rating, all 18 holes scored, and known pars "
+                            + "for every hole. Bundled catalog courses do not carry per-hole pars yet."
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.Color.textSecondary)
+                } else {
+                    Chart(trend) { point in
+                        LineMark(x: .value("Date", point.date), y: .value("Index", point.index))
+                            .foregroundStyle(Theme.Color.greenPrimary)
+                        PointMark(x: .value("Date", point.date), y: .value("Index", point.index))
+                            .foregroundStyle(Theme.Color.greenPrimary)
+                    }
+                    .frame(height: 180)
                 }
             }
         }
@@ -133,7 +185,7 @@ struct AnalyticsView: View {
                             }
                     }
                 }
-                .chartYScale(domain: AnalyticsCalculators.yDomain(for: viewModel.scoreTrend.map(\.score)))
+                .chartYScale(domain: AnalyticsMath.yDomain(scores: viewModel.scoreTrend.map(\.score)))
                 .frame(height: 200)
             }
         }
@@ -150,8 +202,8 @@ struct AnalyticsView: View {
                 }
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Penalties/Rnd", value: String(format: "%.1f", viewModel.summary.penaltiesPerRound))
-                    StatTile(title: "Best", value: viewModel.summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
-                    StatTile(title: "Worst", value: viewModel.summary.worstRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.negative)
+                    StatTile(title: "Best", value: viewModel.summary.bestRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.positive)
+                    StatTile(title: "Worst", value: viewModel.summary.worstRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.negative)
                 }
             }
         }
@@ -283,8 +335,8 @@ struct AnalyticsView: View {
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Putts/Round", value: String(format: "%.1f", viewModel.summary.puttsPerRound))
                     let allScores = scopedRounds.flatMap(\.holeScores)
-                    let threePutts = allScores.filter { $0.putts >= 3 }.count
-                    let onePutts = allScores.filter { $0.putts == 1 }.count
+                    let threePutts = allScores.count(where: { $0.putts >= 3 })
+                    let onePutts = allScores.count(where: { $0.putts == 1 })
                     StatTile(title: "1-Putts", value: "\(onePutts)", valueColor: Theme.Color.positive)
                     StatTile(title: "3-Putts", value: "\(threePutts)", valueColor: threePutts > 0 ? Theme.Color.negative : Theme.Color.textSecondary)
                 }
@@ -312,7 +364,7 @@ struct AnalyticsView: View {
                 SectionHeader(title: "Driving", eyebrow: "Off the tee")
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Fairways", value: String(format: "%.0f%%", viewModel.summary.fairwayPct))
-                    let penaltyHoles = scopedRounds.flatMap(\.holeScores).filter { $0.penalties > 0 }.count
+                    let penaltyHoles = scopedRounds.flatMap(\.holeScores).count(where: { $0.penalties > 0 })
                     StatTile(title: "Penalty Holes", value: "\(penaltyHoles)", valueColor: penaltyHoles == 0 ? Theme.Color.positive : Theme.Color.negative)
                     StatTile(title: "Pen/Round", value: String(format: "%.1f", viewModel.summary.penaltiesPerRound))
                 }
@@ -441,15 +493,17 @@ struct AnalyticsView: View {
 private extension AnalyticsView {
     var refreshKey: String {
         let roundsKey = rounds.map {
-            "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar)"
+            "\($0.id.uuidString):\($0.totalStrokes):\($0.totalPutts):\($0.scoreRelativeToPar.map(String.init) ?? "na")"
         }.joined(separator: "|")
         let profileKey = session.currentProfileId?.uuidString ?? "no-profile"
-        let handicapKey = profile.map { String(format: "%.1f", $0.handicapEstimate) } ?? "no-index"
+        let handicapKey = rounds.map {
+            "\($0.courseRating.map { String($0) } ?? "nr"):\($0.slopeRating.map { String($0) } ?? "ns")"
+        }.joined(separator: "|")
         return [profileKey, handicapKey, roundsKey].joined(separator: "#")
     }
 
     func refreshDashboard() {
-        viewModel.refresh(rounds: scopedRounds, profileIndexEstimate: profile?.handicapEstimate)
+        viewModel.refresh(rounds: scopedRounds)
     }
 }
 

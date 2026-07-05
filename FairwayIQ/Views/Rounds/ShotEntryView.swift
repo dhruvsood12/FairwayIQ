@@ -3,10 +3,11 @@
 //  FairwayIQ
 //
 
-import SwiftUI
-import SwiftData
 import CoreLocation
+import FairwayIQCore
 import MapKit
+import SwiftData
+import SwiftUI
 
 struct ShotEntryView: View {
     @Environment(\.modelContext) private var modelContext
@@ -30,7 +31,10 @@ struct ShotEntryView: View {
     @State private var saveErrorMessage: String?
     @State private var validationMessage: String?
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
     private var startCoordinate: CLLocationCoordinate2D? {
         if let startLat, let startLon { return CLLocationCoordinate2D(latitude: startLat, longitude: startLon) }
         return locationManager.lastLocation?.coordinate
@@ -56,15 +60,19 @@ struct ShotEntryView: View {
                     }
                 }
                 Section("Location") {
-                    Text(profile?.preferManualLocationLogging == true ? "Manual mode is enabled. GPS is optional for this shot." : "Location is only used for this shot log and stays on device.")
-                        .font(.caption)
-                        .foregroundStyle(Theme.Color.textSecondary)
+                    Text(
+                        profile?.preferManualLocationLogging == true
+                            ? "Manual mode is enabled. GPS is optional for this shot."
+                            : "Location is only used for this shot log and stays on device."
+                    )
+                    .font(.caption)
+                    .foregroundStyle(Theme.Color.textSecondary)
                     if let loc = locationManager.lastLocation {
                         Text("Start: \(loc.coordinate.latitude, specifier: "%.5f"), \(loc.coordinate.longitude, specifier: "%.5f")")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     } else {
-                        Text("Location unavailable — you can still log the shot and add landing later.")
+                        Text("Location unavailable. You can still log the shot and add landing later.")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
@@ -119,7 +127,7 @@ struct ShotEntryView: View {
 
                 Section("Notes (optional)") {
                     TextField("e.g. wind, miss, target", text: $notes, axis: .vertical)
-                        .lineLimit(1...3)
+                        .lineLimit(1 ... 3)
                 }
                 if let validationMessage {
                     Section {
@@ -129,7 +137,7 @@ struct ShotEntryView: View {
             }
             .scrollContentBackground(.hidden)
             .background(Theme.Color.background)
-            .navigationTitle("Shot — Hole \(holeNumber)")
+            .navigationTitle("Shot: Hole \(holeNumber)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -179,16 +187,12 @@ struct ShotEntryView: View {
     }
 
     private func recalcDistance() {
-        guard
-            let start = startCoordinate,
-            let end = endCoordinate
-        else {
-            distanceYards = nil
-            return
-        }
-        let s = CLLocation(latitude: start.latitude, longitude: start.longitude)
-        let e = CLLocation(latitude: end.latitude, longitude: end.longitude)
-        distanceYards = s.distance(from: e) / 0.9144
+        distanceYards = GeoMath.distanceYards(
+            fromLatitude: startCoordinate?.latitude,
+            fromLongitude: startCoordinate?.longitude,
+            toLatitude: endCoordinate?.latitude,
+            toLongitude: endCoordinate?.longitude
+        )
     }
 
     private func saveShot() -> Bool {

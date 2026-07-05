@@ -1,13 +1,12 @@
-import Testing
 @testable import FairwayIQ
+import Testing
 
 @Suite("ExportManager Tests")
 struct ExportManagerTests {
-
     @Test("Round summary text contains key fields")
     func roundSummaryText() {
         let summary = ExportableRoundSummary(
-            courseName: "Pebble Beach",
+            courseName: "Sample Links",
             date: "March 15, 2025",
             totalScore: 82,
             relativeToPar: 10,
@@ -16,15 +15,15 @@ struct ExportManagerTests {
             gir: "7/18",
             penalties: 2,
             holeScores: [
-                (1, 4, 5, 2),
-                (2, 3, 3, 1),
+                ExportableHoleLine(hole: 1, par: 4, score: 5, putts: 2),
+                ExportableHoleLine(hole: 2, par: 3, score: 3, putts: 1)
             ],
             coachingHighlights: ["Reduce three-putts", "Strength: Clean card"],
             locationPrivacyNote: nil
         )
         let text = ExportManager.roundSummaryText(summary: summary)
 
-        #expect(text.contains("Pebble Beach"))
+        #expect(text.contains("Sample Links"))
         #expect(text.contains("82"))
         #expect(text.contains("+10"))
         #expect(text.contains("34"))
@@ -38,7 +37,7 @@ struct ExportManagerTests {
     func clubGappingText() {
         let clubs = [
             ExportableClubSummary(clubName: "Driver", averageDistance: 250, medianDistance: 248, sampleSize: 20, consistency: "Consistent", confidence: "High"),
-            ExportableClubSummary(clubName: "7-Iron", averageDistance: 155, medianDistance: 153, sampleSize: 15, consistency: "Moderate", confidence: "Moderate"),
+            ExportableClubSummary(clubName: "7-Iron", averageDistance: 155, medianDistance: 153, sampleSize: 15, consistency: "Moderate", confidence: "Moderate")
         ]
         let text = ExportManager.clubGappingText(clubs: clubs, playerName: "Test Player")
 
@@ -55,6 +54,7 @@ struct ExportManagerTests {
         let snapshot = ExportableStatsSnapshot(
             playerName: "Demo Player",
             handicapEstimate: 12.5,
+            computedIndex: 11.9,
             roundsPlayed: 10,
             averageScore: 85.3,
             fairwayPct: 55.0,
@@ -66,7 +66,8 @@ struct ExportManagerTests {
         let text = ExportManager.statsSnapshotText(snapshot: snapshot)
 
         #expect(text.contains("Demo Player"))
-        #expect(text.contains("12.5"))
+        #expect(text.contains("Index (WHS, computed): 11.9"))
+        #expect(text.contains("Handicap estimate (self-reported): 12.5"))
         #expect(text.contains("10"))
         #expect(text.contains("85.3"))
         #expect(text.contains("55%"))
@@ -80,6 +81,7 @@ struct ExportManagerTests {
         let snapshot = ExportableStatsSnapshot(
             playerName: "Test",
             handicapEstimate: 18.0,
+            computedIndex: nil,
             roundsPlayed: 0,
             averageScore: 0,
             fairwayPct: 0,
@@ -89,7 +91,9 @@ struct ExportManagerTests {
             generatedDate: "Test"
         )
         let text = ExportManager.statsSnapshotText(snapshot: snapshot)
-        #expect(text.contains("—"))
+        #expect(text.contains("Best Score: -"))
+        #expect(!text.contains("Index (WHS, computed)"))
+        #expect(text.contains("Handicap estimate (self-reported): 18.0"))
     }
 
     @Test("Build club exports from summaries")
@@ -110,7 +114,7 @@ struct ExportManagerTests {
                 missShortCount: 1,
                 missLongCount: 2,
                 totalMissCategorized: 11
-            ),
+            )
         ]
         let exports = ExportManager.buildClubExports(summaries: summaries)
         #expect(exports.count == 1)
@@ -121,7 +125,9 @@ struct ExportManagerTests {
 
     @Test("Round summary text scorecard is formatted")
     func scorecardFormatting() {
-        let holes = (1...18).map { (hole: $0, par: $0 % 3 == 0 ? 3 : 4, score: 4 + ($0 % 3 == 0 ? -1 : 0), putts: 2) }
+        let holes = (1 ... 18).map {
+            ExportableHoleLine(hole: $0, par: $0 % 3 == 0 ? 3 : 4, score: 4 + ($0 % 3 == 0 ? -1 : 0), putts: 2)
+        }
         let summary = ExportableRoundSummary(
             courseName: "Test Course",
             date: "Jan 1, 2025",
@@ -143,9 +149,8 @@ struct ExportManagerTests {
 
     @Test("Round export includes privacy note when location is hidden")
     func roundExportPrivacyNote() {
-        let scores = (1...9).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: $0 % 2 == 0, penalties: 0) }
+        let scores = (1 ... 9).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2, gir: $0 % 2 == 0, penalties: 0) }
         let round = Round(courseNameSnapshot: "Privacy Test", holeScores: scores)
-        for score in scores { score.round = round }
 
         let export = ExportManager.buildRoundExport(
             round: round,

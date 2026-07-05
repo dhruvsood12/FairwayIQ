@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct LiveRoundView: View {
     @Environment(\.modelContext) private var modelContext
@@ -22,21 +22,48 @@ struct LiveRoundView: View {
     @State private var saveErrorMessage: String?
     @State private var showingSaveError = false
 
-    private var round: Round? { rounds.first { $0.id == roundId } }
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedPracticeSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles) }
-    private var holeCount: Int { round?.holeScores.count ?? round?.course?.holes.count ?? 18 }
-    private var currentHoleNumber: Int { currentHoleIndex + 1 }
-    private var par: Int {
-        guard let course = round?.course else { return 4 }
-        return course.holes.first(where: { $0.number == currentHoleNumber })?.par ?? 4
+    private var round: Round? {
+        rounds.first { $0.id == roundId }
     }
-    private var isPar3: Bool { par == 3 }
+
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedPracticeSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(practiceSessions, profiles: profiles)
+    }
+
+    private var holeCount: Int {
+        if let scored = round?.holeScores.count, scored > 0 { return scored }
+        if let holes = round?.course?.holes.count, holes > 0 { return holes }
+        return round?.course?.sourceHoleCount ?? 18
+    }
+
+    private var currentHoleNumber: Int {
+        currentHoleIndex + 1
+    }
+
+    private var par: Int? {
+        round?.par(forHole: currentHoleNumber)
+    }
+
+    private var isPar3: Bool {
+        par == 3
+    }
+
     private var currentScore: HoleScore? {
         round?.holeScores.first { $0.holeNumber == currentHoleNumber }
     }
-    private var isLastHole: Bool { currentHoleIndex == holeCount - 1 }
+
+    private var isLastHole: Bool {
+        currentHoleIndex == holeCount - 1
+    }
+
     private var smartRecommendation: StrategyRecommendation? {
         guard let round, let course = round.course,
               let hole = course.holes.first(where: { $0.number == currentHoleNumber }) else { return nil }
@@ -81,7 +108,7 @@ struct LiveRoundView: View {
 
     var body: some View {
         Group {
-            if let round = round {
+            if let round {
                 if showSummary {
                     RoundSummaryView(round: round, onComplete: onRoundComplete)
                 } else {
@@ -108,7 +135,6 @@ struct LiveRoundView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Theme.Color.background)
                         .onAppear {
-                            // If the round isn't in the store, don't soft-lock the user here.
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                                 if round == nil { loadFailed = true }
                             }
@@ -129,7 +155,7 @@ struct LiveRoundView: View {
             }
         }
         .sheet(isPresented: $showShotEntry) {
-            if let round = round {
+            if let round {
                 ShotEntryView(round: round, holeNumber: currentHoleNumber) {
                     showShotEntry = false
                 }
@@ -182,10 +208,10 @@ struct LiveRoundView: View {
     private var parCard: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Par \(par)")
+                Text(par.map { "Par \($0)" } ?? "Par unavailable")
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundStyle(Theme.Color.greenPrimary)
+                    .foregroundStyle(par == nil ? Theme.Color.textSecondary : Theme.Color.greenPrimary)
                 Text("Hole \(currentHoleNumber)")
                     .font(.subheadline)
                     .foregroundStyle(Theme.Color.textSecondary)
@@ -233,8 +259,8 @@ struct LiveRoundView: View {
                     Stepper("\(score.strokes)", value: Binding(
                         get: { score.strokes },
                         set: { score.strokes = InputValidation.clamp($0, min: 1, max: 20) }
-                    ), in: 1...20)
-                    .labelsHidden()
+                    ), in: 1 ... 20)
+                        .labelsHidden()
                     Text("\(score.strokes)")
                         .font(.title)
                         .fontWeight(.bold)
@@ -249,8 +275,8 @@ struct LiveRoundView: View {
                     Stepper("\(score.putts)", value: Binding(
                         get: { score.putts },
                         set: { score.putts = InputValidation.clamp($0, min: 0, max: min(score.strokes, 10)) }
-                    ), in: 0...10)
-                    .labelsHidden()
+                    ), in: 0 ... 10)
+                        .labelsHidden()
                     Text("\(score.putts)")
                         .font(.title)
                         .fontWeight(.bold)
@@ -265,8 +291,8 @@ struct LiveRoundView: View {
                     Stepper("\(score.penalties)", value: Binding(
                         get: { score.penalties },
                         set: { score.penalties = InputValidation.clamp($0, min: 0, max: 10) }
-                    ), in: 0...5)
-                    .labelsHidden()
+                    ), in: 0 ... 5)
+                        .labelsHidden()
                     Text("\(score.penalties)")
                         .font(.title)
                         .fontWeight(.bold)
@@ -369,8 +395,9 @@ struct LiveRoundView: View {
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    // swiftlint:disable:next force_try
     let container = try! ModelContainer(for: Round.self, HoleScore.self, configurations: config)
-    let round = Round(courseNameSnapshot: "Preview Course", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4) })
+    let round = Round(courseNameSnapshot: "Preview Course", holeScores: (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4) })
     container.mainContext.insert(round)
     return NavigationStack {
         LiveRoundView(roundId: round.id)

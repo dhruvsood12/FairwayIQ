@@ -6,7 +6,33 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0ADED8D95B8C9E8B8CA4638F /* ExportManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286735292F7C424000FA6642 /* ExportManagerTests.swift */; };
+		2194FC658D013F9A72E52F13 /* ClubGappingEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0DE2F7BA213006B73B8 /* ClubGappingEngineTests.swift */; };
+		38ABCFCFA5BE2C93AC22A5C4 /* GoalEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0E02F7BA216006B73B8 /* GoalEngineTests.swift */; };
+		514F2BF57A463C81B29BA1CB /* PerformanceInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2867352A2F7C425400FA6642 /* PerformanceInsightsTests.swift */; };
+		61082EC806091651DDDC1996 /* InputValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286735282F7C422800FA6642 /* InputValidationTests.swift */; };
+		9853E7DFFFEBF07C1E57DC3C /* HandicapAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E0E0292F5F1AAB2CA6CE2B /* HandicapAnalyticsTests.swift */; };
+		B0E752324CB73A3812CFC822 /* FairwayIQCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF6F0990323D366FB3F6F46F /* FairwayIQCore */; };
+		C1BDE325BCEEA2543A979B73 /* StrategyEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */; };
+		CB7B3576464E8469C0B5FC36 /* CoachingEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */; };
+		CE5DA065A7CE48C4889C4D9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F74BFBAC4B077714D2FC44 /* Foundation.framework */; };
+		D853C2E30BD0F08E9C5E3812 /* CourseSeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8957BA9501ED528775E329 /* CourseSeedTests.swift */; };
+		DED3793AE2842913AB008B89 /* SampleDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C95CA5A6FE4AAF4F2CFC20 /* SampleDataTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A6B07D7CF73CB15D8D7AEA42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 281B96002F675C0C00AEA9CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 281B96072F675C0C00AEA9CC;
+			remoteInfo = FairwayIQ;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		19C95CA5A6FE4AAF4F2CFC20 /* SampleDataTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SampleDataTests.swift; sourceTree = "<group>"; };
 		281B96082F675C0C00AEA9CC /* FairwayIQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairwayIQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		286735282F7C422800FA6642 /* InputValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationTests.swift; sourceTree = "<group>"; };
 		286735292F7C424000FA6642 /* ExportManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManagerTests.swift; sourceTree = "<group>"; };
@@ -15,33 +41,65 @@
 		2883B0DF2F7BA215006B73B8 /* CoachingEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingEngineTests.swift; sourceTree = "<group>"; };
 		2883B0E02F7BA216006B73B8 /* GoalEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEngineTests.swift; sourceTree = "<group>"; };
 		2883B0E12F7BA217006B73B8 /* StrategyEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyEngineTests.swift; sourceTree = "<group>"; };
+		3D8957BA9501ED528775E329 /* CourseSeedTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSeedTests.swift; sourceTree = "<group>"; };
+		729BEFE3403338B1BDF831FF /* FairwayIQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FairwayIQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85E0E0292F5F1AAB2CA6CE2B /* HandicapAnalyticsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HandicapAnalyticsTests.swift; sourceTree = "<group>"; };
+		93F74BFBAC4B077714D2FC44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		281B960A2F675C0C00AEA9CC /* FairwayIQ */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = FairwayIQ;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		20441F87E363FC118FD6337F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE5DA065A7CE48C4889C4D9C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		281B96052F675C0C00AEA9CC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E752324CB73A3812CFC822 /* FairwayIQCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1712CD906028B7664CF18612 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B85B327A3910C8B622A4EA6 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1B85B327A3910C8B622A4EA6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				93F74BFBAC4B077714D2FC44 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		281B95FF2F675C0C00AEA9CC = {
 			isa = PBXGroup;
 			children = (
 				281B960A2F675C0C00AEA9CC /* FairwayIQ */,
 				281B96092F675C0C00AEA9CC /* Products */,
 				2883B0DD2F7BA1B9006B73B8 /* FairwayIQTests */,
+				1712CD906028B7664CF18612 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -49,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				281B96082F675C0C00AEA9CC /* FairwayIQ.app */,
+				729BEFE3403338B1BDF831FF /* FairwayIQTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,6 +122,9 @@
 				286735282F7C422800FA6642 /* InputValidationTests.swift */,
 				286735292F7C424000FA6642 /* ExportManagerTests.swift */,
 				2867352A2F7C425400FA6642 /* PerformanceInsightsTests.swift */,
+				3D8957BA9501ED528775E329 /* CourseSeedTests.swift */,
+				85E0E0292F5F1AAB2CA6CE2B /* HandicapAnalyticsTests.swift */,
+				19C95CA5A6FE4AAF4F2CFC20 /* SampleDataTests.swift */,
 			);
 			path = FairwayIQTests;
 			sourceTree = "<group>";
@@ -87,10 +149,29 @@
 			);
 			name = FairwayIQ;
 			packageProductDependencies = (
+				EF6F0990323D366FB3F6F46F /* FairwayIQCore */,
 			);
 			productName = FairwayIQ;
 			productReference = 281B96082F675C0C00AEA9CC /* FairwayIQ.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8F8604ECF0C6E416EB7D67C3 /* FairwayIQTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0917CAFB6E408C5F7A818A2E /* Build configuration list for PBXNativeTarget "FairwayIQTests" */;
+			buildPhases = (
+				1F998A35DF9D0EF200196DC9 /* Sources */,
+				20441F87E363FC118FD6337F /* Frameworks */,
+				11ABF8C13819ED749CC5496E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B539BAF33D6912EC7B0F8E6F /* PBXTargetDependency */,
+			);
+			name = FairwayIQTests;
+			productName = FairwayIQTests;
+			productReference = 729BEFE3403338B1BDF831FF /* FairwayIQTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -105,6 +186,9 @@
 					281B96072F675C0C00AEA9CC = {
 						CreatedOnToolsVersion = 26.3;
 					};
+					8F8604ECF0C6E416EB7D67C3 = {
+						TestTargetID = 281B96072F675C0C00AEA9CC;
+					};
 				};
 			};
 			buildConfigurationList = 281B96032F675C0C00AEA9CC /* Build configuration list for PBXProject "FairwayIQ" */;
@@ -116,17 +200,28 @@
 			);
 			mainGroup = 281B95FF2F675C0C00AEA9CC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BFD905820AA41C31AF085D10 /* XCLocalSwiftPackageReference "." */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 281B96092F675C0C00AEA9CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				281B96072F675C0C00AEA9CC /* FairwayIQ */,
+				8F8604ECF0C6E416EB7D67C3 /* FairwayIQTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		11ABF8C13819ED749CC5496E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		281B96062F675C0C00AEA9CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +232,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1F998A35DF9D0EF200196DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2194FC658D013F9A72E52F13 /* ClubGappingEngineTests.swift in Sources */,
+				CB7B3576464E8469C0B5FC36 /* CoachingEngineTests.swift in Sources */,
+				38ABCFCFA5BE2C93AC22A5C4 /* GoalEngineTests.swift in Sources */,
+				C1BDE325BCEEA2543A979B73 /* StrategyEngineTests.swift in Sources */,
+				61082EC806091651DDDC1996 /* InputValidationTests.swift in Sources */,
+				0ADED8D95B8C9E8B8CA4638F /* ExportManagerTests.swift in Sources */,
+				514F2BF57A463C81B29BA1CB /* PerformanceInsightsTests.swift in Sources */,
+				D853C2E30BD0F08E9C5E3812 /* CourseSeedTests.swift in Sources */,
+				9853E7DFFFEBF07C1E57DC3C /* HandicapAnalyticsTests.swift in Sources */,
+				DED3793AE2842913AB008B89 /* SampleDataTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		281B96042F675C0C00AEA9CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,7 +258,36 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B539BAF33D6912EC7B0F8E6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FairwayIQ;
+			target = 281B96072F675C0C00AEA9CC /* FairwayIQ */;
+			targetProxy = A6B07D7CF73CB15D8D7AEA42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		253E67BBEA908B5AE159CD09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dhruvsood.FairwayIQTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FairwayIQ.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FairwayIQ";
+			};
+			name = Debug;
+		};
 		281B96132F675C0D00AEA9CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -330,9 +471,39 @@
 			};
 			name = Release;
 		};
+		FF3E491ADBB0BDCE98BA8DEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dhruvsood.FairwayIQTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FairwayIQ.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FairwayIQ";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0917CAFB6E408C5F7A818A2E /* Build configuration list for PBXNativeTarget "FairwayIQTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF3E491ADBB0BDCE98BA8DEB /* Release */,
+				253E67BBEA908B5AE159CD09 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		281B96032F675C0C00AEA9CC /* Build configuration list for PBXProject "FairwayIQ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -352,6 +523,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BFD905820AA41C31AF085D10 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF6F0990323D366FB3F6F46F /* FairwayIQCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FairwayIQCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 281B96002F675C0C00AEA9CC /* Project object */;
 }

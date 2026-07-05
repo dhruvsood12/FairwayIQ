@@ -27,7 +27,6 @@ enum GoalTrend: String {
 }
 
 enum GoalEngine {
-
     static func evaluateProgress(
         goals: [PlayerGoal],
         recentRounds: [Round],
@@ -41,7 +40,7 @@ enum GoalEngine {
     static func evaluate(
         goal: PlayerGoal,
         recentRounds: [Round],
-        allRounds: [Round]
+        allRounds _: [Round]
     ) -> GoalProgress {
         guard let metricType = GoalMetricType(rawValue: goal.metricType) else {
             return GoalProgress(
@@ -120,7 +119,7 @@ enum GoalEngine {
         case .fairwayPercentage:
             let applicable = rounds.flatMap(\.holeScores).filter { $0.fairwayHit != nil }
             guard !applicable.isEmpty else { return 0 }
-            return Double(applicable.filter { $0.fairwayHit == true }.count) / Double(applicable.count) * 100
+            return Double(applicable.count(where: { $0.fairwayHit == true })) / Double(applicable.count) * 100
 
         case .penaltiesPerRound:
             let totalPen = rounds.flatMap(\.holeScores).reduce(0) { $0 + $1.penalties }
@@ -137,14 +136,13 @@ enum GoalEngine {
         isBelow: Bool,
         metricType: GoalMetricType
     ) -> Double {
-        let startingPoint: Double
-        switch metricType {
-        case .averageScore: startingPoint = 120
-        case .puttsPerRound: startingPoint = 40
-        case .girPercentage: startingPoint = 0
-        case .fairwayPercentage: startingPoint = 0
-        case .penaltiesPerRound: startingPoint = 8
-        case .bestScore: startingPoint = 120
+        let startingPoint: Double = switch metricType {
+        case .averageScore: 120
+        case .puttsPerRound: 40
+        case .girPercentage: 0
+        case .fairwayPercentage: 0
+        case .penaltiesPerRound: 8
+        case .bestScore: 120
         }
 
         if isBelow {

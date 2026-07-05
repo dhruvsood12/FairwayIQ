@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct PracticeView: View {
     @Environment(SessionStore.self) private var session
@@ -7,8 +7,14 @@ struct PracticeView: View {
     @Query private var profiles: [UserProfile]
     @State private var showNewSession = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedSessions: [PracticeSession] { session.practiceSessionsForCurrentProfile(sessions, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedSessions: [PracticeSession] {
+        session.practiceSessionsForCurrentProfile(sessions, profiles: profiles)
+    }
+
     private var recentShotRecords: [ShotRecord] {
         scopedSessions.flatMap { session in
             session.shots.map {
@@ -24,6 +30,7 @@ struct PracticeView: View {
             }
         }
     }
+
     private var topClubSummary: ClubSummary? {
         ClubGappingEngine.computeClubSummaries(
             shots: recentShotRecords,
@@ -81,7 +88,7 @@ struct PracticeView: View {
                     let allDistances = scopedSessions.flatMap(\.shots).compactMap(\.distanceYards)
                     StatTile(
                         title: "Avg Distance",
-                        value: allDistances.isEmpty ? "—" : "\(Int(allDistances.reduce(0, +) / Double(allDistances.count)))y"
+                        value: allDistances.isEmpty ? "-" : "\(Int(allDistances.reduce(0, +) / Double(allDistances.count)))y"
                     )
                 }
             }
@@ -97,7 +104,7 @@ struct PracticeView: View {
                     .foregroundStyle(Theme.Color.textPrimary)
                 HStack(spacing: Spacing.md) {
                     StatTile(title: "Avg", value: "\(Int(summary.averageDistance))y")
-                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "—")
+                    StatTile(title: "Carry", value: summary.carryDistanceEstimate.map { "\(Int($0))y" } ?? "-")
                     StatTile(title: "Trust", value: summary.trustLabel, valueColor: Theme.Color.positive)
                 }
             }

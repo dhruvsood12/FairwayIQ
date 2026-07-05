@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct GoalsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -9,11 +9,25 @@ struct GoalsView: View {
     @Query private var profiles: [UserProfile]
     @State private var showAddGoal = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
-    private var scopedGoals: [PlayerGoal] { session.goalsForCurrentProfile(goals, profiles: profiles) }
-    private var recentRounds: [Round] { Array(scopedRounds.prefix(5)) }
-    private var previousRounds: [Round] { Array(scopedRounds.dropFirst(5).prefix(5)) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
+
+    private var scopedGoals: [PlayerGoal] {
+        session.goalsForCurrentProfile(goals, profiles: profiles)
+    }
+
+    private var recentRounds: [Round] {
+        Array(scopedRounds.prefix(5))
+    }
+
+    private var previousRounds: [Round] {
+        Array(scopedRounds.dropFirst(5).prefix(5))
+    }
 
     private var goalProgress: [GoalProgress] {
         GoalEngine.evaluateProgress(
@@ -78,7 +92,7 @@ struct GoalsView: View {
                         Text("\(achieved) of \(total) achieved")
                             .font(.headline)
                             .foregroundStyle(Theme.Color.textPrimary)
-                        let improving = goalProgress.filter { $0.trend == .improving }.count
+                        let improving = goalProgress.count(where: { $0.trend == .improving })
                         if improving > 0 {
                             Text("\(improving) goal\(improving > 1 ? "s" : "") trending up")
                                 .font(.caption)
@@ -161,7 +175,6 @@ struct GoalsView: View {
                         .foregroundStyle(Theme.Color.textSecondary)
                 }
 
-                // Delete button
                 Button(role: .destructive) {
                     deleteGoal(progress.goal)
                 } label: {
@@ -227,7 +240,9 @@ struct AddGoalView: View {
     @State private var targetValue: Double = 90
     @State private var validationError: String?
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
 
     var body: some View {
         NavigationStack {
@@ -250,7 +265,7 @@ struct AddGoalView: View {
                 }
                 Section("Target (\(metricType.unit))") {
                     HStack {
-                        Slider(value: $targetValue, in: metricType.minValue...metricType.maxValue, step: 1)
+                        Slider(value: $targetValue, in: metricType.minValue ... metricType.maxValue, step: 1)
                         Text(String(format: "%.0f", targetValue))
                             .font(.headline)
                             .foregroundStyle(Theme.Color.accent)

@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned to match the local toolchain (Xcode 26.3 / Swift 6.2.4). The pin is
+  # not permanent: runner images keep only the most recent Xcode versions, so
+  # the assert step fails loudly if 26.3 is removed. If that happens, move to
+  # the image default after verifying the iOS 26.2 deployment target still
+  # builds.
+  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+
+jobs:
+  package:
+    name: Swift Package
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Assert pinned Xcode exists
+        run: |
+          ls /Applications | grep '^Xcode'
+          test -d /Applications/Xcode_26.3.app
+      - name: Show toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
+
+  app:
+    name: iOS App Build + Test
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - name: Assert pinned Xcode exists
+        run: |
+          ls /Applications | grep '^Xcode'
+          test -d /Applications/Xcode_26.3.app
+      - name: Build for iOS Simulator
+        run: >
+          xcodebuild build
+          -project FairwayIQ.xcodeproj
+          -scheme FairwayIQ
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+      - name: Pick a simulator
+        # The first available iPhone by name, so device renames on runner
+        # image updates never break the job.
+        run: |
+          DEVICE=$(xcrun simctl list devices available | grep -E '^ +iPhone' | head -1 | sed -E 's/^ +//; s/ \([0-9A-F-]+\).*$//')
+          test -n "$DEVICE"
+          echo "SIMULATOR_NAME=$DEVICE" >> "$GITHUB_ENV"
+          echo "picked: $DEVICE"
+      - name: Run the app test bundle
+        run: >
+          xcodebuild test
+          -project FairwayIQ.xcodeproj
+          -scheme FairwayIQ
+          -destination "platform=iOS Simulator,name=$SIMULATOR_NAME"
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+
+  lint:
+    name: Lint
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned lint tools
+        # Pinned to the exact versions the repo is kept clean against;
+        # preinstalled runner versions drift and change rule defaults.
+        run: |
+          mkdir -p "$HOME/lint-tools"
+          curl -sL -o /tmp/swiftformat.zip https://github.com/nicklockwood/SwiftFormat/releases/download/0.61.1/swiftformat.zip
+          unzip -o -q /tmp/swiftformat.zip -d /tmp/swiftformat
+          mv /tmp/swiftformat/swiftformat "$HOME/lint-tools/"
+          curl -sL -o /tmp/swiftlint.zip https://github.com/realm/SwiftLint/releases/download/0.63.3/portable_swiftlint.zip
+          unzip -o -q /tmp/swiftlint.zip -d /tmp/swiftlint
+          mv /tmp/swiftlint/swiftlint "$HOME/lint-tools/"
+          chmod +x "$HOME/lint-tools/swiftformat" "$HOME/lint-tools/swiftlint"
+          echo "$HOME/lint-tools" >> "$GITHUB_PATH"
+      - name: SwiftFormat (lint mode)
+        run: |
+          swiftformat --version
+          swiftformat --lint .
+      - name: SwiftLint
+        run: |
+          swiftlint version
+          swiftlint --strict --reporter github-actions-logging

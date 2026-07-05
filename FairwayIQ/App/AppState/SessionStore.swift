@@ -35,10 +35,11 @@ final class SessionStore {
 extension SessionStore {
     func resolvedProfile(in profiles: [UserProfile]) -> UserProfile? {
         if let currentProfileId,
-           let profile = profiles.first(where: { $0.id == currentProfileId }) {
+           let profile = profiles.first(where: { $0.id == currentProfileId })
+        {
             return profile
         }
-        return profiles.sorted(by: { $0.createdAt < $1.createdAt }).first
+        return profiles.min(by: { $0.createdAt < $1.createdAt })
     }
 
     func roundsForCurrentProfile(_ rounds: [Round], profiles: [UserProfile]) -> [Round] {
@@ -53,4 +54,3 @@ extension SessionStore {
         }
     }
 }
-

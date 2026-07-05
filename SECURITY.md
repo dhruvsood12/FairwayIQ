@@ -47,6 +47,7 @@ Location is optional and scoped to shot logging:
 - yardage
 - shot distance
 - handicap estimate
+- course rating and slope rating
 - goal targets
 - latitude/longitude
 
@@ -60,7 +61,7 @@ Implemented mitigations:
 - destructive delete-all-data flow requires confirmation
 - player-scoped helpers prevent analytics from mixing profiles when multiple profiles exist
 - export generation uses DTOs instead of dumping raw persistence objects
-- demo/sample data is isolated behind debug-only pathways where possible
+- demo/sample data is debug-only and clearly fictional (Sample Links, Sample Parkland, Sample Muni Nine)
 
 ## App Configuration Review
 

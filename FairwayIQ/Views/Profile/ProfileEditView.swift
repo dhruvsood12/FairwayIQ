@@ -3,8 +3,8 @@
 //  FairwayIQ
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ProfileEditView: View {
     @Environment(\.modelContext) private var modelContext
@@ -21,7 +21,9 @@ struct ProfileEditView: View {
     @State private var showingSaveError = false
 
     private let skillLevels = ["Beginner", "Intermediate", "Advanced", "Scratch"]
-    private var eligibleCourses: [Course] { courses.filter { $0.holes.count >= 18 } }
+    private var eligibleCourses: [Course] {
+        courses.filter { $0.holes.count >= 18 }
+    }
 
     var body: some View {
         NavigationStack {
@@ -36,7 +38,7 @@ struct ProfileEditView: View {
                     }
                     HStack {
                         Text("Handicap index")
-                        Slider(value: $handicapEstimate, in: 0...54, step: 0.5)
+                        Slider(value: $handicapEstimate, in: 0 ... 54, step: 0.5)
                         Text(String(format: "%.1f", handicapEstimate))
                             .frame(width: 36)
                     }

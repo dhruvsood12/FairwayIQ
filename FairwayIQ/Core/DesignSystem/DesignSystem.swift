@@ -16,11 +16,7 @@ enum Spacing {
 // MARK: - Card Style
 
 struct FIQCard<Content: View>: View {
-    let content: Content
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
+    @ViewBuilder let content: Content
 
     var body: some View {
         content
@@ -263,7 +259,7 @@ struct ConfidenceIndicator: View {
 
     var body: some View {
         HStack(spacing: 2) {
-            ForEach(0..<3, id: \.self) { i in
+            ForEach(0 ..< 3, id: \.self) { i in
                 RoundedRectangle(cornerRadius: 1)
                     .fill(i < barCount ? barColor : Theme.Color.textSecondary.opacity(0.3))
                     .frame(width: 4, height: CGFloat(6 + i * 3))

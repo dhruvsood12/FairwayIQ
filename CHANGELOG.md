@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- A World Handicap System index computed in FairwayIQCore from score differentials, validated against published worked examples, with an index trend chart and explicit low-data states.
+- Optional course rating and slope rating entry at round setup, validated and stored per round.
+- A runnable FairwayIQTests unit-test bundle (now 104 tests in 10 suites) wired into the shared scheme and CI.
+- FairwayIQCore trend, split, course performance, and shot distance functions with golden parity tests against the previous app implementation.
+
 - Smart Caddie rules engine with explainable tee and approach recommendations.
 - Club Gapping Lab with average, median, range, consistency, confidence, carry/total estimates, and miss tendencies.
 - Practice sessions and practice shots for building club data outside of rounds.
@@ -16,19 +21,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Post-round coaching summaries with strengths, weaknesses, stroke-cost categories, action items, baseline comparisons, and best/worst stretches.
 - Privacy-first export DTOs and text reports for round summaries, stats snapshots, and club gapping.
 - Profile privacy controls for hiding exact location in exports and preferring manual location logging.
-- Shared design system components for premium cards, chips, stat tiles, progress rings, validation messages, and buttons.
+- Shared design system components for cards, chips, stat tiles, progress rings, validation messages, and buttons.
 - Input validation utilities for score, distance, handicap, goal, and coordinate data.
 - Tests for club gapping, strategy, coaching, goals, validation, export formatting, and performance insights.
 - `ARCHITECTURE.md`, `SECURITY.md`, and `TESTING.md`.
 
 ### Changed
 
+- The handicap shown across the app is the computed WHS index when enough qualifying rounds exist; the profile estimate is always labeled self-reported.
+- FairwayIQCore is the single implementation of the dashboard analytics math; the app renders from it and the duplicate app-side calculators were deleted.
+
+- Course performance ordering is deterministic: ties on rounds played and average score now break by course name.
 - Analytics screens now include richer tabs for overview, scoring, putting, driving/approach, clubs, and goals.
 - Home dashboard now surfaces goals, score trend, most-improved metric, hole-type insight, and recent mistake category.
 - Live round flow now shows a Smart Caddie preview card where hole and player data are available.
 - Round summaries now include baseline context and best/worst stretch insights.
 - Practice, goals, and club gapping are scoped to the active profile.
 - README rewritten for final-project/recruiter presentation.
+
+### Removed
+
+- The placeholder handicap trend and the unused analytics service that carried it.
+- Fabricated course, hole, and leaderboard sample data; demo courses are now clearly fictional.
 
 ### Security
 

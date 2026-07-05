@@ -3,9 +3,9 @@
 //  FairwayIQ
 //
 
+import CoreLocation
 import Foundation
 import SwiftData
-import CoreLocation
 
 @Model
 final class Course {
@@ -18,6 +18,8 @@ final class Course {
     var websiteURL: String?
     var latitude: Double?
     var longitude: Double?
+    var sourcePar: Int?
+    var sourceHoleCount: Int?
     @Relationship(deleteRule: .cascade, inverse: \Hole.course)
     var holes: [Hole] = []
 
@@ -28,15 +30,24 @@ final class Course {
 
     var locationName: String? {
         switch (city?.isEmpty == false ? city : nil, state?.isEmpty == false ? state : nil) {
-        case let (c?, s?): return "\(c), \(s)"
-        case let (c?, nil): return c
-        case let (nil, s?): return s
+        case let (cityName?, stateName?): return "\(cityName), \(stateName)"
+        case let (cityName?, nil): return cityName
+        case let (nil, stateName?): return stateName
         default: return nil
         }
     }
 
     var totalPar: Int {
         holes.reduce(0) { $0 + $1.par }
+    }
+
+    /// The course par when it is actually known: summed from per-hole data
+    /// when holes exist, otherwise the source-stated course par, otherwise nil.
+    var parIfKnown: Int? {
+        if !holes.isEmpty {
+            return totalPar
+        }
+        return sourcePar
     }
 
     init(
@@ -48,6 +59,8 @@ final class Course {
         websiteURL: String? = nil,
         latitude: Double? = nil,
         longitude: Double? = nil,
+        sourcePar: Int? = nil,
+        sourceHoleCount: Int? = nil,
         holes: [Hole] = []
     ) {
         self.id = id
@@ -58,6 +71,8 @@ final class Course {
         self.websiteURL = websiteURL
         self.latitude = latitude
         self.longitude = longitude
+        self.sourcePar = sourcePar
+        self.sourceHoleCount = sourceHoleCount
         self.holes = holes
     }
 }

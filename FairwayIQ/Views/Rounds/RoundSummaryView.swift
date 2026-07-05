@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import MapKit
+import SwiftData
+import SwiftUI
 
 struct RoundSummaryView: View {
     @Environment(\.dismiss) private var dismiss
@@ -31,15 +31,22 @@ struct RoundSummaryView: View {
         let baseline = CoachingEngine.computeBaseline(from: Array(otherRounds.prefix(10)))
         return CoachingEngine.analyze(round: round, baseline: baseline)
     }
+
     private var stretchInsights: (best: RoundStretchInsight?, worst: RoundStretchInsight?) {
         PerformanceInsights.bestAndWorstStretch(for: round)
     }
+
     private var baselineComparison: BaselineComparison? {
         PerformanceInsights.baselineComparison(for: round, against: Array(scopedRounds.filter { $0.id != round.id }.prefix(5)))
     }
 
-    private var frontNineScores: [HoleScore] { sortedScores.filter { $0.holeNumber <= 9 } }
-    private var backNineScores: [HoleScore] { sortedScores.filter { $0.holeNumber > 9 } }
+    private var frontNineScores: [HoleScore] {
+        sortedScores.filter { $0.holeNumber <= 9 }
+    }
+
+    private var backNineScores: [HoleScore] {
+        sortedScores.filter { $0.holeNumber > 9 }
+    }
 
     var body: some View {
         ScrollView {
@@ -96,10 +103,15 @@ struct RoundSummaryView: View {
                     Text("\(round.totalStrokes)")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundStyle(Theme.Color.accent)
-                    let diff = round.scoreRelativeToPar
-                    Text(diff >= 0 ? "+\(diff)" : "\(diff)")
-                        .font(.title2.weight(.semibold))
-                        .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                    if let diff = round.scoreRelativeToPar {
+                        Text(diff >= 0 ? "+\(diff)" : "\(diff)")
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                    } else {
+                        Text("Par unavailable")
+                            .font(.caption)
+                            .foregroundStyle(Theme.Color.textSecondary)
+                    }
                     Spacer()
                     Text(coaching.overallAssessment)
                         .font(.caption)
@@ -194,25 +206,29 @@ struct RoundSummaryView: View {
                     GridItem(.flexible()),
                     GridItem(.flexible()),
                     GridItem(.flexible()),
-                    GridItem(.flexible()),
+                    GridItem(.flexible())
                 ], spacing: 6) {
                     Text("Hole").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("Par").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("Score").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("Putts").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
                     Text("+/-").font(.caption2.weight(.semibold)).foregroundStyle(Theme.Color.textSecondary)
-                    ForEach(sortedScores, id: \.holeNumber) { s in
-                        let par = parForHole(s.holeNumber)
-                        let diff = s.strokes - par
-                        Text("\(s.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
-                        Text("\(par)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
-                        Text("\(s.strokes)")
+                    ForEach(sortedScores, id: \.holeNumber) { holeScore in
+                        let par = parForHole(holeScore.holeNumber)
+                        let diff = par.map { holeScore.strokes - $0 }
+                        Text("\(holeScore.holeNumber)").font(.caption).foregroundStyle(Theme.Color.textPrimary)
+                        Text(par.map(String.init) ?? "?").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        Text("\(holeScore.strokes)")
                             .font(.caption.weight(.semibold))
-                            .foregroundStyle(scoreColor(diff))
-                        Text("\(s.putts)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
-                        Text(diff > 0 ? "+\(diff)" : "\(diff)")
-                            .font(.caption)
-                            .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                            .foregroundStyle(diff.map(scoreColor) ?? Theme.Color.textPrimary)
+                        Text("\(holeScore.putts)").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        if let diff {
+                            Text(diff > 0 ? "+\(diff)" : "\(diff)")
+                                .font(.caption)
+                                .foregroundStyle(diff <= 0 ? Theme.Color.positive : Theme.Color.negative)
+                        } else {
+                            Text("?").font(.caption).foregroundStyle(Theme.Color.textSecondary)
+                        }
                     }
                 }
             }
@@ -391,8 +407,8 @@ struct RoundSummaryView: View {
         .buttonStyle(.plain)
     }
 
-    private func parForHole(_ holeNumber: Int) -> Int {
-        round.course?.holes.first(where: { $0.number == holeNumber })?.par ?? 4
+    private func parForHole(_ holeNumber: Int) -> Int? {
+        round.par(forHole: holeNumber)
     }
 }
 
@@ -431,7 +447,7 @@ struct ShareSheet: View {
 
 #Preview {
     NavigationStack {
-        RoundSummaryView(round: Round(courseNameSnapshot: "Preview", holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2) }))
+        RoundSummaryView(round: Round(courseNameSnapshot: "Preview", holeScores: (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 2) }))
     }
     .modelContainer(for: [Round.self], inMemory: true)
     .environment(SessionStore())

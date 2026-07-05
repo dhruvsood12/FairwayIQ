@@ -9,7 +9,7 @@ The strategy is:
 3. **Normalization**: Clean and dedupe records into a stable app-facing schema.
 4. **Export**: Produce a versioned seed file the app can load (`courses_seed_v*.json`).
 
-The app currently ships a **small bundled starter dataset** (see `FairwayIQ/FairwayIQ/Data/Seed/`) for MVP usability.
+The app ships the normalized catalog at `FairwayIQ/Resources/courses_catalog.json`, imported by `FairwayIQ/Data/Seed/CourseSeedLoader.swift`.
 This pipeline is how you scale beyond that starter set.
 
 ---
@@ -60,7 +60,7 @@ python scripts/course-data/normalize.py \
   --out "scripts/course-data/out/courses_seed_v1_sandiego.json"
 ```
 
-The normalized output follows the schema in `seed_schema_v1.md`.
+The normalized output follows the schema in `seed_schema_v2.md`.
 
 ---
 
@@ -99,8 +99,8 @@ python scripts/course-data/merge_catalogs.py \
 
 ### Honest limitations (OSM)
 
-- **“Public”** is inferred from OSM tags (`access`, text hints); many courses are untagged — use `--public-only` as a best-effort filter, not a legal guarantee.
-- Hole pars / yardages in the seed are **placeholders** unless you enrich from another source.
+- **“Public”** is inferred from OSM tags (`access`, text hints); many courses are untagged. Use `--public-only` as a best-effort filter, not a legal guarantee.
+- The normalizer emits no per-hole data at all, because the Overpass course query carries none: hole arrays are empty, and course-level par or hole count appears only when OSM states a plain integer. Nothing is invented; nulls mean the source does not say.
 - This pipeline **does not scrape** private club websites; it uses structured OSM data.
 
 Later (beyond MVP), you can:

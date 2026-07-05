@@ -1,5 +1,6 @@
-import SwiftUI
+import FairwayIQCore
 import SwiftData
+import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.modelContext) private var modelContext
@@ -13,8 +14,13 @@ struct ProfileView: View {
     @State private var exportText = ""
     @State private var showShareSheet = false
 
-    private var profile: UserProfile? { session.resolvedProfile(in: profiles) }
-    private var scopedRounds: [Round] { session.roundsForCurrentProfile(rounds, profiles: profiles) }
+    private var profile: UserProfile? {
+        session.resolvedProfile(in: profiles)
+    }
+
+    private var scopedRounds: [Round] {
+        session.roundsForCurrentProfile(rounds, profiles: profiles)
+    }
 
     var body: some View {
         NavigationStack {
@@ -60,7 +66,7 @@ struct ProfileView: View {
                         Text(String(format: "%.1f", profile.handicapEstimate))
                             .font(.headline)
                             .foregroundStyle(Theme.Color.accent)
-                        Text("Handicap")
+                        Text("Handicap (self-reported)")
                             .font(.caption)
                             .foregroundStyle(Theme.Color.textSecondary)
                     }
@@ -100,10 +106,10 @@ struct ProfileView: View {
                         .font(.caption)
                         .foregroundStyle(Theme.Color.textSecondary)
                 } else {
-                    let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+                    let summary = AnalyticsMath.summary(rounds: scopedRounds.map(\.rollup))
                     HStack(spacing: Spacing.md) {
                         StatTile(title: "Avg Score", value: String(format: "%.0f", summary.averageScore))
-                        StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "—", valueColor: Theme.Color.positive)
+                        StatTile(title: "Best", value: summary.bestRoundScore.map(String.init) ?? "-", valueColor: Theme.Color.positive)
                         StatTile(title: "Putts/Rnd", value: String(format: "%.1f", summary.puttsPerRound))
                     }
                 }
@@ -154,9 +160,9 @@ struct ProfileView: View {
             if let profile {
                 FIQCard {
                     VStack(alignment: .leading, spacing: Spacing.md) {
-                        Toggle("Hide exact location in exports", isOn: binding(for: \.hideExactLocationInExports))
+                        Toggle("Hide exact location in exports", isOn: binding(for: \.hideExactLocationInExports, on: profile))
                             .tint(Theme.Color.greenPrimary)
-                        Toggle("Prefer manual location logging", isOn: binding(for: \.preferManualLocationLogging))
+                        Toggle("Prefer manual location logging", isOn: binding(for: \.preferManualLocationLogging, on: profile))
                             .tint(Theme.Color.greenPrimary)
                         Text("FairwayIQ stays local-first. These controls let you reduce location detail in reports and avoid automatic GPS use during shot logging.")
                             .font(.caption)
@@ -210,12 +216,12 @@ struct ProfileView: View {
             }
 
             #if DEBUG
-            Button {
-                SampleData.seedIfNeeded(modelContext: modelContext)
-                SampleData.ensureDemoProfile(modelContext: modelContext)
-            } label: {
-                settingsRow(icon: "ladybug", title: "Reset Sample Data (Debug)")
-            }
+                Button {
+                    SampleData.seedIfNeeded(modelContext: modelContext)
+                    SampleData.ensureDemoProfile(modelContext: modelContext)
+                } label: {
+                    settingsRow(icon: "ladybug", title: "Reset Sample Data (Debug)")
+                }
             #endif
         }
     }
@@ -241,11 +247,12 @@ struct ProfileView: View {
 
     private func exportAllData() {
         guard let profile else { return }
-        let summary = AnalyticsCalculators.summary(rounds: scopedRounds)
+        let summary = AnalyticsMath.summary(rounds: scopedRounds.map(\.rollup))
         let snapshot = ExportManager.buildStatsExport(
             profile: profile,
             summary: summary,
-            roundCount: scopedRounds.count
+            roundCount: scopedRounds.count,
+            computedIndex: HandicapAnalytics.computedIndex(rounds: scopedRounds)
         )
         let snapshotText = ExportManager.statsSnapshotText(snapshot: snapshot)
         let latestRoundText: String
@@ -281,12 +288,12 @@ struct ProfileView: View {
         }
     }
 
-    private func binding<Value>(for keyPath: ReferenceWritableKeyPath<UserProfile, Value>) -> Binding<Value> {
+    private func binding<Value>(for keyPath: ReferenceWritableKeyPath<UserProfile, Value>, on profile: UserProfile) -> Binding<Value> {
         Binding(
-            get: { profile![keyPath: keyPath] },
+            get: { profile[keyPath: keyPath] },
             set: {
-                profile?[keyPath: keyPath] = $0
-                profile?.updatedAt = Date()
+                profile[keyPath: keyPath] = $0
+                profile.updatedAt = Date()
                 try? modelContext.save()
             }
         )
@@ -315,9 +322,12 @@ struct PrivacyInfoView: View {
                             Label("Location", systemImage: "location")
                                 .font(.headline)
                                 .foregroundStyle(Theme.Color.textPrimary)
-                            Text("Location is only used when you choose to log shot positions during a round. It is never shared or uploaded. You can use the app fully without granting location permission.")
-                                .font(.subheadline)
-                                .foregroundStyle(Theme.Color.textSecondary)
+                            Text(
+                                "Location is only used when you choose to log shot positions during a round. "
+                                    + "It is never shared or uploaded. You can use the app fully without granting location permission."
+                            )
+                            .font(.subheadline)
+                            .foregroundStyle(Theme.Color.textSecondary)
                         }
                     }
                     FIQCard {

@@ -1,3 +1,4 @@
+import FairwayIQCore
 import Foundation
 import SwiftUI
 
@@ -6,16 +7,23 @@ struct ExportPrivacyOptions: Hashable {
     var includeCoachingNotes: Bool = true
 }
 
+struct ExportableHoleLine {
+    let hole: Int
+    let par: Int?
+    let score: Int
+    let putts: Int
+}
+
 struct ExportableRoundSummary {
     let courseName: String
     let date: String
     let totalScore: Int
-    let relativeToPar: Int
+    let relativeToPar: Int?
     let totalPutts: Int
     let fairwaysHit: String
     let gir: String
     let penalties: Int
-    let holeScores: [(hole: Int, par: Int, score: Int, putts: Int)]
+    let holeScores: [ExportableHoleLine]
     let coachingHighlights: [String]
     let locationPrivacyNote: String?
 }
@@ -32,6 +40,7 @@ struct ExportableClubSummary {
 struct ExportableStatsSnapshot {
     let playerName: String
     let handicapEstimate: Double
+    let computedIndex: Double?
     let roundsPlayed: Int
     let averageScore: Double
     let fairwayPct: Double
@@ -42,15 +51,18 @@ struct ExportableStatsSnapshot {
 }
 
 enum ExportManager {
-
     static func roundSummaryText(summary: ExportableRoundSummary) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Round Summary")
+        lines.append("FairwayIQ Round Summary")
         lines.append(String(repeating: "=", count: 40))
         lines.append("")
         lines.append("Course: \(summary.courseName)")
         lines.append("Date: \(summary.date)")
-        lines.append("Score: \(summary.totalScore) (\(summary.relativeToPar >= 0 ? "+" : "")\(summary.relativeToPar))")
+        if let relative = summary.relativeToPar {
+            lines.append("Score: \(summary.totalScore) (\(relative >= 0 ? "+" : "")\(relative))")
+        } else {
+            lines.append("Score: \(summary.totalScore) (par unavailable)")
+        }
         lines.append("")
         lines.append("Stats")
         lines.append("  Putts: \(summary.totalPutts)")
@@ -60,8 +72,9 @@ enum ExportManager {
         lines.append("")
         lines.append("Scorecard")
         lines.append("  Hole  Par  Score  Putts")
-        for h in summary.holeScores {
-            lines.append(String(format: "  %2d    %d    %2d     %d", h.hole, h.par, h.score, h.putts))
+        for holeScore in summary.holeScores {
+            let par = holeScore.par.map(String.init) ?? "-"
+            lines.append(String(format: "  %2d    %@    %2d     %d", holeScore.hole, par, holeScore.score, holeScore.putts))
         }
         if !summary.coachingHighlights.isEmpty {
             lines.append("")
@@ -81,7 +94,7 @@ enum ExportManager {
 
     static func clubGappingText(clubs: [ExportableClubSummary], playerName: String) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Club Gapping Report")
+        lines.append("FairwayIQ Club Gapping Report")
         lines.append(String(repeating: "=", count: 40))
         lines.append("Player: \(playerName)")
         lines.append("")
@@ -90,10 +103,10 @@ enum ExportManager {
         for club in clubs {
             lines.append(
                 padded(club.clubName, to: 18) +
-                padded("\(club.averageDistance)yd", to: 6) +
-                padded("\(club.medianDistance)yd", to: 6) +
-                padded("\(club.sampleSize)", to: 7) +
-                club.consistency
+                    padded("\(club.averageDistance)yd", to: 6) +
+                    padded("\(club.medianDistance)yd", to: 6) +
+                    padded("\(club.sampleSize)", to: 7) +
+                    club.consistency
             )
         }
         lines.append("")
@@ -103,16 +116,19 @@ enum ExportManager {
 
     static func statsSnapshotText(snapshot: ExportableStatsSnapshot) -> String {
         var lines: [String] = []
-        lines.append("FairwayIQ — Stats Snapshot")
+        lines.append("FairwayIQ Stats Snapshot")
         lines.append(String(repeating: "=", count: 40))
         lines.append("Player: \(snapshot.playerName)")
-        lines.append("Handicap: \(String(format: "%.1f", snapshot.handicapEstimate))")
+        if let index = snapshot.computedIndex {
+            lines.append("Index (WHS, computed): \(String(format: "%.1f", index))")
+        }
+        lines.append("Handicap estimate (self-reported): \(String(format: "%.1f", snapshot.handicapEstimate))")
         lines.append("Rounds: \(snapshot.roundsPlayed)")
         lines.append("Generated: \(snapshot.generatedDate)")
         lines.append("")
         lines.append("Performance")
         lines.append("  Average Score: \(String(format: "%.1f", snapshot.averageScore))")
-        lines.append("  Best Score: \(snapshot.bestScore.map(String.init) ?? "—")")
+        lines.append("  Best Score: \(snapshot.bestScore.map(String.init) ?? "-")")
         lines.append("  Fairways: \(String(format: "%.0f%%", snapshot.fairwayPct))")
         lines.append("  GIR: \(String(format: "%.0f%%", snapshot.girPct))")
         lines.append("  Putts/Round: \(String(format: "%.1f", snapshot.puttsPerRound))")
@@ -127,16 +143,15 @@ enum ExportManager {
         privacy: ExportPrivacyOptions = ExportPrivacyOptions()
     ) -> ExportableRoundSummary {
         let scores = round.holeScores.sorted { $0.holeNumber < $1.holeNumber }
-        let holeData: [(Int, Int, Int, Int)] = scores.map { score in
-            let par = round.course?.holes.first(where: { $0.number == score.holeNumber })?.par ?? 4
-            return (score.holeNumber, par, score.strokes, score.putts)
+        let holeData: [ExportableHoleLine] = scores.map { score in
+            ExportableHoleLine(hole: score.holeNumber, par: round.par(forHole: score.holeNumber), score: score.strokes, putts: score.putts)
         }
 
         var highlights: [String] = []
         if privacy.includeCoachingNotes, let coaching {
             highlights.append(contentsOf: coaching.actionItems)
-            for s in coaching.strengths.prefix(2) {
-                highlights.append("Strength: \(s.title)")
+            for strength in coaching.strengths.prefix(2) {
+                highlights.append("Strength: \(strength.title)")
             }
         }
 
@@ -168,10 +183,11 @@ enum ExportManager {
         }
     }
 
-    static func buildStatsExport(profile: UserProfile, summary: AnalyticsSummary, roundCount: Int) -> ExportableStatsSnapshot {
+    static func buildStatsExport(profile: UserProfile, summary: AnalyticsSummary, roundCount: Int, computedIndex: Double?) -> ExportableStatsSnapshot {
         ExportableStatsSnapshot(
             playerName: profile.playerName,
             handicapEstimate: profile.handicapEstimate,
+            computedIndex: computedIndex,
             roundsPlayed: roundCount,
             averageScore: summary.averageScore,
             fairwayPct: summary.fairwayPct,
